@@ -1,1 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+.header {
+    display: grid;
+    grid-template-columns: 25% 25% 30% 20%;
+    height : 150px; 
+    }
+.main {
+    display: grid;
+    grid-template-columns: 20% 80%;
+    }
+.product {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    }
