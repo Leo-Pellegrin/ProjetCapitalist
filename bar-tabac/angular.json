@@ -25,6 +25,7 @@
               "src/assets"
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css"
             ],
             "scripts": [],
@@ -89,6 +90,7 @@
               "src/assets"
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -96,6 +98,17 @@
         }
       }
     }
+  },
+  "cli": {
+<<<<<<< HEAD
+<<<<<<< HEAD
+    "analytics": "e9e37885-6a2a-4b78-89d8-36df3349757d"
+=======
+    "analytics": "e08eeba9-2d28-4744-ab20-028ee384a180"
+>>>>>>> 6e800ec45b99df529e59a3b39415ab7bb0b058ff
+=======
+    "analytics": "e08eeba9-2d28-4744-ab20-028ee384a180"
+>>>>>>> 6e800ec45b99df529e59a3b39415ab7bb0b058ff
   },
   "cli": {
     "analytics": "e08eeba9-2d28-4744-ab20-028ee384a180"

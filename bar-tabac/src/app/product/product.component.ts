@@ -8,9 +8,9 @@ import { Product } from '../world';
   templateUrl: './product.component.html',
   styleUrl: './product.component.css'
 })
+
 export class ProductComponent {
 
- 
   product : Product = new Product();
 
 
