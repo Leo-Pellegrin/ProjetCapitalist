@@ -10,13 +10,21 @@
 <body>
   <div class="header">
     <div class="logo-monde">
-      <img src="../../../public/icones/terre.png" >
+      <img [attr.src]="server+world.logo" /> 
+      <span id="worldname"> {{world.name}} </span>
     </div>
+    
     <div> argent </div>
     <div class="multiplicateur">  
-      <button class="button" type="button">Cash upgrade</button> 
+      <button class="button-buy" type="button">Buy</button> 
     </div>
-    <div> ID du joueur </div>
+    <div class="id-joueur">
+      <form action="">
+        <label for="fname">Your ID:</label><br>
+        <input type="text" id="id" name="id"><br>
+        <input type="submit" value="Submit">
+    </form>
+    </div>
   </div>
   <div class="main">
     <div class="menu">
@@ -38,12 +46,8 @@
       </div>
     </div>
     <div class="product">
-      <div> premier produit </div>
-      <div> second produit </div>
-      <div> troisième produit </div>
-      <div> quatrième produit </div>
-      <div> cinquième produit </div>
-      <div> sixième produit </div>
+     <app-product [prod]="world.products.product[0]"
+     class="product col-md-6"></app-product>
     </div>
   </div>
 </body>
