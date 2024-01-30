@@ -11,12 +11,12 @@
   <div class="header">
     <div class="logo-monde">
       <img [attr.src]="server+world.logo" /> 
-      @if (world){
-        <span id="worldname"> {{world.name}} </span>
+      @if(world){
+        <span id="worldname"> {{ world.name }} </span>
       }
     </div>
     
-    <div> argent </div>
+    <span [innerHTML]="world.money | bigvalue"> </span>
     <div class="multiplicateur">  
       <button class="button-buy" type="button">Buy</button> 
     </div>
@@ -48,10 +48,12 @@
       </div>
     </div>
     <div class="product">
-      @if(world){
-        <app-product [prod]="world.products[0]"
-        class="product col-md-6"></app-product>
-      }  
+      @for(product of world.products; track product.id){
+        <app-product [prod]="product" class="product col-md-6"></app-product>
+      }
+      @empty {
+        <p> No product </p>
+      }
     </div>
   </div>
 </body>

@@ -12,13 +12,10 @@ import { Product } from '../world';
 export class ProductComponent {
 
   product : Product = new Product();
-
-
   money : number = 0
 
   @Input()
   set prod(value :Product){
     this.product = value; 
   }
-  
 }
