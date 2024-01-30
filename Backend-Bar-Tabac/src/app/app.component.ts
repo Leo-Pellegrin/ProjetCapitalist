@@ -1,15 +1,16 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import {World, Palier, Product} from './world'; 
+import {World} from './world'; 
 import { WebserviceService } from './webservice.service';
 import { ProductComponent } from './product/product.component';
 import {GET_SERV } from '../request';
+import { BigvaluePipe } from './bigvalue.pipe';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, ProductComponent],
+  imports: [RouterOutlet, ProductComponent, BigvaluePipe],
   templateUrl: './app.component.html',
 })
 

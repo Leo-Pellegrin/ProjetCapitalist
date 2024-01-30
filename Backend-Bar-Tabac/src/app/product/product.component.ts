@@ -12,8 +12,6 @@ import { Product } from '../world';
 export class ProductComponent {
 
   product : Product = new Product();
-
-
   money : number = 0
 
   @Input()
@@ -21,5 +19,4 @@ export class ProductComponent {
     console.log("value : " + value)
     this.product = value; 
   }
-  
 }
