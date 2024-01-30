@@ -10,6 +10,7 @@ import { WebserviceService } from './webservice.service';
   templateUrl: '../app.component.html',
   title = 'bar-tabac',
   world: World = new World(),
+  
 
   constructor(private service: WebserviceService) {
     this.service.getWorld().then(
