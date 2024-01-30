@@ -18,6 +18,7 @@ export class ProductComponent {
 
   @Input()
   set prod(value :Product){
+    console.log("value : " + value)
     this.product = value; 
   }
   
