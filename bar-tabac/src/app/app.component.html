@@ -11,7 +11,9 @@
   <div class="header">
     <div class="logo-monde">
       <img [attr.src]="server+world.logo" /> 
-      <span id="worldname"> {{world.name}} </span>
+      @if (world){
+        <span id="worldname"> {{world.name}} </span>
+      }
     </div>
     
     <div> argent </div>
@@ -46,8 +48,10 @@
       </div>
     </div>
     <div class="product">
-     <app-product [prod]="world.products.product[0]"
-     class="product col-md-6"></app-product>
+      @if(world){
+        <app-product [prod]="world.products[0]"
+        class="product col-md-6"></app-product>
+      }  
     </div>
   </div>
 </body>
