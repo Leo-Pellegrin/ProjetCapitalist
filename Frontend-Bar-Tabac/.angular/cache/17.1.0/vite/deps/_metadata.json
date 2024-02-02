@@ -1,0 +1,49 @@
+{
+  "hash": "c4605ab7",
+  "configHash": "5985f171",
+  "lockfileHash": "a3446037",
+  "browserHash": "4c8a2520",
+  "optimized": {
+    "@angular/core": {
+      "src": "../../../../../node_modules/@angular/core/fesm2022/core.mjs",
+      "file": "@angular_core.js",
+      "fileHash": "54867381",
+      "needsInterop": false
+    },
+    "@angular/platform-browser": {
+      "src": "../../../../../node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs",
+      "file": "@angular_platform-browser.js",
+      "fileHash": "f9e613d3",
+      "needsInterop": false
+    },
+    "@angular/platform-browser/animations": {
+      "src": "../../../../../node_modules/@angular/platform-browser/fesm2022/animations.mjs",
+      "file": "@angular_platform-browser_animations.js",
+      "fileHash": "fdd2dbec",
+      "needsInterop": false
+    },
+    "@angular/router": {
+      "src": "../../../../../node_modules/@angular/router/fesm2022/router.mjs",
+      "file": "@angular_router.js",
+      "fileHash": "5db16ee7",
+      "needsInterop": false
+    },
+    "@urql/core": {
+      "src": "../../../../../node_modules/@urql/core/dist/urql-core.mjs",
+      "file": "@urql_core.js",
+      "fileHash": "938b4aa7",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-T34HPUEF": {
+      "file": "chunk-T34HPUEF.js"
+    },
+    "chunk-NPD75TTZ": {
+      "file": "chunk-NPD75TTZ.js"
+    },
+    "chunk-HMLPZKPQ": {
+      "file": "chunk-HMLPZKPQ.js"
+    }
+  }
+}
