@@ -100,17 +100,6 @@
     }
   },
   "cli": {
-<<<<<<< HEAD
-<<<<<<< HEAD
-    "analytics": "e9e37885-6a2a-4b78-89d8-36df3349757d"
-=======
-    "analytics": "e08eeba9-2d28-4744-ab20-028ee384a180"
->>>>>>> 6e800ec45b99df529e59a3b39415ab7bb0b058ff
-=======
-    "analytics": "e08eeba9-2d28-4744-ab20-028ee384a180"
->>>>>>> 6e800ec45b99df529e59a3b39415ab7bb0b058ff
-  },
-  "cli": {
-    "analytics": "e08eeba9-2d28-4744-ab20-028ee384a180"
+    "analytics": "99023523-cd9b-4744-b43c-ea4ade8a1980"
   }
 }

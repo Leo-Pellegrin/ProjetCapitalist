@@ -48,8 +48,7 @@ export class ProductComponent {
     }
   }
 
-  @Output() notifyProduction: EventEmitter<Product> = new
-  EventEmitter<Product>();
+  @Output() notifyProduction: EventEmitter<Product> = new EventEmitter<Product>();
 
   ngOnInit(): void {
     setInterval(() => { this.calcScore(); }, 100);
