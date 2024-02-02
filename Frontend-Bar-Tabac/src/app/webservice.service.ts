@@ -8,7 +8,7 @@ import {GET_WORLD} from './grapqhrequests';
 export class WebserviceService {
 
   server ='http://localhost:4000/'; 
-  user =''; 
+  user ='Test'; 
   
 
   createClient() {

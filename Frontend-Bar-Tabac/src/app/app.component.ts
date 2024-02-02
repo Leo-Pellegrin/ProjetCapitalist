@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import {World} from './world'; 
+import {World, Palier, Product} from './world'; 
 import { WebserviceService } from './webservice.service';
 import { ProductComponent } from './product/product.component';
 import {GET_SERV } from '../request';
