@@ -1,10 +1,11 @@
 
 @if(product != undefined){
-    <img [attr.src]="server + product.logo" (click)="onClick()"/>
-    <p>{{ product.name }}</p>
+    <span (click)="onClick()">
+        <img [attr.src]="server + product.logo"/>
+    </span>
+    <span>{{ product.name }}</span>
     <mat-progress-bar class="progressbar" [value]="progressbarvalue"></mat-progress-bar>
 }
-<!-- <img [src]="product.logo"/>
-    <mat-progress-bar class="progressbar" [value]="progressbarvalue"></mat-progress-bar> -->
+
 
 
