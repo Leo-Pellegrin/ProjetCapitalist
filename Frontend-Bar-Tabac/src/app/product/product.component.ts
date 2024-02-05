@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, SimpleChange } from '@angular/core';
 import { Product } from '../world';
 import {MatProgressBarModule} from '@angular/material/progress-bar'
 import {GET_SERV} from '../../request';
@@ -6,7 +6,7 @@ import {GET_SERV} from '../../request';
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [MatProgressBarModule],
+  imports: [MatProgressBarModule], 
   templateUrl: './product.component.html',
   styleUrl: './product.component.css'
 })
@@ -14,6 +14,8 @@ import {GET_SERV} from '../../request';
 export class ProductComponent {
   product: Product = new Product();
   lastupdate: number = Date.now();
+  _qtmulti : string ="x1"; 
+  
 
   @Input() 
   set prod(value: Product) {
@@ -21,6 +23,14 @@ export class ProductComponent {
         this.product = value; 
       }
   }
+  @Input()
+  set qtmulti(value: string) {
+    this._qtmulti = value;
+      if (this._qtmulti && this.product) this.calcMaxCanBuy();
+  }
+
+  
+
   money : number = 0
   progressbarvalue : number = 0
   server = GET_SERV;
@@ -50,7 +60,20 @@ export class ProductComponent {
 
 //  @Output() notifyProduction: EventEmitter<Product> = new EventEmitter<Product>();
 
-  ngOnInit(): void {
-    setInterval(() => { this.calcScore(); }, 100);
+  // ngOnInit() {
+  //   setInterval(() => { this.calcScore(); }, 100);
+  // }
+
+
+  calcMaxCanBuy() {
+    const currentCost = this.product.cout;
+    const growthRate = this.product.croissance;
+
+    const maxCanBuy = Math.floor(Math.log((this.money * (growthRate - 1) + currentCost) / currentCost) / Math.log(growthRate));
+
+    
   }
-}
+
+
+
+   }

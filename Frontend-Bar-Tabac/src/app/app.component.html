@@ -4,6 +4,7 @@
     <span id="worldname"> {{ world.name }} </span>
   </div>
   
+
   <span [innerHTML]="world.money | bigvalue"> </span>
   <div class="multiplicateur">  
     <button class="button-buy" type="button">Buy</button> 
@@ -15,7 +16,16 @@
       <input type="submit" value="Submit">
     </form>
   </div>
+
+  <div>
+    <button (click)="toggleSwitch()">{{qtmulti}}</button>
+   
+  </div>
+
 </div>
+
+
+
 <div class="main">
   <div class="menu">
     <div class="bouton-menu"> 
@@ -36,8 +46,8 @@
     </div>
   </div>
   <div class="product">
-    <app-product [prod]="world.products[0]" class="product col-md-6"/>
-    <app-product [prod]="world.products[1]" class="product col-md-6"/>
+    <app-product [prod]="world.products[0]" [qtmulti]="qtmulti" [money]="world.money" class="produit"/>
+    <app-product [prod]="world.products[1]" class="produit"/>
   </div>
 </div>
 
