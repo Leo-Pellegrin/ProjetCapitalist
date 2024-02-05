@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@angular/cli": "^17.1.2",
     "apollo-server-express": "^3.13.0",
     "graphql": "^16.8.1",
     "nodemon": "^3.0.3"

@@ -32,9 +32,9 @@ export class ProductComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    setInterval(() => {
-      // this.calcScore();
-    }, 1000);
+    // setInterval(() => {
+    //   // this.calcScore();
+    // }, 1000);
   }
 
   onClick() {
