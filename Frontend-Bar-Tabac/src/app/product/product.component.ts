@@ -63,5 +63,5 @@ export class ProductComponent implements OnInit {
     }
   }
 
-  // @Output() notifyProduction: EventEmitter<Product> = new EventEmitter<Product>();
+  @Output() notifyProduction: EventEmitter<Product> = new EventEmitter<Product>();
 }
