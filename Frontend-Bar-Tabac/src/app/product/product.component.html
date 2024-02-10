@@ -1,16 +1,19 @@
-
 @if(product != undefined){
-    <img [attr.src]="server + product.logo" (click)="onClick()"/>
-    
-    
-    <p class="product-name">{{ product.name }}</p>
-    <p class="product-name">{{ product.cout }}</p>
+<div>
+    <div class="productpresentation">
+        <p class="product-name">{{ product.name }}</p>
+        <img [attr.src]="server + product.logo" (click)="onClick()" />
+        <span class="quantite">100</span>
+    </div>
+    <div>
+        <mat-progress-bar [value]="progressbarvalue" class="mat-large"></mat-progress-bar>
+        <p class="product-name">{{ product.cout }}</p>
+    </div>
+    <button class="button-buy" type="button" (click)="buyProduct()">Buy</button>
+</div>
 
-    <span class="quantite">100</span>
-    <mat-progress-bar class="progressbar" [value]="progressbarvalue"></mat-progress-bar>
-    
-    
+
+
+
+
 }
-
-
-

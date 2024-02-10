@@ -1,43 +1,43 @@
 {
-  "hash": "afa04c85",
+  "hash": "830007f6",
   "configHash": "cd4a6acd",
-  "lockfileHash": "2c3b1e7c",
-  "browserHash": "1a536e75",
+  "lockfileHash": "5494d1ef",
+  "browserHash": "e50cd39f",
   "optimized": {
     "@angular/core": {
       "src": "../../../../../node_modules/@angular/core/fesm2022/core.mjs",
       "file": "@angular_core.js",
-      "fileHash": "65bf20d9",
+      "fileHash": "4e1851e8",
       "needsInterop": false
     },
     "@angular/material/progress-bar": {
       "src": "../../../../../node_modules/@angular/material/fesm2022/progress-bar.mjs",
       "file": "@angular_material_progress-bar.js",
-      "fileHash": "61ac38fc",
+      "fileHash": "84f5270a",
       "needsInterop": false
     },
     "@angular/platform-browser": {
       "src": "../../../../../node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs",
       "file": "@angular_platform-browser.js",
-      "fileHash": "1e618d46",
+      "fileHash": "0785f27b",
       "needsInterop": false
     },
     "@angular/platform-browser/animations": {
       "src": "../../../../../node_modules/@angular/platform-browser/fesm2022/animations.mjs",
       "file": "@angular_platform-browser_animations.js",
-      "fileHash": "0f271f84",
+      "fileHash": "8d298794",
       "needsInterop": false
     },
     "@angular/router": {
       "src": "../../../../../node_modules/@angular/router/fesm2022/router.mjs",
       "file": "@angular_router.js",
-      "fileHash": "afe71ff8",
+      "fileHash": "15c08f88",
       "needsInterop": false
     },
     "@urql/core": {
       "src": "../../../../../node_modules/@urql/core/dist/urql-core.mjs",
       "file": "@urql_core.js",
-      "fileHash": "6b438bb5",
+      "fileHash": "ca4c76ed",
       "needsInterop": false
     }
   },

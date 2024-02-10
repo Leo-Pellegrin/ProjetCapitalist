@@ -3,12 +3,9 @@
     <img [attr.src]="server + world.logo" />
     <span id="worldname"> {{ world.name }} </span>
   </div>
-  
+
 
   <span [innerHTML]="world.money | bigvalue"> </span>
-  <div class="multiplicateur">  
-    <button class="button-buy" type="button">Buy</button> 
-  </div>
   <div class="id-joueur">
     <form action="">
       <label for="fname">Your ID:</label><br>
@@ -19,7 +16,7 @@
 
   <div>
     <button (click)="toggleSwitch()">{{qtmulti}}</button>
-   
+
   </div>
 
 </div>
@@ -28,27 +25,27 @@
 
 <div class="main">
   <div class="menu">
-    <div class="bouton-menu"> 
-      <button class="button" type="button">Unlocks</button> 
+    <div class="bouton-menu">
+      <button class="button" type="button">Unlocks</button>
     </div>
-    <div class="bouton-menu"> 
-      <button class="button" type="button">Cash upgrade</button> 
+    <div class="bouton-menu">
+      <button class="button" type="button">Cash upgrade</button>
     </div>
-    
-    <div class="bouton-menu"> 
-      <button class="button" type="button">Angel Upgrade</button> 
+
+    <div class="bouton-menu">
+      <button class="button" type="button">Angel Upgrade</button>
     </div>
-    <div class="bouton-menu"> 
-      <button class="button" type="button">Managers</button> 
+    <div class="bouton-menu">
+      <button class="button" type="button">Managers</button>
     </div>
-    <div class="bouton-menu"> 
-      <button class="button" type="button">Investors</button> 
+    <div class="bouton-menu">
+      <button class="button" type="button">Investors</button>
     </div>
   </div>
   <div class="product">
-    <app-product [prod]="world.products[0]" [qtmulti]="qtmulti" class="product col-md-6" (notifyProduction)="onProductionDone($event)"/>
-    <app-product [prod]="world.products[1]" [qtmulti]="qtmulti" class="product col-md-6" (notifyProduction)="onProductionDone($event)"/>
+    <app-product [prod]="world.products[0]" [qtmulti]="qtmulti" class="product col-md-6"
+      (notifyProduction)="onProductionDone($event)" [worldmoney]="world.money" />
+    <app-product [prod]="world.products[1]" [qtmulti]="qtmulti" class="product col-md-6"
+      (notifyProduction)="onProductionDone($event)" [worldmoney]="world.money" />
   </div>
 </div>
-
-
