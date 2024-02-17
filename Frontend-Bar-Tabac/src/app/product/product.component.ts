@@ -23,9 +23,7 @@ export class ProductComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    // setInterval(() => {
-    //   // this.calcScore();
-    // }, 1000);
+    // this.intervalCalcScore();
   }
 
   // Passage du produit depuis le composant parent
@@ -54,7 +52,7 @@ export class ProductComponent implements OnInit {
     this.maxCanBuy = n;
   }
 
-  getBaseLog(x: number, y:number) {
+  getBaseLog(x: number, y: number) {
     return Math.log(y) / Math.log(x);
   }
 
@@ -62,6 +60,12 @@ export class ProductComponent implements OnInit {
   onClick() {
     this.product.timeleft = this.product.vitesse;
     this.lastupdate = Date.now();
+  }
+
+  intervalCalcScore() {
+    setInterval(() => {
+      this.calcScore();
+    }, 1000);
   }
 
   // Calcul de la progression de la production

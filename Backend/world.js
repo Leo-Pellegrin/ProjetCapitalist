@@ -227,7 +227,7 @@ module.exports = {
     "managers": [
         {
             "name": "Philip Morris",            
-            "logo": "icones/icones/Philip_Morris_tobacconist.jpg",
+            "logo": "icones/Philip_Morris_tobacconist.jpg",
             "seuil": 10,
             "idcible": 1,
             "ratio": 0,
@@ -236,7 +236,7 @@ module.exports = {
         },
         {
             "name": "Mélia Ferreira",            
-            "logo": "icones/icones/melia.jpg",
+            "logo": "icones/melia.jpg",
             "seuil": 10,
             "idcible": 2,
             "ratio": 0,
