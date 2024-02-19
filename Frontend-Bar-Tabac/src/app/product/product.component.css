@@ -32,10 +32,6 @@ img {
     margin-top: 10px;
 }
 
-.mdc-linear-progress {
-    height: 50px;
-}
-
-.mdc-linear-progress__buffer-bar {
+.progressbar{
     height: 100px;
 }

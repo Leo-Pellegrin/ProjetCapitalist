@@ -1,45 +1,40 @@
-
-
-body{
+body {
     background-color: lightgrey;
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif 
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
 }
+
 .header {
     display: grid;
     grid-template-columns: 25% 20% 15% 20% 20%;
     height: 150px;
-    
-   
-    
-    }
-
-img{
-    width : 100px; 
 }
 
-.logo-monde{
-    width : 50%; 
+img {
+    width: 100px;
 }
+
+.logo-monde {
+    width: 50%;
+}
+
 .main {
     display: grid;
     grid-template-columns: 25% 75%;
-    height: 500px ;
+    height: 500px;
 }
 
-.menu{
+.menu {
     margin-top: 10px;
 }
 
-.bouton-menu{
-    margin-left: 30px; 
-    margin-right: 30px; 
-    margin-top: 30px; 
+.bouton-menu {
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-top: 30px;
     margin-bottom: 70px;
-    
-    
 }
 
-.button{
+.button {
     border: none;
     border-radius: 5px;
     background-color: burlywood;
@@ -53,15 +48,125 @@ img{
     cursor: pointer;
 }
 
-
 .product {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    }
+}
 
 .produits{
-    display : grid; 
+    display : grid;
     grid-template-columns: 30% 60%;
     height: 80px;
-    width: 400px; 
-}   
+    width: 400px;
+}
+
+.modal {
+    position: fixed;
+    z-index: 2;
+    padding: 40px;
+    background-color: white;
+    border: solid;
+    /* Centering */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.modal .title {
+    /* Styles pour le titre */
+    margin-bottom: 20px;
+}
+
+.managerslayout {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    /* Mettre les gestionnaires en ligne */
+    padding: 10px;
+    /* Ajout de padding */
+    margin-top: 40px;
+}
+
+.managerslayout .logo {
+    width: 50px;
+    /* Largeur de l'image */
+    height: 50px;
+    /* Hauteur de l'image */
+    border-radius: 50%;
+    /* Pour une forme ronde */
+    margin-right: 10px;
+}
+
+.managerslayout .managername,
+.managerslayout .managercible,
+.managerslayout .managercost {
+    /* Styles pour le nom, la cible et le coût du gestionnaire */
+    text-align: center; /* Centrer le texte */
+    margin-bottom: 5px; /* Espace en bas pour séparer les éléments */
+}
+
+.managerslayout .managername {
+    /* Styles pour le nom du gestionnaire */
+    font-weight: bold; /* Police en gras pour le nom */
+    margin-bottom: 5px; /* Espace en bas pour séparer les éléments */
+}
+
+.managerslayout .managercible,
+.managerslayout .managercost {
+    /* Styles pour la cible et le coût du gestionnaire */
+    margin-bottom: 5px; /* Espace en bas pour séparer les éléments */
+}
+.managerslayout .hirebutton {
+    /* Styles pour le bouton d'embauche */
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    /* Couleur de fond */
+    color: #fff;
+    /* Couleur du texte */
+    cursor: pointer;
+}
+
+.managerslayout .hirebutton.selectable {
+    /* Styles pour le bouton d'embauche sélectionnable */
+    background-color: #28a745;
+    /* Couleur de fond si sélectionnable */
+}
+
+.closebutton {
+
+    padding-top: 5px;
+    padding-right: 5px;
+    /* Styles pour le bouton de fermeture */
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    /* Placement en haut à droite */
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.closebutton::before,
+.closebutton::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 2px;
+    background-color: black;
+    /* Barres horizontales */
+}
+
+.closebutton::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.closebutton::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}

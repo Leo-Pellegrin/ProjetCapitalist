@@ -5,12 +5,14 @@ import { WebserviceService } from './webservice.service';
 import { ProductComponent } from './product/product.component';
 import { GET_SERV } from '../request';
 import { BigvaluePipe } from './bigvalue.pipe';
+import { CommonModule } from '@angular/common';
+
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, ProductComponent, BigvaluePipe],
+  imports: [RouterOutlet, ProductComponent, BigvaluePipe, CommonModule],
   templateUrl: './app.component.html',
   styleUrl : './app.component.css',
 })
@@ -22,6 +24,7 @@ export class AppComponent{
     switchPositions = ['x1', 'x10', 'x100', 'Max'];
     currentPositionIndex = 0; 
     qtmulti = this.switchPositions[this.currentPositionIndex]; 
+    showManagers = false;
   
    
     toggleSwitch() {
@@ -44,5 +47,9 @@ export class AppComponent{
     } else {
       console.warn(`Production of product with non-positive revenu (${product.revenu}) skipped.`);
     }
+  }
+
+  hireManager(manager: Palier) {
+  
   }
 }
