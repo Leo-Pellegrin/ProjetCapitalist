@@ -9,7 +9,7 @@ module.exports = {
     "lastupdate": 0,
     "products": [
         {
-            "id": 1,
+            "id": 0,
             "name": "Filtre",
             "logo": "icones/filtre.png",
             "cout": 4,
@@ -50,7 +50,7 @@ module.exports = {
             ]    
     },
         {
-            "id": 2,
+            "id": 1,
             "name": "Feuilles",
             "logo": "icones/feuille.jpeg",
             "cout": 60,
@@ -229,7 +229,7 @@ module.exports = {
             "name": "Philip Morris",            
             "logo": "icones/Philip_Morris_tobacconist.jpg",
             "seuil": 10,
-            "idcible": 1,
+            "idcible": 0,
             "ratio": 0,
             "typeratio": "gain",
             "unlocked": false
@@ -237,8 +237,8 @@ module.exports = {
         {
             "name": "Mélia Ferreira",            
             "logo": "icones/melia.jpg",
-            "seuil": 10,
-            "idcible": 2,
+            "seuil": 100,
+            "idcible": 1,
             "ratio": 0,
             "typeratio": "gain",
             "unlocked": false

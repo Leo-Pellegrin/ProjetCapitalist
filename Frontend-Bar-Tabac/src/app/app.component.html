@@ -33,7 +33,15 @@
       <button class="button" type="button">Angel Upgrade</button>
     </div>
     <div class="bouton-menu">
-      <button (click)="showManagers = !showManagers" class="button" type="button">Managers</button>
+      <button 
+        mat-raised-button
+        (click)="showManagers = !showManagers" 
+        [matBadge]="badgeManagers"
+        [matBadgeHidden]="badgeManagers==0"
+        class="button" 
+        type="button">
+        Managers
+      </button>
       @if(showManagers){
       <div class="modal">
         <div>

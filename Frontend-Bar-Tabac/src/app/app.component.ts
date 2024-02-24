@@ -9,13 +9,14 @@ import { CommonModule } from '@angular/common';
 
 // Material message éphémère
 import {MatSnackBarModule, MatSnackBar} from '@angular/material/snack-bar';
+import {MatBadgeModule} from '@angular/material/badge';
 
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, ProductComponent, BigvaluePipe, CommonModule, MatSnackBarModule],
+  imports: [RouterOutlet, ProductComponent, BigvaluePipe, CommonModule, MatSnackBarModule, MatBadgeModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
@@ -28,6 +29,7 @@ export class AppComponent {
   currentPositionIndex = 0;
   qtmulti = this.switchPositions[this.currentPositionIndex];
   showManagers = false;
+  badgeManagers: number = 0;
 
 
   toggleSwitch() {
@@ -39,6 +41,7 @@ export class AppComponent {
     this.service.getWorld().then(
       world => {
         this.world = world.data.getWorld;
+        console.log(this.world.managers[2]);
       }
     );
   }
@@ -46,6 +49,7 @@ export class AppComponent {
   onProductionDone(product: Product) {
     if (product.revenu > 0) {
       this.world.money += product.revenu;
+      this.calcbadgeManagers();
       console.log(`Production of product ${product.revenu} completed. Total money: ${this.world.money}`);
     } else {
       console.warn(`Production of product with non-positive revenu (${product.revenu}) skipped.`);
@@ -54,6 +58,7 @@ export class AppComponent {
 
   onBuy(num: number){
     this.world.money -= num;
+    this.calcbadgeManagers();
   }
 
   hireManager(manager: Palier) {
@@ -61,6 +66,7 @@ export class AppComponent {
     this.world.products[manager.idcible - 1].managerUnlocked = true;
     if(this.world.money >= manager.seuil){
       this.world.money -= manager.seuil;
+      this.calcbadgeManagers();
       this.popMessage("Manager " + manager.name + " hired");
     }
     else{
@@ -70,5 +76,14 @@ export class AppComponent {
 
   popMessage(message : string) : void {
     this.snackBar.open(message, "", { duration : 2000 })
+  }
+
+  calcbadgeManagers() {
+    this.badgeManagers = 0;
+    for (let manager of this.world.managers) {
+      if (manager.unlocked == false && this.world.money >= manager.seuil) {
+        this.badgeManagers++;
+      }
+    }
   }
 }
