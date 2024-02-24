@@ -7,12 +7,15 @@ import { GET_SERV } from '../request';
 import { BigvaluePipe } from './bigvalue.pipe';
 import { CommonModule } from '@angular/common';
 
+// Material message éphémère
+import {MatSnackBarModule, MatSnackBar} from '@angular/material/snack-bar';
+
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, ProductComponent, BigvaluePipe, CommonModule],
+  imports: [RouterOutlet, ProductComponent, BigvaluePipe, CommonModule, MatSnackBarModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
@@ -32,7 +35,7 @@ export class AppComponent {
     this.qtmulti = this.switchPositions[this.currentPositionIndex];
   }
 
-  constructor(private service: WebserviceService) {
+  constructor(private service: WebserviceService, private snackBar: MatSnackBar) {
     this.service.getWorld().then(
       world => {
         this.world = world.data.getWorld;
@@ -56,6 +59,16 @@ export class AppComponent {
   hireManager(manager: Palier) {
     this.world.managers[manager.idcible - 1].unlocked = true;
     this.world.products[manager.idcible - 1].managerUnlocked = true;
-    this.world.money -= manager.seuil;
+    if(this.world.money >= manager.seuil){
+      this.world.money -= manager.seuil;
+      this.popMessage("Manager " + manager.name + " hired");
+    }
+    else{
+      this.popMessage("Not enough money to hire this manager");
+    }    
+  }
+
+  popMessage(message : string) : void {
+    this.snackBar.open(message, "", { duration : 2000 })
   }
 }
