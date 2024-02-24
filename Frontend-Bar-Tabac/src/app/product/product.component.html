@@ -1,19 +1,19 @@
 @if(product != undefined){
-<div>
-    <div class="productpresentation">
+<div class="product-container">
+    <div class="product-image-wrapper">
+        <img [attr.src]="server + product.logo" class="product-image round" (click)="onClick()" />
+    </div>
+    <div class="product-details">
         <p class="product-name">{{ product.name }}</p>
-        <img [attr.src]="server + product.logo" (click)="onClick()" />
-        <span class="quantite">100</span>
+        <div class="price-progress-wrapper">
+            <mat-progress-bar [value]="progressbarvalue" class="product-progress">
+                <p class="product-price">{{ product.revenu }}</p>
+            </mat-progress-bar>
+        </div>
+        <button class="buy-button" type="button" (click)="buyProduct()" [disabled]="disabledButtonBuy">
+            <span class="buy-text">Buy</span>
+            <span class="product-price">{{ productCost }} <span class="qmulti-product">{{ qmultiButton }}</span></span>
+        </button>
     </div>
-    <div>
-        <mat-progress-bar [value]="progressbarvalue" class="mat-large"></mat-progress-bar>
-        <p class="product-name">{{ product.cout }}</p>
-    </div>
-    <button class="button-buy" type="button" (click)="buyProduct()">Buy</button>
 </div>
-
-
-
-
-
 }

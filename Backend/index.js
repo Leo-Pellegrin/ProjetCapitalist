@@ -5,6 +5,9 @@ const typeDefs = require("./schema")
 // Provide resolver functions for your schema fields
 const resolvers =  require("./resolvers")
 
+//Cors
+var cors = require('cors')
+
 // Provide world
 let world = require("./world")
 
@@ -16,7 +19,10 @@ const server = new ApolloServer({
 });
 
 const app = express();
+
 app.use(express.static('public'));
+app.use(cors())
+
 server.start().then(res => {
     server.applyMiddleware({ app });
     app.listen({ port: 4000 }, () =>

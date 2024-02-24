@@ -7,8 +7,7 @@
 
   <span [innerHTML]="world.money | bigvalue"> </span>
   <div class="id-joueur">
-    <form action="">
-      <label for="fname">Your ID:</label><br>
+    <form action=""> <label for="name">Your ID:</label><br>
       <input type="text" id="id" name="id"><br>
       <input type="submit" value="Submit">
     </form>
@@ -72,8 +71,8 @@
   </div>
   <div class="product">
     <app-product [prod]="world.products[0]" [qtmulti]="qtmulti" class="product col-md-6"
-      (notifyProduction)="onProductionDone($event)" [worldmoney]="world.money" />
+      (notifyProduction)="onProductionDone($event)" [worldmoney]="world.money" (notifyBuy)="onBuy($event)"/>
     <app-product [prod]="world.products[1]" [qtmulti]="qtmulti" class="product col-md-6"
-      (notifyProduction)="onProductionDone($event)" [worldmoney]="world.money" />
+      (notifyProduction)="onProductionDone($event)" [worldmoney]="world.money" (notifyBuy)="onBuy($event)"/>
   </div>
 </div>

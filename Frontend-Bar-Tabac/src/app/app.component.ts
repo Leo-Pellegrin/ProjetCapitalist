@@ -14,23 +14,23 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [RouterOutlet, ProductComponent, BigvaluePipe, CommonModule],
   templateUrl: './app.component.html',
-  styleUrl : './app.component.css',
+  styleUrl: './app.component.css',
 })
 
-export class AppComponent{
-    title = 'bar-tabac';
-    world: World = new World();
-    server = GET_SERV;
-    switchPositions = ['x1', 'x10', 'x100', 'Max'];
-    currentPositionIndex = 0; 
-    qtmulti = this.switchPositions[this.currentPositionIndex]; 
-    showManagers = false;
-  
-   
-    toggleSwitch() {
-      this.currentPositionIndex = (this.currentPositionIndex + 1) % this.switchPositions.length;
-      this.qtmulti = this.switchPositions[this.currentPositionIndex];
-    }
+export class AppComponent {
+  title = 'bar-tabac';
+  world: World = new World();
+  server = GET_SERV;
+  switchPositions = ['x1', 'x10', 'x100', 'Max'];
+  currentPositionIndex = 0;
+  qtmulti = this.switchPositions[this.currentPositionIndex];
+  showManagers = false;
+
+
+  toggleSwitch() {
+    this.currentPositionIndex = (this.currentPositionIndex + 1) % this.switchPositions.length;
+    this.qtmulti = this.switchPositions[this.currentPositionIndex];
+  }
 
   constructor(private service: WebserviceService) {
     this.service.getWorld().then(
@@ -41,7 +41,7 @@ export class AppComponent{
   }
 
   onProductionDone(product: Product) {
-    if (product.revenu > 0) { 
+    if (product.revenu > 0) {
       this.world.money += product.revenu;
       console.log(`Production of product ${product.revenu} completed. Total money: ${this.world.money}`);
     } else {
@@ -49,7 +49,13 @@ export class AppComponent{
     }
   }
 
+  onBuy(num: number){
+    this.world.money -= num;
+  }
+
   hireManager(manager: Palier) {
-  
+    this.world.managers[manager.idcible - 1].unlocked = true;
+    this.world.products[manager.idcible - 1].managerUnlocked = true;
+    this.world.money -= manager.seuil;
   }
 }
