@@ -19,7 +19,7 @@ module.exports = {
             "quantite": 1,
             "timeleft": 0,
             "managerUnlocked": false,
-            "palliers": [
+            "paliers": [
                 {
                     "name": "Palier1",
                     "logo": "icones/premierpalier.jpg",
@@ -60,7 +60,7 @@ module.exports = {
             "quantite": 1,
             "timeleft": 0,
             "managerUnlocked": false,
-            "palliers": [
+            "paliers": [
                 {
                     "name": "Palier1",
                     "logo": "icones/premierpalier.jpg",

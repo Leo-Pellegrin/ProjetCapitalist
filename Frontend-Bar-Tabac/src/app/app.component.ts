@@ -40,8 +40,8 @@ export class AppComponent {
   constructor(private service: WebserviceService, private snackBar: MatSnackBar) {
     this.service.getWorld().then(
       world => {
-        this.world = world.data.getWorld;
-        console.log(this.world.managers[2]);
+        this.world = world.data.getWorld;        
+        console.log(this.server + this.world.logo);
       }
     );
   }
@@ -56,15 +56,33 @@ export class AppComponent {
     }
   }
 
-  onBuy(num: number){
-    this.world.money -= num;
+  onBuy(eventData: [ productCost: number, product: Product, maxCanBuy: number]) {
+    this.world.money -= eventData[0];
+    switch(this.currentPositionIndex){
+      case 0:
+        this.world.products[eventData[1].id].quantite += 1;
+        this.world.products[eventData[1].id].cout = Math.round((eventData[1].cout * eventData[1].croissance) * 100) / 100;
+        break;
+      case 1 :
+        this.world.products[eventData[1].id].quantite += 10;
+        this.world.products[eventData[1].id].cout = Math.round(eventData[1].cout * (Math.pow(eventData[1].croissance, 10 - 1)) * 100) / 100;
+        break;
+      case 2 :
+        this.world.products[eventData[1].id].quantite += 100;
+        this.world.products[eventData[1].id].cout = Math.round(eventData[1].cout * (Math.pow(eventData[1].croissance, 100 - 1)) * 100) / 100;
+        break;
+      case 3 :
+        this.world.products[eventData[1].id].quantite += eventData[2];
+        this.world.products[eventData[1].id].cout = Math.round(eventData[1].cout * (Math.pow(eventData[1].croissance, eventData[2] - 1)) * 100) / 100;
+        break;
+    }
     this.calcbadgeManagers();
   }
 
   hireManager(manager: Palier) {
-    this.world.managers[manager.idcible - 1].unlocked = true;
-    this.world.products[manager.idcible - 1].managerUnlocked = true;
     if(this.world.money >= manager.seuil){
+      this.world.managers[manager.idcible].unlocked = true;
+      this.world.products[manager.idcible].managerUnlocked = true;
       this.world.money -= manager.seuil;
       this.calcbadgeManagers();
       this.popMessage("Manager " + manager.name + " hired");

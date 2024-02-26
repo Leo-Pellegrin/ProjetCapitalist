@@ -2,6 +2,7 @@
 <div class="product-container">
     <div class="product-image-wrapper">
         <img [attr.src]="server + product.logo" class="product-image round" (click)="onClick()" />
+        <span>{{this.product.quantite}}</span>
     </div>
     <div class="product-details">
         <p class="product-name">{{ product.name }}</p>

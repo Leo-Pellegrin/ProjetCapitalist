@@ -52,7 +52,7 @@ export class ProductComponent implements AfterViewInit {
       if(this.product.timeleft == 0 && this.product.managerUnlocked){
         this.product.timeleft = this.product.vitesse;
       }
-      
+
       const timeElapsed = Date.now() - this.lastupdate;
 
       if (this.product.timeleft < 0) {
@@ -112,7 +112,7 @@ export class ProductComponent implements AfterViewInit {
   // Achat d'un produit
   buyProduct() {
     if (this._worldmoney >= this.product.cout) {
-      this.notifyBuy.emit(this.productCost);
+      this.notifyBuy.emit([this.productCost, this.product, this.maxCanBuy]);
     }
   }
 
@@ -157,6 +157,7 @@ export class ProductComponent implements AfterViewInit {
             
             let priceMaxcanBuy = this.maxCanBuy * this.product.cout * (1 + this.product.croissance)^(this.maxCanBuy-1)
             this.productCost = priceMaxcanBuy;
+            
             console.log("maxcanbuy", this.maxCanBuy)
             console.log("priceMaxcanBuy", priceMaxcanBuy)
             if(this._worldmoney > (priceMaxcanBuy)){
@@ -182,6 +183,8 @@ export class ProductComponent implements AfterViewInit {
   @Output() notifyProduction: EventEmitter<Product> = new EventEmitter<Product>();
 
   // Evénement d'achat
-  @Output() notifyBuy: EventEmitter<number> = new EventEmitter<number>();
+  @Output() notifyBuy: 
+    EventEmitter<[productCost: number, product: Product, maxCanBuy: number]> = 
+      new EventEmitter<[productCost: number, product: Product, maxCanBuy: number]>();
 }
 
