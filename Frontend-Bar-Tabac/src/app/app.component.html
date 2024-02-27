@@ -1,88 +1,92 @@
-<div class="body" [ngStyle]="{'background-image': 'url(' + backgroundImageUrl + ')', 'background-size': 'cover', 'height' : '150%'}" >
-<div class="header">
-  <div class="logo-monde">
-    <img [attr.src]="server + world.logo" />
-    <br>
-    <span id="worldname" > {{ world.name }} </span>
-  </div>
+<div class="body"
+  [ngStyle]="{'background-image': 'url(' + backgroundImageUrl + ')', 'background-size': 'cover', 'height' : '150%'}">
+  <div class="header">
+    <div class="logo-monde">
+      <img [attr.src]="server + world.logo" />
+      <br>
+      <span id="worldname"> {{ world.name }} </span>
+    </div>
 
 
-  <span class="world-money" [innerHTML]="world.money | bigvalue"> </span>
-  <div class="id-joueur">
-    <form action="">
-      <label for="fname">Your ID:</label><br>
-      <input type="text" id="id" name="id"><br>
-      <input type="submit" value="Submit">
-    </form>
-  </div>
-  <div>
+    <span class="world-money" [innerHTML]="world.money | bigvalue"> </span>
+    <div class="id-joueur">
+      <form action="">
+        <label for="fname">Your ID:</label><br>
+        <input type="text" id="id" name="id"><br>
+        <input type="submit" value="Submit">
+      </form>
+    </div>
+    <div>
       <label for="name">Your name:</label><br>
-      <input type="text" [(ngModel)]="username" (change)="onUsernameChanged()"/>
+      <input type="text" [(ngModel)]="username" (change)="onUsernameChanged()" />
+    </div>
+
+    <div>
+      <button class="button_qte" (click)="toggleSwitch()">{{qtmulti}}</button>
+
+    </div>
+
   </div>
 
-  <div>
-    <button  class="button_qte" (click)="toggleSwitch()">{{qtmulti}}</button>
+  <div class="main">
+    <div class="menu">
+      <div class="bouton-menu">
+        <button class="button" type="button">Unlocks</button>
+      </div>
+      <div class="bouton-menu">
+        <button class="button" type="button">Cash upgrade</button>
+      </div>
 
-  </div>
-
-</div>
-
-<div class="main">
-  <div class="menu">
-    <div class="bouton-menu">
-      <button class="button" type="button">Unlocks</button>
-    </div>
-    <div class="bouton-menu">
-      <button class="button" type="button">Cash upgrade</button>
-    </div>
-
-    <div class="bouton-menu">
-      <button class="button" type="button">Angel Upgrade</button>
-    </div>
-    <div class="bouton-menu">
-      <button 
-        mat-raised-button
-        (click)="showManagers = !showManagers" 
-        [matBadge]="badgeManagers"
-        [matBadgeHidden]="badgeManagers==0"
-        class="button" 
-        type="button">
-        Managers
-      </button>
-      @if(showManagers){
-      <div class="modal">
-        <div>
-          <h1 class="title">Managers make you feel better !</h1>
-        </div>
-        <div>
-          @for (manager of world.managers; track manager.name) {
+      <div class="bouton-menu">
+        <button class="button" type="button">Angel Upgrade</button>
+      </div>
+      <div class="bouton-menu">
+        <button mat-raised-button (click)="showManagers = !showManagers" [matBadge]="badgeManagers"
+          [matBadgeHidden]="badgeManagers==0" class="button" type="button">
+          Managers
+        </button>
+        @if(showManagers){
+        <div class="modal">
           <div>
-            @if(!manager.unlocked){
-            <div class="managerslayout">
-              <div>
-                <div class="logo"><img class="round" [attr.src]="server+manager.logo" /> </div>
+            <h1 class="title">Managers make you feel better !</h1>
+          </div>
+          <div>
+            @for (manager of world.managers; track manager.name) {
+            <div>
+              @if(!manager.unlocked){
+              <div class="managerslayout">
+                <div>
+                  <div class="logo"><img class="round" [attr.src]="server+manager.logo" /> </div>
+                </div>
+                <div>
+                  <div class="managername"> {{ manager.name}} </div>
+                  <div class="managercible"> {{ world.products[manager.idcible].name }} </div>
+                  <div class="managercost"> {{ manager.seuil}} </div>
+                </div>
+                <div>
+                  <div class="hirebutton" (click)="hireManager(manager)"
+                    [ngClass]="{'selectable' : (world.money >= manager.seuil)}">Hire !</div>
+                </div>
               </div>
-              <div>
-                <div class="managername"> {{ manager.name}} </div>
-                <div class="managercible"> {{ world.products[manager.idcible].name }} </div>
-                <div class="managercost"> {{ manager.seuil}} </div>
-              </div>
-              <div>
-                <div class="hirebutton" (click)="hireManager(manager)"
-                  [ngClass]="{'selectable' : (world.money >= manager.seuil)}">Hire !</div>
-              </div>
+              }
             </div>
             }
           </div>
-          }
+          <button class="closebutton" mat-raised-button color="primary" (click)="showManagers = !showManagers"></button>
         </div>
-        <button class="closebutton" mat-raised-button color="primary" (click)="showManagers = !showManagers"></button>
+        }
       </div>
+      <div class="bouton-menu">
+        <button class="button" type="button">Investors</button>
+      </div>
+    </div>
+    <div class="product">
+      @for (product of world.products; track product.name) {      
+        <app-product [prod]="product" [qtmulti]="qtmulti" class="product col-md-6"
+          (notifyProduction)="onProductionDone($event)" [worldmoney]="world.money" (notifyBuy)="onBuy($event)" />
       }
     </div>
-    <div class="bouton-menu">
-      <button class="button" type="button">Investors</button>
-    </div>
+<<<<<<< HEAD
   </div>
   <div class="product">
     @for (product of world.products; track product.id){
@@ -91,3 +95,6 @@
     }
   </div>
 </div>
+=======
+  </div>
+>>>>>>> ed868231ef4cff6b4ceca2a84f83b422892585d5

@@ -92,7 +92,7 @@ module.exports = {
             ]    
         },
         {
-            "id": 3,
+            "id": 2,
             "name": "Grand Fromage",
             "logo": "icones/gros_fromage.png",
             "cout": 60,
@@ -133,7 +133,7 @@ module.exports = {
             ]    
         },
         {
-            "id": 4,
+            "id": 3,
             "name": "Vache",
             "logo": "icones/vache.png",
             "cout": 60,
@@ -174,7 +174,7 @@ module.exports = {
             ]    
         },
         {
-            "id": 5,
+            "id": 4,
             "name": "Ferme",
             "logo": "icones/ferme.png",
             "cout": 60,
@@ -215,7 +215,7 @@ module.exports = {
             ]    
         },
         {
-            "id": 6,
+            "id": 5,
             "name": "Exploitation",
             "logo": "icones/grandeferme.png",
             "cout": 60,

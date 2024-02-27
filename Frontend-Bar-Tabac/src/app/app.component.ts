@@ -36,8 +36,12 @@ export class AppComponent {
   showManagers = false;
   badgeManagers: number = 0;
   username: string = "";
+<<<<<<< HEAD
   backgroundImageUrl = 'http://localhost:4000/icones/ferme_background.png'
 
+=======
+  backgroundImageUrl: string  = "http://localhost:4000/icones/ferme_background.png"
+>>>>>>> ed868231ef4cff6b4ceca2a84f83b422892585d5
 
   toggleSwitch() {
     this.currentPositionIndex = (this.currentPositionIndex + 1) % this.switchPositions.length;
