@@ -85,9 +85,9 @@
     </div>
   </div>
   <div class="product">
-    <app-product [prod]="world.products[0]" [qtmulti]="qtmulti" class="product col-md-6"
+    @for (product of world.products; track product.id){
+      <app-product [prod]="{{product}}" [qtmulti]="qtmulti" class="product col-md-6"
       (notifyProduction)="onProductionDone($event)" [worldmoney]="world.money" (notifyBuy)="onBuy($event)"/>
-    <app-product [prod]="world.products[1]" [qtmulti]="qtmulti" class="product col-md-6"
-      (notifyProduction)="onProductionDone($event)" [worldmoney]="world.money" />
+    }
   </div>
 </div>
