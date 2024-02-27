@@ -32,8 +32,6 @@ export class ProductComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.product = new Product();
-
     if (this.isBrowser()) {
       setInterval(() => { this.calcScore() }, 100)
     }
@@ -69,8 +67,10 @@ export class ProductComponent implements AfterViewInit {
   // Passage du produit depuis le composant parent
   @Input()
   set prod(value: Product) {
-    if (value != undefined) {
+    
+    if (value != undefined) {      
       this.product = value;
+      console.log(this.server + this.product.logo)
       this.productCost = this.product.cout
       this.buyDisabled();
     }
