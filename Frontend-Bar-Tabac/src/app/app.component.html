@@ -10,10 +10,14 @@
   <span class="world-money" [innerHTML]="world.money | bigvalue"> </span>
   <div class="id-joueur">
     <form action="">
-      <label  id="id_form-label" for="fname">Your ID:</label><br>
-      <input type="text" id="id_form" name="id"><br>
-      <input type="submit" id="id_form_button" value="Submit">
+      <label for="fname">Your ID:</label><br>
+      <input type="text" id="id" name="id"><br>
+      <input type="submit" value="Submit">
     </form>
+  </div>
+  <div>
+      <label for="name">Your name:</label><br>
+      <input type="text" [(ngModel)]="username" (change)="onUsernameChanged()"/>
   </div>
 
   <div>
@@ -36,7 +40,15 @@
       <button class="button" type="button">Angel Upgrade</button>
     </div>
     <div class="bouton-menu">
-      <button (click)="showManagers = !showManagers" class="button" type="button">Managers</button>
+      <button 
+        mat-raised-button
+        (click)="showManagers = !showManagers" 
+        [matBadge]="badgeManagers"
+        [matBadgeHidden]="badgeManagers==0"
+        class="button" 
+        type="button">
+        Managers
+      </button>
       @if(showManagers){
       <div class="modal">
         <div>
@@ -74,18 +86,8 @@
   </div>
   <div class="product">
     <app-product [prod]="world.products[0]" [qtmulti]="qtmulti" class="product col-md-6"
-      (notifyProduction)="onProductionDone($event)" [worldmoney]="world.money" />
+      (notifyProduction)="onProductionDone($event)" [worldmoney]="world.money" (notifyBuy)="onBuy($event)"/>
     <app-product [prod]="world.products[1]" [qtmulti]="qtmulti" class="product col-md-6"
       (notifyProduction)="onProductionDone($event)" [worldmoney]="world.money" />
-    <app-product [prod]="world.products[2]" [qtmulti]="qtmulti" class="product col-md-6"
-      (notifyProduction)="onProductionDone($event)" [worldmoney]="world.money" />
-    <app-product [prod]="world.products[3]" [qtmulti]="qtmulti" class="product col-md-6"
-      (notifyProduction)="onProductionDone($event)" [worldmoney]="world.money" />
-    <app-product [prod]="world.products[4]" [qtmulti]="qtmulti" class="product col-md-6"
-      (notifyProduction)="onProductionDone($event)" [worldmoney]="world.money" />
-    <app-product [prod]="world.products[5]" [qtmulti]="qtmulti" class="product col-md-6"
-      (notifyProduction)="onProductionDone($event)" [worldmoney]="world.money" />
-      
   </div>
-</div>
 </div>
