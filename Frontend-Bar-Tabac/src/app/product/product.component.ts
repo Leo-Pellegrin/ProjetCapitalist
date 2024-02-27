@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, AfterViewInit, signal, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, Input, Output, EventEmitter, AfterViewInit, signal, Inject, PLATFORM_ID } from '@angular/core';
 import { Product } from '../world';
 import { isPlatformBrowser, CommonModule } from "@angular/common"; // update this
 import { MatProgressBarModule } from '@angular/material/progress-bar'
@@ -21,9 +21,6 @@ export class ProductComponent implements AfterViewInit {
   progressbarvalue: number = 0
   server = GET_SERV;
   isBrowser = signal(false);
-
-
-
   productCost: number = 0;
   disabledButtonBuy: boolean = true;
   qmultiButton: string = "x1";
