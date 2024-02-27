@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 
 
 
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -25,7 +26,7 @@ export class AppComponent{
     currentPositionIndex = 0; 
     qtmulti = this.switchPositions[this.currentPositionIndex]; 
     showManagers = false;
-  
+    backgroundImageUrl = 'http://localhost:4000/icones/ferme_background.png';
    
     toggleSwitch() {
       this.currentPositionIndex = (this.currentPositionIndex + 1) % this.switchPositions.length;

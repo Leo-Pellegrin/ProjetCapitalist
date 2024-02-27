@@ -1,4 +1,5 @@
 export class World {
+ 
   name = '';
   logo = '';
   money = 0;

@@ -3,6 +3,7 @@ import {gql} from "@urql/core";
 export const GET_WORLD = gql`
     query getWorld {
         getWorld {
+        
         name
         logo
         money

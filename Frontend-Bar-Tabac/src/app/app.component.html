@@ -1,21 +1,23 @@
+<div class="body" [ngStyle]="{'background-image': 'url(' + backgroundImageUrl + ')', 'background-size': 'cover', 'height' : '150%'}" >
 <div class="header">
   <div class="logo-monde">
     <img [attr.src]="server + world.logo" />
-    <span id="worldname"> {{ world.name }} </span>
+    <br>
+    <span id="worldname" > {{ world.name }} </span>
   </div>
 
 
-  <span [innerHTML]="world.money | bigvalue"> </span>
+  <span class="world-money" [innerHTML]="world.money | bigvalue"> </span>
   <div class="id-joueur">
     <form action="">
-      <label for="fname">Your ID:</label><br>
-      <input type="text" id="id" name="id"><br>
-      <input type="submit" value="Submit">
+      <label  id="id_form-label" for="fname">Your ID:</label><br>
+      <input type="text" id="id_form" name="id"><br>
+      <input type="submit" id="id_form_button" value="Submit">
     </form>
   </div>
 
   <div>
-    <button (click)="toggleSwitch()">{{qtmulti}}</button>
+    <button  class="button_qte" (click)="toggleSwitch()">{{qtmulti}}</button>
 
   </div>
 
@@ -75,5 +77,15 @@
       (notifyProduction)="onProductionDone($event)" [worldmoney]="world.money" />
     <app-product [prod]="world.products[1]" [qtmulti]="qtmulti" class="product col-md-6"
       (notifyProduction)="onProductionDone($event)" [worldmoney]="world.money" />
+    <app-product [prod]="world.products[2]" [qtmulti]="qtmulti" class="product col-md-6"
+      (notifyProduction)="onProductionDone($event)" [worldmoney]="world.money" />
+    <app-product [prod]="world.products[3]" [qtmulti]="qtmulti" class="product col-md-6"
+      (notifyProduction)="onProductionDone($event)" [worldmoney]="world.money" />
+    <app-product [prod]="world.products[4]" [qtmulti]="qtmulti" class="product col-md-6"
+      (notifyProduction)="onProductionDone($event)" [worldmoney]="world.money" />
+    <app-product [prod]="world.products[5]" [qtmulti]="qtmulti" class="product col-md-6"
+      (notifyProduction)="onProductionDone($event)" [worldmoney]="world.money" />
+      
   </div>
+</div>
 </div>

@@ -1,6 +1,7 @@
 module.exports = {
-    "name": "Nom du monde",
-    "logo": "icones/logomonde.jpg",
+    
+    "name": "La Fromagerie",
+    "logo": "icones/logomonde.png",
     "money": 0,
     "score": 0,
     "totalangels": 0,
@@ -10,8 +11,8 @@ module.exports = {
     "products": [
         {
             "id": 1,
-            "name": "Filtre",
-            "logo": "icones/filtre.png",
+            "name": "Lait",
+            "logo": "icones/lait.png",
             "cout": 4,
             "croissance": 1.07,
             "revenu": 1,
@@ -51,8 +52,172 @@ module.exports = {
     },
         {
             "id": 2,
-            "name": "Feuilles",
-            "logo": "icones/feuille.jpeg",
+            "name": "Petit Fromage",
+            "logo": "icones/petit_fromage.png",
+            "cout": 60,
+            "croissance": 1.15,
+            "revenu": 60,
+            "vitesse": 30000,
+            "quantite": 1,
+            "timeleft": 0,
+            "managerUnlocked": false,
+            "palliers": [
+                {
+                    "name": "Palier1",
+                    "logo": "icones/premierpalier.jpg",
+                    "seuil": 20,
+                    "idcible": 1,
+                    "ratio": 2,
+                    "typeratio": "vitesse",
+                    "unlocked": false
+                },
+                {
+                    "name": "Palier2",
+                    "logo": "icones/deuxiemepalier.jpg",
+                    "seuil": 50,
+                    "idcible": 1,
+                    "ratio": 2,
+                    "typeratio": "vitesse",
+                    "unlocked": false
+                },
+                {
+                    "name": "Palier3",
+                    "logo": "icones/troisiemepalier.jpg",
+                    "seuil": 100,
+                    "idcible": 1,
+                    "ratio": 2,
+                    "typeratio": "vitesse",
+                    "unlocked": false
+                },
+            ]    
+        },
+        {
+            "id": 3,
+            "name": "Grand Fromage",
+            "logo": "icones/gros_fromage.png",
+            "cout": 60,
+            "croissance": 1.15,
+            "revenu": 60,
+            "vitesse": 30000,
+            "quantite": 1,
+            "timeleft": 0,
+            "managerUnlocked": false,
+            "palliers": [
+                {
+                    "name": "Palier1",
+                    "logo": "icones/premierpalier.jpg",
+                    "seuil": 20,
+                    "idcible": 1,
+                    "ratio": 2,
+                    "typeratio": "vitesse",
+                    "unlocked": false
+                },
+                {
+                    "name": "Palier2",
+                    "logo": "icones/deuxiemepalier.jpg",
+                    "seuil": 50,
+                    "idcible": 1,
+                    "ratio": 2,
+                    "typeratio": "vitesse",
+                    "unlocked": false
+                },
+                {
+                    "name": "Palier3",
+                    "logo": "icones/troisiemepalier.jpg",
+                    "seuil": 100,
+                    "idcible": 1,
+                    "ratio": 2,
+                    "typeratio": "vitesse",
+                    "unlocked": false
+                },
+            ]    
+        },
+        {
+            "id": 4,
+            "name": "Vache",
+            "logo": "icones/vache.png",
+            "cout": 60,
+            "croissance": 1.15,
+            "revenu": 60,
+            "vitesse": 30000,
+            "quantite": 1,
+            "timeleft": 0,
+            "managerUnlocked": false,
+            "palliers": [
+                {
+                    "name": "Palier1",
+                    "logo": "icones/premierpalier.jpg",
+                    "seuil": 20,
+                    "idcible": 1,
+                    "ratio": 2,
+                    "typeratio": "vitesse",
+                    "unlocked": false
+                },
+                {
+                    "name": "Palier2",
+                    "logo": "icones/deuxiemepalier.jpg",
+                    "seuil": 50,
+                    "idcible": 1,
+                    "ratio": 2,
+                    "typeratio": "vitesse",
+                    "unlocked": false
+                },
+                {
+                    "name": "Palier3",
+                    "logo": "icones/troisiemepalier.jpg",
+                    "seuil": 100,
+                    "idcible": 1,
+                    "ratio": 2,
+                    "typeratio": "vitesse",
+                    "unlocked": false
+                },
+            ]    
+        },
+        {
+            "id": 5,
+            "name": "Ferme",
+            "logo": "icones/ferme.png",
+            "cout": 60,
+            "croissance": 1.15,
+            "revenu": 60,
+            "vitesse": 30000,
+            "quantite": 1,
+            "timeleft": 0,
+            "managerUnlocked": false,
+            "palliers": [
+                {
+                    "name": "Palier1",
+                    "logo": "icones/premierpalier.jpg",
+                    "seuil": 20,
+                    "idcible": 1,
+                    "ratio": 2,
+                    "typeratio": "vitesse",
+                    "unlocked": false
+                },
+                {
+                    "name": "Palier2",
+                    "logo": "icones/deuxiemepalier.jpg",
+                    "seuil": 50,
+                    "idcible": 1,
+                    "ratio": 2,
+                    "typeratio": "vitesse",
+                    "unlocked": false
+                },
+                {
+                    "name": "Palier3",
+                    "logo": "icones/troisiemepalier.jpg",
+                    "seuil": 100,
+                    "idcible": 1,
+                    "ratio": 2,
+                    "typeratio": "vitesse",
+                    "unlocked": false
+                },
+            ]    
+        },
+        {
+            "id": 6,
+            "name": "Exploitation",
+            "logo": "icones/grandeferme.png",
             "cout": 60,
             "croissance": 1.15,
             "revenu": 60,
