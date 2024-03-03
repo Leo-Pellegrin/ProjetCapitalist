@@ -1,3 +1,16 @@
+.modal {
+    position: fixed;
+    z-index: 2;
+    padding: 40px;
+    background-color: white;
+    border: solid;
+    width: 700px;
+    /* Centering */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 .managerslayout {
     display: flex;
     flex-direction: row;
@@ -14,21 +27,27 @@
 .managerslayout .managercible,
 .managerslayout .managercost {
     /* Styles pour le nom, la cible et le coût du gestionnaire */
-    text-align: center; /* Centrer le texte */
-    margin-bottom: 5px; /* Espace en bas pour séparer les éléments */
+    text-align: center;
+    /* Centrer le texte */
+    margin-bottom: 5px;
+    /* Espace en bas pour séparer les éléments */
 }
 
 .managerslayout .managername {
     /* Styles pour le nom du gestionnaire */
-    font-weight: bold; /* Police en gras pour le nom */
-    margin-bottom: 5px; /* Espace en bas pour séparer les éléments */
+    font-weight: bold;
+    /* Police en gras pour le nom */
+    margin-bottom: 5px;
+    /* Espace en bas pour séparer les éléments */
 }
 
 .managerslayout .managercible,
 .managerslayout .managercost {
     /* Styles pour la cible et le coût du gestionnaire */
-    margin-bottom: 5px; /* Espace en bas pour séparer les éléments */
+    margin-bottom: 5px;
+    /* Espace en bas pour séparer les éléments */
 }
+
 .managerslayout .hirebutton {
     /* Styles pour le bouton d'embauche */
     padding: 5px 10px;
@@ -41,10 +60,10 @@
     cursor: pointer;
 }
 
-.managerslayout .logo {
-    width: 50px;
+.managerslayout .logo img {
+    width: 150px;
     /* Largeur de l'image */
-    height: 50px;
+    height: 150px;
     /* Hauteur de l'image */
     border-radius: 50%;
     /* Pour une forme ronde */

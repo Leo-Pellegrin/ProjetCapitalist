@@ -13,6 +13,8 @@ import { MatBadgeModule } from '@angular/material/badge';
 
 // FormsModule
 import { FormsModule } from '@angular/forms';
+
+// Dialog
 import { DialogComponent } from './dialog/dialog.component';
 
 @Component({
@@ -33,7 +35,7 @@ export class AppComponent {
   showManagers = false;
   showUpgrades = false; 
   badgeManagers: number = 0;
-  badgeUpgrade: number = 0;
+  badgeUpgrades: number = 0;
   backgroundImageUrl: string = "http://localhost:4000/icones/ferme_background.png"
   username: string = ""
   isBrowser = signal(false);
@@ -43,7 +45,7 @@ export class AppComponent {
     this.qtmulti = this.switchPositions[this.currentPositionIndex];
   }
 
-  constructor(private service: WebserviceService, private snackBar: MatSnackBar, @Inject(PLATFORM_ID) private platformId: object,public dialog: MatDialog) {
+  constructor(private service: WebserviceService, private snackBar: MatSnackBar, @Inject(PLATFORM_ID) private platformId: object, public dialog: MatDialog) {
     this.isBrowser.set(isPlatformBrowser(platformId));
 
     if (this.isBrowser()) {
@@ -54,6 +56,7 @@ export class AppComponent {
     this.service.getWorld().then(
       world => {
         this.world = world.data.getWorld;
+        console.log(this.world.managers)
       }
     );
   }

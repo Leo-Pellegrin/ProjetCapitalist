@@ -1,31 +1,58 @@
-<h1 class="title">Managers make you feel better !</h1>
 <mat-dialog-content>
     @if(data.type == "manager"){
-        @for (manager of data.data.managers; track manager.name) {
-            @if(!manager.unlocked){
-                <div class="managerslayout">
-                    <div>
-                        <div class="logo"><img class="round" [attr.src]="data.server+manager.logo" /> </div>
+        <div class="modal">
+            <h1 class="title">Managers make you feel better !</h1>
+            @for (manager of data.data.managers; track manager.name) {
+                @if(!manager.unlocked){
+                    <div class="managerslayout">
+                        <div>
+                            <div class="logo"><img [attr.src]="data.server+manager.logo" /> </div>
+                        </div>
+                        <div>
+                            <div class="managername"> {{ manager.name}} </div>
+                            <div class="managercible"> {{ data.data.products[manager.idcible].name }} </div>
+                            <div class="managercost"> {{ manager.seuil}} </div>
+                        </div>
+                        <!-- <div>
+                            <div class="hirebutton" (click)="hireManager(manager)"
+                                [ngClass]="{'selectable' : (world.money >= manager.seuil)}">Hire !<
+                            /div>
+                        </div> -->
                     </div>
-                    <div>
-                        <div class="managername"> {{ manager.name}} </div>
-                        <div class="managercible"> {{ data.data.products[manager.idcible].name }} </div>
-                        <div class="managercost"> {{ manager.seuil}} </div>
-                    </div>
-                    <!-- <div>
-                                <div class="hirebutton" (click)="hireManager(manager)"
-                                    [ngClass]="{'selectable' : (world.money >= manager.seuil)}">Hire !</div>
-                                </div> -->
-                </div>
+                }
             }
-        }
+        </div>
     }
     @else if(data.type == "upgrade"){
-        <div class="upgrade">
-            
+        <div class="modal">
+            <div>
+              <h1 class="title">Want to maximize profits? Get your investments to this quotas !</h1>
+            </div>
+            <div class ="two-column-list">
+                @for (upgrade of data.data.upgrades.slice(0, 6); track upgrade.name) {
+                    <div>
+                        @if(!upgrade.unlocked){
+                            <div class="upgradeslayout">
+                                <div>
+                                    <div class="logo"><img class="round" [attr.src]="data.server" /> </div>
+                                </div>
+                                <div>
+                                    <div class="upgradename"> {{ upgrade.name}} </div>
+                                    <div class="upgradecible"> {{ data.data.products[upgrade.idcible].name }} </div>
+                                    <div class="upgradeseuil"> {{ upgrade.seuil}} </div>
+                                </div>
+                                <!-- <div>
+                                    <div class="buyUpgrade" (click)="buyUpgrade(upgrade)"
+                                    [ngClass]="{'selectable' : (world.money >= upgrade.seuil)}">Hire !</div>
+                                </div> -->
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
         </div>
     }
 </mat-dialog-content>
 <mat-dialog-actions>
-    <button mat-button cdkFocusInitial>Fermer</button>
+    <button mat-button mat-dialog-close>Fermer</button>
 </mat-dialog-actions>
