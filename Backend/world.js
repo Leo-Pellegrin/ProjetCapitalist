@@ -410,7 +410,7 @@ module.exports = {
         },
         {
             "name": "Salomé Roland",            
-            "logo": "icones/melia.png",
+            "logo": "icones/meliamanager.png",
             "seuil": 1000,
             "idcible": 2,
             "ratio": 0,
@@ -419,7 +419,7 @@ module.exports = {
         },
         {
             "name": "Lois Garcion",            
-            "logo": "icones/melia.png",
+            "logo": "icones/meliamanager.png",
             "seuil": 10000,
             "idcible": 3,
             "ratio": 0,
