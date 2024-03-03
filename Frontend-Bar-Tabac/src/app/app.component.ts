@@ -31,6 +31,7 @@ export class AppComponent {
   currentPositionIndex = 0;
   qtmulti = this.switchPositions[this.currentPositionIndex];
   showManagers = false;
+  showUpgrades = false; 
   badgeManagers: number = 0;
   badgeUpgrade: number = 0;
   backgroundImageUrl: string = "http://localhost:4000/icones/ferme_background.png"
@@ -79,6 +80,7 @@ export class AppComponent {
       }
       this.world.money += product.revenu;
       this.calcbadgeManagers();
+      this.calcbadgeUpgrades();
       console.log(`Production of product ${product.revenu} completed. Total money: ${this.world.money}`);
     } else {
       console.warn(`Production of product with non-positive revenu (${product.revenu}) skipped.`);
@@ -106,6 +108,7 @@ export class AppComponent {
         break;
     }
     this.calcbadgeManagers();
+    this.calcbadgeUpgrades();
   }
 
   hireManager(manager: Palier) {
@@ -114,12 +117,30 @@ export class AppComponent {
       this.world.products[manager.idcible].managerUnlocked = true;
       this.world.money -= manager.seuil;
       this.calcbadgeManagers();
+      this.calcbadgeUpgrades();
       this.popMessage("Manager " + manager.name + " hired");
     }
     else {
       this.popMessage("Not enough money to hire this manager");
     }
   }
+
+  buyUpgrade(upgrade: Palier) {
+    if (this.world.money >= upgrade.seuil) {
+      let up = this.world.upgrades.find(up => up.name == upgrade.name)
+      if(up){
+        up.unlocked = true;
+      }
+      this.world.money -= upgrade.seuil;
+      this.calcbadgeUpgrades();
+      this.calcbadgeManagers();
+      this.popMessage("Manager " + upgrade.name + " hired");
+    }
+    else {
+      this.popMessage("Not enough money to hire this manager");
+    }
+  }
+
 
   popMessage(message: string): void {
     this.snackBar.open(message, "", { duration: 2000 })
@@ -130,6 +151,15 @@ export class AppComponent {
     for (let manager of this.world.managers) {
       if (manager.unlocked == false && this.world.money >= manager.seuil) {
         this.badgeManagers++;
+      }
+    }
+  }
+
+  calcbadgeUpgrades() {
+    this.badgeUpgrades = 0;
+    for (let upgrade of this.world.upgrades) {
+      if (upgrade.unlocked == false && this.world.money >= upgrade.seuil) {
+        this.badgeUpgrades++;
       }
     }
   }

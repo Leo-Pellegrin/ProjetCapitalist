@@ -11,14 +11,14 @@
     <span class="world-money" [innerHTML]="world.money | bigvalue"> </span>
     <div class="id-joueur">
       <form action="">
-        <label for="fname">Your ID:</label><br>
-        <input type="text" id="id" name="id"><br>
-        <input type="submit" value="Submit">
+        <label  id ="id_form-label" for="fname">Your ID:</label><br>
+        <input type="text" id="id_form" name="id"><br>
+        <input id="id_form_button" type="submit" value="Submit">
       </form>
     </div>
     <div>
-      <label for="name">Your name:</label><br>
-      <input type="text" [(ngModel)]="username" (change)="onUsernameChanged()" />
+      <label id="name_form_label"for="name">Your name:</label><br>
+      <input type="text" id="name_form" [(ngModel)]="username" (change)="onUsernameChanged()" />
     </div>
 
     <div>
@@ -34,10 +34,41 @@
         <button class="button" type="button">Unlocks</button>
       </div>
       <div class="bouton-menu">
-        <button mat-raised-button (click)="openDialogUpgrade()" [matBadge]="badgeUpgrade" [matBadgeHidden]="badgeUpgrade==0"
-          class="button" type="button">
-          Cash upgrade
-        </button>
+        <button mat-raised-button (click)="showUpgrades = !showUpgrades" [matBadge]="badgeUpgrades"
+        [matBadgeHidden]="badgeUpgrades==0" class="button" type="button">Cash Upgrade</button>
+        @if(showUpgrades){
+        <div class="modal">
+          <div>
+            <h1 class="title">Want to maximize profits? Get your investments to this quotas !</h1>
+          </div>
+          <div class ="two-column-list">
+            @for (upgrade of world.upgrades.slice(0, 6); track upgrade.name) {
+              <div>
+                @if(!upgrade.unlocked){
+                  <div class="upgradeslayout">
+                    <div>
+                      <div class="logo"><img class="round" [attr.src]="server+upgrade.logo" /> </div>
+                    </div>
+                    <div>
+                      <div class="upgradename"> {{ upgrade.name}} </div>
+                      <div class="upgradecible"> {{ world.products[upgrade.idcible].name }} </div>
+                      <div class="upgradeseuil"> {{ upgrade.seuil}} </div>
+                    </div>
+                    <div>
+                      <div class="buyUpgrade" (click)="buyUpgrade(upgrade)"
+                        [ngClass]="{'selectable' : (world.money >= upgrade.seuil)}">Hire !</div>
+                    </div>
+                  </div>
+                }
+              </div>
+            }
+          <div>
+          <button class="closebutton" mat-raised-button color="primary" (click)="showUpgrades = !showUpgrades"></button>
+          </div>
+          </div>
+        </div>
+        }
+         
       </div>
 
       <div class="bouton-menu">

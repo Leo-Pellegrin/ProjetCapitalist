@@ -391,8 +391,8 @@ module.exports = {
     ],
     "managers": [
         {
-            "name": "Philip Morris",            
-            "logo": "icones/Philip_Morris_tobacconist.jpg",
+            "name": "Lucas Miralles",            
+            "logo": "icones/lucasmanager.png",
             "seuil": 10,
             "idcible": 0,
             "ratio": 0,
@@ -401,9 +401,45 @@ module.exports = {
         },
         {
             "name": "Mélia Ferreira",            
-            "logo": "icones/melia.jpg",
+            "logo": "icones/meliamanager.png",
             "seuil": 100,
             "idcible": 1,
+            "ratio": 0,
+            "typeratio": "gain",
+            "unlocked": false
+        },
+        {
+            "name": "Salomé Roland",            
+            "logo": "icones/melia.png",
+            "seuil": 1000,
+            "idcible": 2,
+            "ratio": 0,
+            "typeratio": "gain",
+            "unlocked": false
+        },
+        {
+            "name": "Lois Garcion",            
+            "logo": "icones/melia.png",
+            "seuil": 10000,
+            "idcible": 3,
+            "ratio": 0,
+            "typeratio": "gain",
+            "unlocked": false
+        },
+        {
+            "name": "Fermier",            
+            "logo": "icones/fermier.png",
+            "seuil": 50000,
+            "idcible": 4,
+            "ratio": 0,
+            "typeratio": "gain",
+            "unlocked": false
+        },
+        {
+            "name": "Léo Pellegrin",            
+            "logo": "icones/leomanager.png",
+            "seuil": 100000,
+            "idcible": 5,
             "ratio": 0,
             "typeratio": "gain",
             "unlocked": false
