@@ -9,6 +9,7 @@ body {
     grid-template-columns: 25% 20% 15% 20% 20%;
     height: 150px;
     font-family: "Protest Riot";
+    color : #440B19; 
    
 }
 
@@ -51,7 +52,7 @@ img {
     /* border: none; */
     border-radius: 5px;
     background-color: rgba(255, 255, 255, .6); 
-    color: #2E1402;
+    color: #440B19;
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
@@ -59,8 +60,24 @@ img {
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
-    border-color: #2E1402;
+    border-color: #440B19;
 }
+
+.button:hover{
+    /* border: none; */
+    border-radius: 5px;
+    background-color: #440B19; 
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-color: white;
+}
+
 
 .product {
     display: grid;
@@ -84,16 +101,30 @@ img {
 
 #id_form{
     background-color: rgba(255, 255, 255, .4); 
-    color : #2E1402; 
-    border-color: #2E1402; 
+    color : #440B19; 
+    border-color: #440B19; 
     border-radius: 3px;
     border-width: 1px;
 }
 
 #id_form_button{
     background-color: rgba(255, 255, 255, .6); 
-    border-color: #2E1402;
-    color: #2E1402;
+    border-color: #440B19;
+    color: #440B19;
+    border-width: 1px;
+    /* border: none; */
+    border-radius: 3px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 2px;
+    padding: 5px 5px;
+}
+
+#id_form_button:hover{
+    background-color: #440B19; 
+    border-color: white;
+    color: white;
     border-width: 1px;
     /* border: none; */
     border-radius: 3px;
@@ -108,14 +139,40 @@ img {
     font-size: 20px;
 }
 
+#name_form_label{
+    font-size: 20px;
+
+}
+
+#name_form{
+    background-color: rgba(255, 255, 255, .4); 
+    color : #440B19; 
+    border-color: #440B19; 
+    border-radius: 3px;
+    border-width: 1px;
+}
+
 #worldname{
     font-size: 20px;
     margin-left: 10px;
 }
 .button_qte{
     background-color: rgba(255, 255, 255, .6); 
-    border-color: #2E1402;
-    color: #2E1402;
+    border-color: #440B19;
+    color: #440B19;
+    border-width: 1px;
+    border-radius: 3px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 2px;
+    padding: 5px 5px;
+}
+
+.button_qte:hover{
+    background-color: #440B19; 
+    border-color: white;
+    color: white;
     border-width: 1px;
     border-radius: 3px;
     text-align: center;
@@ -131,6 +188,7 @@ img {
     padding: 40px;
     background-color: white;
     border: solid;
+    width : 700px; 
     /* Centering */
     top: 50%;
     left: 50%;
@@ -140,6 +198,11 @@ img {
 .modal .title {
     /* Styles pour le titre */
     margin-bottom: 20px;
+}
+
+.two-column-list {
+    column-count: 2;
+    column-gap: 20px; /* Ajustez selon vos besoins */
 }
 
 .managerslayout {

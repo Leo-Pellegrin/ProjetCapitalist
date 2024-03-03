@@ -1,8 +1,8 @@
 @if(product != undefined){
 <div class="product-container">
     <div class="product-image-wrapper">
-        <img [attr.src]="server + product.logo" class="product-image round" (click)="onClick()" />
-        <span>{{this.product.quantite}}</span>
+        <img [attr.src]="server + product.logo" class="product-image" (click)="onClick()" />
+        <span class="product_qte">{{this.product.quantite}}</span>
     </div>
     <div class="product-details">
         <p class="product-name">{{ product.name }}</p>
