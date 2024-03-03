@@ -34,47 +34,20 @@
         <button class="button" type="button">Unlocks</button>
       </div>
       <div class="bouton-menu">
-        <button class="button" type="button">Cash upgrade</button>
+        <button mat-raised-button (click)="openDialogUpgrade()" [matBadge]="badgeUpgrade" [matBadgeHidden]="badgeUpgrade==0"
+          class="button" type="button">
+          Cash upgrade
+        </button>
       </div>
 
       <div class="bouton-menu">
         <button class="button" type="button">Angel Upgrade</button>
       </div>
       <div class="bouton-menu">
-        <button mat-raised-button (click)="showManagers = !showManagers" [matBadge]="badgeManagers"
+        <button mat-raised-button (click)="openDialogManager()" [matBadge]="badgeManagers"
           [matBadgeHidden]="badgeManagers==0" class="button" type="button">
           Managers
         </button>
-        @if(showManagers){
-        <div class="modal">
-          <div>
-            <h1 class="title">Managers make you feel better !</h1>
-          </div>
-          <div>
-            @for (manager of world.managers; track manager.name) {
-            <div>
-              @if(!manager.unlocked){
-              <div class="managerslayout">
-                <div>
-                  <div class="logo"><img class="round" [attr.src]="server+manager.logo" /> </div>
-                </div>
-                <div>
-                  <div class="managername"> {{ manager.name}} </div>
-                  <div class="managercible"> {{ world.products[manager.idcible].name }} </div>
-                  <div class="managercost"> {{ manager.seuil}} </div>
-                </div>
-                <div>
-                  <div class="hirebutton" (click)="hireManager(manager)"
-                    [ngClass]="{'selectable' : (world.money >= manager.seuil)}">Hire !</div>
-                </div>
-              </div>
-              }
-            </div>
-            }
-          </div>
-          <button class="closebutton" mat-raised-button color="primary" (click)="showManagers = !showManagers"></button>
-        </div>
-        }
       </div>
       <div class="bouton-menu">
         <button class="button" type="button">Investors</button>

@@ -43,7 +43,6 @@ export class ProductComponent implements AfterViewInit {
       return;
     }
     else {
-
       if(this.product.timeleft == 0 && this.product.managerUnlocked){
         this.product.timeleft = this.product.vitesse;
       }
@@ -67,10 +66,8 @@ export class ProductComponent implements AfterViewInit {
   // Passage du produit depuis le composant parent
   @Input()
   set prod(value: Product) {
-    
     if (value != undefined) {      
       this.product = value;
-      console.log(this.server + this.product.logo)
       this.productCost = this.product.cout
       this.buyDisabled();
     }
@@ -128,7 +125,6 @@ export class ProductComponent implements AfterViewInit {
           }
           break;
         case "x10":
-          console.log(this.productCost * 10)
           this.qmultiButton = "x10";
           this.productCost = this.product.cout * 10;
           if (this._worldmoney >= this.product.cout * 10) {
@@ -154,9 +150,7 @@ export class ProductComponent implements AfterViewInit {
             
             let priceMaxcanBuy = this.maxCanBuy * this.product.cout * (1 + this.product.croissance)^(this.maxCanBuy-1)
             this.productCost = priceMaxcanBuy;
-            
-            console.log("maxcanbuy", this.maxCanBuy)
-            console.log("priceMaxcanBuy", priceMaxcanBuy)
+                        
             if(this._worldmoney > (priceMaxcanBuy)){
               this.disabledButtonBuy = false;
             }            

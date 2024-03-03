@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Client, fetchExchange } from '@urql/core';
+import { createClient, fetchExchange } from '@urql/core';
 import { GET_WORLD } from './grapqhrequests';
 
 @Injectable({
@@ -8,20 +8,24 @@ import { GET_WORLD } from './grapqhrequests';
 export class WebserviceService {
 
   server = 'http://localhost:4000/';
-  user = '';
+  user = "";
 
   constructor() { }
 
   createClient() {
-    return new Client({
+    return createClient({
       url: this.server + "graphql",
-      exchanges: [fetchExchange],
+      exchanges : [fetchExchange],
       fetchOptions: () => {
         return {
           headers: { 'x-user': this.user },
         };
       },
     });
+  }
+
+  public setUser(user: string) {
+    this.user = user;
   }
 
   getWorld() {

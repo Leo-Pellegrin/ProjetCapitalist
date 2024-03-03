@@ -1,22 +1,19 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, signal, Inject, PLATFORM_ID } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { World, Palier, Product } from './world';
 import { WebserviceService } from './webservice.service';
 import { ProductComponent } from './product/product.component';
 import { GET_SERV } from '../request';
 import { BigvaluePipe } from './bigvalue.pipe';
-import { CommonModule } from '@angular/common';
-
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
 // Material message éphémère
 import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 import { MatBadgeModule } from '@angular/material/badge';
 
 // FormsModule
 import { FormsModule } from '@angular/forms';
-
-// LocalStorageService
-import { LocalStorageService } from './localstorage';
-
+import { DialogComponent } from './dialog/dialog.component';
 
 @Component({
   selector: 'app-root',
@@ -35,15 +32,24 @@ export class AppComponent {
   qtmulti = this.switchPositions[this.currentPositionIndex];
   showManagers = false;
   badgeManagers: number = 0;
-  username: string = "";
-  backgroundImageUrl: string  = "http://localhost:4000/icones/ferme_background.png"
+  badgeUpgrade: number = 0;
+  backgroundImageUrl: string = "http://localhost:4000/icones/ferme_background.png"
+  username: string = ""
+  isBrowser = signal(false);
 
   toggleSwitch() {
     this.currentPositionIndex = (this.currentPositionIndex + 1) % this.switchPositions.length;
     this.qtmulti = this.switchPositions[this.currentPositionIndex];
   }
 
-  constructor(private service: WebserviceService, private snackBar: MatSnackBar, private localStorageService: LocalStorageService) {
+  constructor(private service: WebserviceService, private snackBar: MatSnackBar, @Inject(PLATFORM_ID) private platformId: object,public dialog: MatDialog) {
+    this.isBrowser.set(isPlatformBrowser(platformId));
+
+    if (this.isBrowser()) {
+      this.username = localStorage.getItem("username") || "Anonymous" + Math.floor(Math.random() * 100000).toString();
+      this.service.setUser(this.username);
+    }
+
     this.service.getWorld().then(
       world => {
         this.world = world.data.getWorld;
@@ -51,9 +57,26 @@ export class AppComponent {
     );
   }
 
+  openDialogManager(): void {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      data: {data : this.world, server: this.server, type: "manager"},
+    });
+  }
+
+  openDialogUpgrade(): void {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      data: {data : this.world, server: this.server, type: "upgrade"},
+    });
+  }
 
   onProductionDone(product: Product) {
     if (product.revenu > 0) {
+      let upgrades = this.world.upgrades.filter(upgrads => (upgrads.idcible == product.id) && upgrads.unlocked == true);
+      for (let upgrad of upgrades) {
+        if(upgrad.typeratio == "gain"){
+          product.revenu *= upgrad.ratio;          
+        }
+      }
       this.world.money += product.revenu;
       this.calcbadgeManagers();
       console.log(`Production of product ${product.revenu} completed. Total money: ${this.world.money}`);
@@ -113,9 +136,9 @@ export class AppComponent {
 
   onUsernameChanged() {
     if (this.username == "") {
-      this.username = "Anonymous" + Math.floor(Math.random() * 100000).toString();
+      this.username = "Anonymous" + Math.floor(Math.random() * 10000).toString();
     }
     localStorage.setItem('username', this.username);
-    console.log(localStorage.getItem('username'));
+    this.service.setUser(this.username);
   }
 }

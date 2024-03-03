@@ -142,17 +142,7 @@ img {
     margin-bottom: 20px;
 }
 
-.managerslayout {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 20px;
-    /* Mettre les gestionnaires en ligne */
-    padding: 10px;
-    /* Ajout de padding */
-    margin-top: 40px;
-}
+
 
 .managerslayout .logo {
     width: 50px;
