@@ -16,6 +16,7 @@ import { FormsModule } from '@angular/forms';
 
 // Dialog
 import { DialogComponent } from './dialog/dialog.component';
+import { Dialog } from '@angular/cdk/dialog';
 
 @Component({
   selector: 'app-root',
@@ -66,7 +67,7 @@ export class AppComponent {
       height: '600px',
       width: '800px',
     });
-    dialogRef.componentInstance.notifyBuyManager.subscribe((data) => {
+    dialogRef.componentInstance.onBuyManager.subscribe((data) => {
       this.hireManager(data);
     });
   }
@@ -77,7 +78,7 @@ export class AppComponent {
       height: '600px',
       width: '800px',
     });
-    dialogRef.componentInstance.notifyBuyUpgrade.subscribe((data) => {
+    dialogRef.componentInstance.onBuyUpgrade.subscribe((data) => {
       this.buyUpgrade(data);
     });
   }
@@ -154,10 +155,10 @@ export class AppComponent {
       this.world.money -= upgrade.seuil;
       this.calcbadgeUpgrades();
       this.calcbadgeManagers();
-      this.popMessage("Manager " + upgrade.name + " hired");
+      this.popMessage("Upgrade " + upgrade.name + " bought");
     }
     else {
-      this.popMessage("Not enough money to hire this manager");
+      this.popMessage("Not enough money to buy this upgrade");
     }
   }
 
@@ -193,6 +194,8 @@ export class AppComponent {
       }
     }
   }
+
+  
 
   onUsernameChanged() {
     if (this.username == "") {
