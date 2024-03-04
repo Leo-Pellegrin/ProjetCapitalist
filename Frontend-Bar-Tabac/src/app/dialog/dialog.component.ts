@@ -10,6 +10,8 @@ import {
 import {MatButtonModule} from '@angular/material/button';
 import { Palier, World } from '../world';
 
+import { CommonModule } from '@angular/common';
+
 
 export interface DialogData {
     data: World;
@@ -28,6 +30,7 @@ export interface DialogData {
       MatDialogContent,
       MatDialogActions,
       MatDialogClose,
+      CommonModule
     ],
   })
   export class DialogComponent {

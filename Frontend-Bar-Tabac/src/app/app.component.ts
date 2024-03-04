@@ -34,7 +34,7 @@ export class AppComponent {
   currentPositionIndex = 0;
   qtmulti = this.switchPositions[this.currentPositionIndex];
   showManagers = false;
-  showUpgrades = false; 
+  showUpgrades = false;
   badgeManagers: number = 0;
   badgeUpgrades: number = 0;
   backgroundImageUrl: string = "http://localhost:4000/icones/ferme_background.png"
@@ -64,13 +64,25 @@ export class AppComponent {
 
   openDialogManager(): void {
     const dialogRef = this.dialog.open(DialogComponent, {
-      data: {data : this.world, server: this.server, type: "manager"},
+      data: { data: this.world, server: this.server, type: "manager" },
+      height: '600px',
+      width: '800px',
     });
   }
 
   openDialogUpgrade(): void {
     const dialogRef = this.dialog.open(DialogComponent, {
-      data: {data : this.world, server: this.server, type: "upgrade"},
+      data: { data: this.world, server: this.server, type: "upgrade" },
+      height: '600px',
+      width: '800px',
+    });
+  }
+
+  openDialogUnlock(): void {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      data: { data: this.world, server: this.server, type: "unlock" },
+      height: '600px',
+      width: '800px',
     });
   }
 
@@ -84,8 +96,8 @@ export class AppComponent {
     if (product.revenu > 0) {
       let upgrades = this.world.upgrades.filter(upgrads => (upgrads.idcible == product.id) && upgrads.unlocked == true);
       for (let upgrad of upgrades) {
-        if(upgrad.typeratio == "gain"){
-          product.revenu *= upgrad.ratio;          
+        if (upgrad.typeratio == "gain") {
+          product.revenu *= upgrad.ratio;
         }
       }
       this.world.money += product.revenu;
@@ -138,7 +150,7 @@ export class AppComponent {
   buyUpgrade(upgrade: Palier) {
     if (this.world.money >= upgrade.seuil) {
       let up = this.world.upgrades.find(up => up.name == upgrade.name)
-      if(up){
+      if (up) {
         up.unlocked = true;
       }
       this.world.money -= upgrade.seuil;

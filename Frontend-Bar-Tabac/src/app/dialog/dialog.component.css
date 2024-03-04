@@ -1,21 +1,8 @@
-.modal {
-    position: fixed;
-    z-index: 2;
-    padding: 40px;
-    background-color: white;
-    border: solid;
-    width: 700px;
-    /* Centering */
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.managerslayout {
+.layout {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     margin-bottom: 20px;
     /* Mettre les gestionnaires en ligne */
     padding: 10px;
@@ -23,9 +10,9 @@
     margin-top: 40px;
 }
 
-.managerslayout .managername,
-.managerslayout .managercible,
-.managerslayout .managercost {
+.layout .name,
+.layout .cible,
+.layout .cost {
     /* Styles pour le nom, la cible et le coût du gestionnaire */
     text-align: center;
     /* Centrer le texte */
@@ -33,7 +20,7 @@
     /* Espace en bas pour séparer les éléments */
 }
 
-.managerslayout .managername {
+.layout .name {
     /* Styles pour le nom du gestionnaire */
     font-weight: bold;
     /* Police en gras pour le nom */
@@ -41,14 +28,14 @@
     /* Espace en bas pour séparer les éléments */
 }
 
-.managerslayout .managercible,
-.managerslayout .managercost {
+.layout .cible,
+.layout .cost {
     /* Styles pour la cible et le coût du gestionnaire */
     margin-bottom: 5px;
     /* Espace en bas pour séparer les éléments */
 }
 
-.managerslayout .hirebutton {
+.layout .hirebutton {
     /* Styles pour le bouton d'embauche */
     padding: 5px 10px;
     border: none;
@@ -60,7 +47,7 @@
     cursor: pointer;
 }
 
-.managerslayout .logo img {
+.layout .logo img {
     width: 150px;
     /* Largeur de l'image */
     height: 150px;
