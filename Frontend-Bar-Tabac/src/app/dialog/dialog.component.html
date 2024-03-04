@@ -1,23 +1,24 @@
-<mat-dialog-content>
+<div mat-dialog-content>
     @if(data.type == "manager"){
         <div class="modal">
             <h1 class="title">Managers make you feel better !</h1>
             @for (manager of data.data.managers; track manager.name) {
                 @if(!manager.unlocked){
-                    <div class="managerslayout">
+                    <div class="layout">
                         <div>
                             <div class="logo"><img [attr.src]="data.server+manager.logo" /> </div>
                         </div>
                         <div>
-                            <div class="managername"> {{ manager.name}} </div>
-                            <div class="managercible"> {{ data.data.products[manager.idcible].name }} </div>
-                            <div class="managercost"> {{ manager.seuil}} </div>
+                            <div class="name"> {{ manager.name}} </div>
+                            <div class="cible"> {{ data.data.products[manager.idcible].name }} </div>
+                            <div class="cost"> {{ manager.seuil}} </div>
                         </div>
-                        <!-- <div>
-                            <div class="hirebutton" (click)="hireManager(manager)"
-                                [ngClass]="{'selectable' : (world.money >= manager.seuil)}">Hire !<
-                            /div>
-                        </div> -->
+                        <div>
+                            <!-- (click)="hireManager(manager)" -->
+                            <div class="hirebutton" 
+                                [ngClass]="{'selectable' : (data.data.money >= manager.seuil)}">Hire !                                
+                            </div>
+                        </div>
                     </div>
                 }
             }
@@ -32,19 +33,20 @@
                 @for (upgrade of data.data.upgrades.slice(0, 6); track upgrade.name) {
                     <div>
                         @if(!upgrade.unlocked){
-                            <div class="upgradeslayout">
+                            <div class="layout">
                                 <div>
                                     <div class="logo"><img class="round" [attr.src]="data.server" /> </div>
                                 </div>
                                 <div>
-                                    <div class="upgradename"> {{ upgrade.name}} </div>
-                                    <div class="upgradecible"> {{ data.data.products[upgrade.idcible].name }} </div>
-                                    <div class="upgradeseuil"> {{ upgrade.seuil}} </div>
+                                    <div class="name"> {{ upgrade.name}} </div>
+                                    <div class="cible"> {{ data.data.products[upgrade.idcible].name }} </div>
+                                    <div class="cost"> {{ upgrade.seuil}} </div>
                                 </div>
-                                <!-- <div>
-                                    <div class="buyUpgrade" (click)="buyUpgrade(upgrade)"
-                                    [ngClass]="{'selectable' : (world.money >= upgrade.seuil)}">Hire !</div>
-                                </div> -->
+                                <div>
+                                    <!-- (click)="buyUpgrade(upgrade)" -->
+                                    <div class="hirebutton" 
+                                    [ngClass]="{'selectable' : (data.data.money >= upgrade.seuil)}">Hire !</div>
+                                </div>
                             </div>
                         }
                     </div>
@@ -52,7 +54,7 @@
             </div>
         </div>
     }
-</mat-dialog-content>
+</div>
 <mat-dialog-actions>
     <button mat-button mat-dialog-close>Fermer</button>
 </mat-dialog-actions>

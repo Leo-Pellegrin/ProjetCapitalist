@@ -9,6 +9,7 @@ import {
 } from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
 import { World } from '../world';
+import { CommonModule } from '@angular/common';
 
 
 export interface DialogData {
@@ -28,6 +29,7 @@ export interface DialogData {
       MatDialogContent,
       MatDialogActions,
       MatDialogClose,
+      CommonModule
     ],
   })
   export class DialogComponent {
