@@ -258,8 +258,8 @@ module.exports = {
     ],
     "allunlocks": [
         {
-            "name": "Nom du premier unlock général",
-            "logo": "icones/premierunlock.jpg",
+            "name": "Lait demi-écrémé",
+            "logo": "icones/lait.png",
             "seuil": 30,
             "idcible": 0,
             "ratio": 2,
@@ -419,7 +419,7 @@ module.exports = {
         },
         {
             "name": "Lois Garcion",            
-            "logo": "icones/meliamanager.png",
+            "logo": "icones/loismanager.png",
             "seuil": 10000,
             "idcible": 3,
             "ratio": 0,

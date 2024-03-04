@@ -52,6 +52,31 @@
             </div>
         </div>
     }
+    @else if (data.type == "unlock"){
+        <div class="modal">
+            <div>
+              <h1 class="title">Want to maximize profits? Get your investments to this quotas !</h1>
+            </div>
+            <div class="two-column-list">
+              @for(unlock of getUnlocks(); track unlock.name){
+                <div>
+                  @if(!unlock.unlocked){
+                    <div class="unlockslayout">
+                      <div>
+                        <div class="logo"><img class="round" [attr.src]="data.server+unlock.logo" /> </div>
+                      </div>
+                      <div>
+                        <div class="unlockname"> {{ unlock.name}} </div>
+                        <div class="unlockcible"> {{ data.data.products[unlock.idcible].name }} </div>
+                        <div class="unlockseuil"> {{ unlock.seuil}} </div>
+                      </div>
+                    </div>
+                  }
+                </div>
+              }
+            </div>
+          </div>
+    }
 </mat-dialog-content>
 <mat-dialog-actions>
     <button mat-button mat-dialog-close>Fermer</button>

@@ -8,7 +8,7 @@ import {
   MatDialogClose,
 } from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
-import { World } from '../world';
+import { Palier, World } from '../world';
 
 
 export interface DialogData {
@@ -31,6 +31,7 @@ export interface DialogData {
     ],
   })
   export class DialogComponent {
+    unlock : Palier = new Palier();
     constructor(
       public dialogRef: MatDialogRef<DialogComponent>,
       @Inject(MAT_DIALOG_DATA) public data: DialogData,
@@ -38,5 +39,15 @@ export interface DialogData {
   
     onNoClick(): void {
       this.dialogRef.close();
+    }
+
+    getUnlocks(){
+      let unlocks = [];
+      for(let unlock of this.data.data.allunlocks){
+        if(unlock.seuil > this.data.data.products[unlock.idcible].quantite ){
+          unlocks.push(unlock)
+        }
+      }
+      return unlocks
     }
   }

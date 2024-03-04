@@ -16,6 +16,7 @@ import { FormsModule } from '@angular/forms';
 
 // Dialog
 import { DialogComponent } from './dialog/dialog.component';
+import { Dialog } from '@angular/cdk/dialog';
 
 @Component({
   selector: 'app-root',
@@ -70,6 +71,12 @@ export class AppComponent {
   openDialogUpgrade(): void {
     const dialogRef = this.dialog.open(DialogComponent, {
       data: {data : this.world, server: this.server, type: "upgrade"},
+    });
+  }
+
+  openDialogUnlock(): void {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      data: {data: this.world, server: this.server, type: "unlock"}
     });
   }
 
@@ -137,22 +144,14 @@ export class AppComponent {
       this.world.money -= upgrade.seuil;
       this.calcbadgeUpgrades();
       this.calcbadgeManagers();
-      this.popMessage("Manager " + upgrade.name + " hired");
+      this.popMessage("Upgrade " + upgrade.name + " bought");
     }
     else {
-      this.popMessage("Not enough money to hire this manager");
+      this.popMessage("Not enough money to buy this upgrade");
     }
   }
 
-  getUnlock(unlock: Palier, product:Product){
-    let unlocks = [];
-    for(unlock of this.world.allunlocks){
-      if(unlock.seuil > this.world.products[unlock.idcible].quantite ){
-        unlocks.push(unlock)
-      }
-    }
-    
-  }
+
 
 
   popMessage(message: string): void {
@@ -176,6 +175,8 @@ export class AppComponent {
       }
     }
   }
+
+  
 
   onUsernameChanged() {
     if (this.username == "") {
