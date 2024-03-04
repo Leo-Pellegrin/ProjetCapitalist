@@ -77,6 +77,14 @@ export class AppComponent {
     });
   }
 
+  openDialogUnlock(): void {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      data: { data: this.world, server: this.server, type: "unlock" },
+      height: '600px',
+      width: '800px',
+    });
+  }
+
   onProductionDone(product: Product) {
     if (product.revenu > 0) {
       let upgrades = this.world.upgrades.filter(upgrads => (upgrads.idcible == product.id) && upgrads.unlocked == true);
