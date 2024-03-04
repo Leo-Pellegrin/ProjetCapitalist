@@ -56,7 +56,6 @@ export class AppComponent {
     this.service.getWorld().then(
       world => {
         this.world = world.data.getWorld;
-        console.log(this.world.managers)
       }
     );
   }
@@ -67,6 +66,9 @@ export class AppComponent {
       height: '600px',
       width: '800px',
     });
+    dialogRef.componentInstance.notifyBuyManager.subscribe((data) => {
+      this.hireManager(data);
+    });
   }
 
   openDialogUpgrade(): void {
@@ -74,6 +76,9 @@ export class AppComponent {
       data: { data: this.world, server: this.server, type: "upgrade" },
       height: '600px',
       width: '800px',
+    });
+    dialogRef.componentInstance.notifyBuyUpgrade.subscribe((data) => {
+      this.buyUpgrade(data);
     });
   }
 
@@ -156,14 +161,14 @@ export class AppComponent {
     }
   }
 
-  getUnlock(unlock: Palier, product:Product){
+  getUnlock(unlock: Palier, product: Product) {
     let unlocks = [];
-    for(unlock of this.world.allunlocks){
-      if(unlock.seuil > this.world.products[unlock.idcible].quantite ){
+    for (unlock of this.world.allunlocks) {
+      if (unlock.seuil > this.world.products[unlock.idcible].quantite) {
         unlocks.push(unlock)
       }
     }
-    
+
   }
 
 

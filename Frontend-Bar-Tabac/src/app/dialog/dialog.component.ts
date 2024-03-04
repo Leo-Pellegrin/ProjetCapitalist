@@ -1,4 +1,4 @@
-import {Component, Inject} from '@angular/core';
+import {Component, EventEmitter, Inject, Output} from '@angular/core';
 import {
   MAT_DIALOG_DATA,
   MatDialogRef,
@@ -8,7 +8,7 @@ import {
   MatDialogClose,
 } from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
-import { World } from '../world';
+import { Palier, World } from '../world';
 import { CommonModule } from '@angular/common';
 
 
@@ -41,4 +41,18 @@ export interface DialogData {
     onNoClick(): void {
       this.dialogRef.close();
     }
+
+    onBuyManager(palier: Palier){
+        this.notifyBuyManager.emit(palier);        
+    }
+
+    onBuyUpgrade(palier: Palier){
+        this.notifyBuyUpgrade.emit(palier);
+    }
+
+    @Output() notifyBuyManager :
+    EventEmitter<Palier> = new EventEmitter<Palier>();
+
+    @Output() notifyBuyUpgrade :
+    EventEmitter<Palier> = new EventEmitter<Palier>();
   }
