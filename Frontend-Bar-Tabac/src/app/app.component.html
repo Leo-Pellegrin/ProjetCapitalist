@@ -31,8 +31,36 @@
   <div class="main">
     <div class="menu">
       <div class="bouton-menu">
-        <button class="button" type="button">Unlocks</button>
+        <button mat-raised-button (click)="showUnlocks = !showUnlocks" [matBadge]="badgeUnlocks"
+        [matBadgeHidden]="badgeUnlocks==0" class="button" type="button">Unlocks</button>
+        @if(showUnlocks){
+          <div class="modal">
+            <div>
+              <h1 class="title">Want to maximize profits? Get your investments to this quotas !</h1>
+            </div>
+            <div class="two-column-list">
+              @for(unlock of world.allunlocks.slice(0,6); track unlock.name){
+                <div>
+                  @if(!unlock.unlocked){
+                    <div class="unlockslayout">
+                      <div>
+                        <div class="logo"><img class="round" [attr.src]="server+unlock.logo" /> </div>
+                      </div>
+                      <div>
+                        <div class="unlockname"> {{ unlock.name}} </div>
+                        <div class="unlockcible"> {{ world.products[unlock.idcible].name }} </div>
+                        <div class="unlockseuil"> {{ unlock.seuil}} </div>
+                      </div>
+                    </div>
+                  }
+                </div>
+              }
+            </div>
+          </div>
+
+        }
       </div>
+      
       <div class="bouton-menu">
         <button mat-raised-button (click)="openDialogUpgrade()" [matBadge]="badgeUpgrades"
         [matBadgeHidden]="badgeUpgrades==0" class="button" type="button">Cash Upgrade</button>

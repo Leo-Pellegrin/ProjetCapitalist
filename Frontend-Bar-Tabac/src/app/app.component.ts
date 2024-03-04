@@ -148,6 +148,16 @@ export class AppComponent {
     }
   }
 
+  getUnlock(unlock: Palier, product:Product){
+    let unlocks = [];
+    for(unlock of this.world.allunlocks){
+      if(unlock.seuil > this.world.products[unlock.idcible].quantite ){
+        unlocks.push(unlock)
+      }
+    }
+    
+  }
+
 
   popMessage(message: string): void {
     this.snackBar.open(message, "", { duration: 2000 })
