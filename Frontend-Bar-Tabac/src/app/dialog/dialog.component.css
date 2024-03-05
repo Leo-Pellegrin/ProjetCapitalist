@@ -56,3 +56,9 @@
     /* Pour une forme ronde */
     margin-right: 10px;
 }
+
+.layout .hirebutton.selectable {
+    /* Styles pour le bouton d'embauche sélectionnable */
+    background-color: #28a745;
+    /* Couleur de fond si sélectionnable */
+}

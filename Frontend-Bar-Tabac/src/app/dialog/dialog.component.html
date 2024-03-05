@@ -15,8 +15,8 @@
                         </div>
                         <div>
                             <!-- (click)="hireManager(manager)" -->
-                            <div class="hirebutton" 
-                                [ngClass]="{'selectable' : (data.data.money >= manager.seuil)}">Hire !                                
+                            <div class="hirebutton" (click)="buyManager(manager)"
+                                [ngClass]="{'selectable' : (data.data.money >= manager.seuil)}"> Hire !                                
                             </div>
                         </div>
                     </div>
@@ -43,8 +43,8 @@
                                     <div class="cost"> {{ upgrade.seuil}} </div>
                                 </div>
                                 <div>
-                                    <!-- (click)="buyUpgrade(upgrade)" -->
-                                    <div class="hirebutton" 
+                                    
+                                    <div class="hirebutton" (click)="buyUpgrade(upgrade)"
                                     [ngClass]="{'selectable' : (data.data.money >= upgrade.seuil)}">Hire !</div>
                                 </div>
                             </div>
