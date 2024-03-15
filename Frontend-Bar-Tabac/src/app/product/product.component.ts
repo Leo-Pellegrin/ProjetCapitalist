@@ -3,6 +3,7 @@ import { Product } from '../world';
 import { isPlatformBrowser, CommonModule } from "@angular/common"; // update this
 import { MatProgressBarModule } from '@angular/material/progress-bar'
 import { GET_SERV } from '../../request';
+import { WebserviceService } from '../webservice.service';
 
 @Component({
   selector: 'app-product',
@@ -27,6 +28,7 @@ export class ProductComponent implements AfterViewInit {
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: object,
+    private service: WebserviceService
   ) {
     this.isBrowser.set(isPlatformBrowser(platformId));
   }
@@ -43,7 +45,7 @@ export class ProductComponent implements AfterViewInit {
       return;
     }
     else {
-      if(this.product.timeleft == 0 && this.product.managerUnlocked){
+      if (this.product.timeleft == 0 && this.product.managerUnlocked) {
         this.product.timeleft = this.product.vitesse;
       }
 
@@ -66,9 +68,15 @@ export class ProductComponent implements AfterViewInit {
   // Passage du produit depuis le composant parent
   @Input()
   set prod(value: Product) {
-    if (value != undefined) {      
+    if (value != undefined) {
       this.product = value;
-      this.productCost = this.product.cout
+      this.productCost = Math.round(this.product.cout * 100) / 100
+      if (this.product && this.product.timeleft > 0) {
+        this.lastupdate = Date.now();
+        let progress = (this.product.vitesse - this.product.timeleft) / this.product.vitesse;
+        // this.progressbar.set(progress);
+        // this.progressbar.animate(1, { duration: this.product.timeleft });
+      }
       this.buyDisabled();
     }
   }
@@ -101,12 +109,25 @@ export class ProductComponent implements AfterViewInit {
   onClick() {
     this.product.timeleft = this.product.vitesse;
     this.lastupdate = Date.now();
+    this.service.lancerProduction(this.product.id).catch(reason =>
+      console.log("erreur: " + reason)
+    );
   }
 
   // Achat d'un produit
   buyProduct() {
     if (this._worldmoney >= this.product.cout) {
       this.notifyBuy.emit([this.productCost, this.product, this.maxCanBuy]);
+      if (this._qtmulti == "Max") {
+        this.service.BuyqtProduct(this.product.id, this.maxCanBuy).catch(reason =>
+          console.log("erreur: " + reason)
+        );
+      }
+      else {
+        this.service.BuyqtProduct(this.product.id, parseInt(this._qtmulti.slice(1))).catch(reason =>
+          console.log("erreur: " + reason)
+        );
+      }
     }
   }
 
@@ -116,7 +137,7 @@ export class ProductComponent implements AfterViewInit {
       switch (this._qtmulti) {
         case "x1":
           this.qmultiButton = "x1";
-          this.productCost = this.product.cout;
+          this.productCost = Math.round(this.product.cout * 100) / 100;
           if (this._worldmoney >= this.product.cout) {
             this.disabledButtonBuy = false;
           }
@@ -126,7 +147,7 @@ export class ProductComponent implements AfterViewInit {
           break;
         case "x10":
           this.qmultiButton = "x10";
-          this.productCost = this.product.cout * 10;
+          this.productCost = Math.round((this.product.cout * 10) * 100) / 100;
           if (this._worldmoney >= this.product.cout * 10) {
             this.disabledButtonBuy = false;
           }
@@ -136,7 +157,7 @@ export class ProductComponent implements AfterViewInit {
           break;
         case "x100":
           this.qmultiButton = "x100";
-          this.productCost = this.product.cout * 100;
+          this.productCost = Math.round((this.product.cout * 100) * 100) / 100;
           if (this._worldmoney >= this.product.cout * 100) {
             this.disabledButtonBuy = false;
           }
@@ -147,19 +168,19 @@ export class ProductComponent implements AfterViewInit {
         case "Max":
           if (this.maxCanBuy > 0) {
             this.qmultiButton = "x" + this.maxCanBuy.toString();
-            
-            let priceMaxcanBuy = this.maxCanBuy * this.product.cout * (1 + this.product.croissance)^(this.maxCanBuy-1)
-            this.productCost = priceMaxcanBuy;
-                        
-            if(this._worldmoney > (priceMaxcanBuy)){
+
+            let priceMaxcanBuy = this.maxCanBuy * this.product.cout * (1 + this.product.croissance) ^ (this.maxCanBuy - 1)
+            this.productCost = Math.round(priceMaxcanBuy * 100) / 100;
+
+            if (this._worldmoney > (priceMaxcanBuy)) {
               this.disabledButtonBuy = false;
-            }            
-            else{
+            }
+            else {
               this.disabledButtonBuy = true;
             }
           } else {
             this.qmultiButton = "x1";
-            this.productCost = this.product.cout;
+            this.productCost = Math.round(this.product.cout * 100) / 100;
             this.disabledButtonBuy = (this._worldmoney < this.product.cout);
           }
           break;
@@ -174,8 +195,8 @@ export class ProductComponent implements AfterViewInit {
   @Output() notifyProduction: EventEmitter<Product> = new EventEmitter<Product>();
 
   // Evénement d'achat
-  @Output() notifyBuy: 
-    EventEmitter<[productCost: number, product: Product, maxCanBuy: number]> = 
-      new EventEmitter<[productCost: number, product: Product, maxCanBuy: number]>();
+  @Output() notifyBuy:
+    EventEmitter<[productCost: number, product: Product, maxCanBuy: number]> =
+    new EventEmitter<[productCost: number, product: Product, maxCanBuy: number]>();
 }
 

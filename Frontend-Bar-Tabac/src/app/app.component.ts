@@ -99,7 +99,7 @@ export class AppComponent {
           product.revenu *= upgrad.ratio;
         }
       }
-      this.world.money += product.revenu;
+      this.world.money += product.revenu * product.quantite;
       this.calcbadgeManagers();
       this.calcbadgeUpgrades();
       console.log(`Production of product ${product.revenu} completed. Total money: ${this.world.money}`);
@@ -109,23 +109,30 @@ export class AppComponent {
   }
 
   onBuy(eventData: [productCost: number, product: Product, maxCanBuy: number]) {
+
+
     this.world.money -= eventData[0];
     switch (this.currentPositionIndex) {
       case 0:
         this.world.products[eventData[1].id].quantite += 1;
         this.world.products[eventData[1].id].cout = Math.round((eventData[1].cout * eventData[1].croissance) * 100) / 100;
+        this.world.products[eventData[1].id].revenu = this.world.products[eventData[1].id].revenu * this.world.products[eventData[1].id].quantite;
+        console.log(this.world.products[eventData[1].id].revenu)
         break;
       case 1:
         this.world.products[eventData[1].id].quantite += 10;
         this.world.products[eventData[1].id].cout = Math.round(eventData[1].cout * (Math.pow(eventData[1].croissance, 10 - 1)) * 100) / 100;
+        this.world.products[eventData[1].id].revenu = this.world.products[eventData[1].id].revenu * this.world.products[eventData[1].id].quantite;
         break;
       case 2:
         this.world.products[eventData[1].id].quantite += 100;
         this.world.products[eventData[1].id].cout = Math.round(eventData[1].cout * (Math.pow(eventData[1].croissance, 100 - 1)) * 100) / 100;
+        this.world.products[eventData[1].id].revenu = this.world.products[eventData[1].id].revenu * this.world.products[eventData[1].id].quantite;
         break;
       case 3:
         this.world.products[eventData[1].id].quantite += eventData[2];
         this.world.products[eventData[1].id].cout = Math.round(eventData[1].cout * (Math.pow(eventData[1].croissance, eventData[2] - 1)) * 100) / 100;
+        this.world.products[eventData[1].id].revenu = this.world.products[eventData[1].id].revenu * this.world.products[eventData[1].id].quantite;
         break;
     }
     this.calcbadgeManagers();
@@ -140,6 +147,9 @@ export class AppComponent {
       this.calcbadgeManagers();
       this.calcbadgeUpgrades();
       this.popMessage("Manager " + manager.name + " hired");
+      this.service.buyManager(manager).catch(reason => {
+        console.log("erreur: " + reason)
+      });
     }
     else {
       this.popMessage("Not enough money to hire this manager");
@@ -156,6 +166,9 @@ export class AppComponent {
       this.calcbadgeUpgrades();
       this.calcbadgeManagers();
       this.popMessage("Upgrade " + upgrade.name + " bought");
+      this.service.buyUpgrade(upgrade).catch(reason =>
+        console.log("erreur: " + reason)
+      );
     }
     else {
       this.popMessage("Not enough money to buy this upgrade");
@@ -195,7 +208,7 @@ export class AppComponent {
     }
   }
 
-  
+
 
   onUsernameChanged() {
     if (this.username == "") {
