@@ -33,6 +33,9 @@ app.use(express.static('public'));
 server.start().then( res => {
     server.applyMiddleware({app});
     app.listen({port: 4000}, () =>
-        console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`)
+    {
+        console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`);
+        console.log(server.context.world);
+    }
     );
 })

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { createClient, fetchExchange } from '@urql/core';
-import { GET_WORLD } from './grapqhrequests';
+import { BUY_UPGRADE, GET_WORLD, LANCER_PRODUCTION, HIRE_MANAGER, BUY_QT_PRODUIT } from './grapqhrequests';
+import { Product } from './world';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +16,7 @@ export class WebserviceService {
   createClient() {
     return createClient({
       url: this.server + "graphql",
-      exchanges : [fetchExchange],
+      exchanges: [fetchExchange],
       fetchOptions: () => {
         return {
           headers: { 'x-user': this.user },
@@ -30,5 +31,25 @@ export class WebserviceService {
 
   getWorld() {
     return this.createClient().query(GET_WORLD, {}).toPromise();
+  }
+
+  lancerProduction(id: number) {
+    return this.createClient().mutation(LANCER_PRODUCTION,
+      { id: id }).toPromise();
+  }
+
+  buyManager(palier: any) {
+    return this.createClient().mutation(HIRE_MANAGER,
+      { id: palier.id }).toPromise();
+  }
+
+  buyUpgrade(palier: any) {
+    return this.createClient().mutation(BUY_UPGRADE,
+      { id: palier.id }).toPromise();
+  }
+
+  BuyqtProduct(idProduct: number, qtmulti: number) {
+    return this.createClient().mutation(BUY_QT_PRODUIT,
+      { id: idProduct, quantite: qtmulti }).toPromise();
   }
 }
