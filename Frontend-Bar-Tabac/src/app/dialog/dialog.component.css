@@ -55,6 +55,7 @@
     border-radius: 50%;
     /* Pour une forme ronde */
     margin-right: 10px;
+    border: 2px solid #6A819B
 }
 
 .layout .hirebutton.selectable {
