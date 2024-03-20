@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, AfterViewInit, signal, Inject, PLATFORM_ID } from '@angular/core';
-import { Product } from '../world';
+import { Product, Palier } from '../world';
 import { isPlatformBrowser, CommonModule } from "@angular/common"; // update this
 import { MatProgressBarModule } from '@angular/material/progress-bar'
 import { GET_SERV } from '../../request';
@@ -91,6 +91,25 @@ export class ProductComponent implements AfterViewInit {
   calcMaxCanBuy() {
     let numberOfItems = Math.log(1 - (this._worldmoney / this.product.cout) * (1 - this.product.croissance)) / Math.log(this.product.croissance);
     if (numberOfItems > 0) this.maxCanBuy = Math.round(numberOfItems);
+  }
+
+  calcUpgrade(Upgrade: Palier){
+    console.log("Upgrade", Upgrade)
+    console.log("product vitesse", this.product.vitesse)
+    console.log("product gain", this.product.revenu)
+    console.log("type", Upgrade.typeratio)
+    console.log(Upgrade.unlocked)
+
+
+    if(Upgrade.unlocked && Upgrade.typeratio == "vitesse"){
+      this.product.vitesse = this.product.vitesse / Upgrade.ratio; 
+      console.log("product vitesse apres upgrade", this.product.vitesse)
+    }
+    else if(Upgrade.unlocked && Upgrade.typeratio == "gain"){
+      this.product.revenu = this.product.revenu * Upgrade.ratio;
+      console.log("ratio", Upgrade.ratio)
+      console.log("product gain apres upgarde", this.product.revenu)
+    }
   }
 
   getBaseLog(x: number, y: number) {

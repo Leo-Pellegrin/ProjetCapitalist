@@ -6,9 +6,10 @@
     </div>
     <div class="product-details">
         <p class="product-name">{{ product.name }}</p>
+        <p class="product-price">{{ product.revenu }}</p>
+
         <div class="price-progress-wrapper">
             <mat-progress-bar [value]="progressbarvalue" class="product-progress">
-                <p class="product-price">{{ product.revenu }}</p>
             </mat-progress-bar>
         </div>
         <button class="buy-button" type="button" (click)="buyProduct()" [disabled]="disabledButtonBuy">

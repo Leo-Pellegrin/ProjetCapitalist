@@ -79,6 +79,57 @@
             </div>
           </div>
     }
+    @else if (data.type == "investors"){
+        <div class="modal">
+            <div>
+                <h1>Angel Investors</h1>
+            </div>
+            <div class="two-column-list">
+                <div>           
+                    <div class="totalangels">  Total anges : {{data.data.activeangels}}  </div>
+                    <div class="bonusangels"> Pourcentage de bonus par anges : {{data.data.angelbonus}} % </div>
+                </div>   
+                <div>
+                    <button class="hirebutton" (click)="resetWorld()"> {{data.data.totalangels}} To Claim with Restart</button>
+                </div>  
+            </div> 
+
+        </div>
+    }
+
+    @else if(data.type == "angelupgrade"){
+        <div class="modal">
+            <div>
+              <h1 class="title">Spend you angels wisely !</h1>
+            </div>
+            <div class ="two-column-list">
+                @for (angelupgrade of data.data.angelupgrades.slice(0, 6); track angelupgrade.name) {
+                    <div>
+                        @if(!angelupgrade.unlocked){
+                            <div class="layout">
+                                <div>
+                                    <div class="logo"><img class="round" [attr.src]="data.server" /> </div>
+                                </div>
+                                <div>
+                                    <div class="name"> {{ angelupgrade.name}} </div>
+                                    <div class="cible"> {{ data.data.products[angelupgrade.idcible].name }} </div>
+                                    <div class="cost"> {{ angelupgrade.seuil}} </div>
+                                    <div class="bonus">
+                                        {{ angelupgrade.typeratio == 'gain' ?  ("All Products Profits x" + angelupgrade.ratio) : (" Angel Effectiveness + " + angelupgrade.ratio + "%") }}
+                                      </div>
+                                </div>
+                                <div>
+                                    
+                                    <div class="hirebutton" (click)="buyAngelUpgrade(angelupgrade)"
+                                    [ngClass]="{'selectable' : (data.data.activeangels >= angelupgrade.seuil)}">Buy !</div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+    }
 </div>
 <mat-dialog-actions>
     <button mat-button mat-dialog-close>Fermer</button>

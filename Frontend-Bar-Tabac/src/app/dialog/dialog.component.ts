@@ -8,7 +8,7 @@ import {
     MatDialogClose,
 } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-import { Palier, World } from '../world';
+import { Palier, World,  } from '../world';
 
 import { CommonModule } from '@angular/common';
 
@@ -62,7 +62,22 @@ export class DialogComponent {
         this.onBuyUpgrade.emit(palier);
     }
 
+    buyAngelUpgrade(palier: Palier) {
+        this.onBuyAngelUpgrade.emit(palier);
+    }
+
+
+    resetWorld() {
+        this.onResetWorld.emit();
+    }
+    
+
     @Output() onBuyManager: EventEmitter<Palier> = new EventEmitter<Palier>();
 
     @Output() onBuyUpgrade: EventEmitter<Palier> = new EventEmitter<Palier>();
+
+    @Output() onBuyAngelUpgrade: EventEmitter<Palier> = new EventEmitter<Palier>();
+
+    @Output() onResetWorld: EventEmitter<void> = new EventEmitter<void>();
+
 }

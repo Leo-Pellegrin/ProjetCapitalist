@@ -1,4 +1,4 @@
-import { Component, signal, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, signal, Inject, PLATFORM_ID, ViewChildren, QueryList } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { World, Palier, Product } from './world';
 import { WebserviceService } from './webservice.service';
@@ -17,6 +17,8 @@ import { FormsModule } from '@angular/forms';
 // Dialog
 import { DialogComponent } from './dialog/dialog.component';
 import { Dialog } from '@angular/cdk/dialog';
+
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -37,6 +39,7 @@ export class AppComponent {
   showUpgrades = false;
   badgeManagers: number = 0;
   badgeUpgrades: number = 0;
+  badgeAngelUpgrades: number = 0;
   backgroundImageUrl: string = "http://localhost:4000/icones/ferme_background.png"
   username: string = ""
   isBrowser = signal(false);
@@ -46,7 +49,7 @@ export class AppComponent {
     this.qtmulti = this.switchPositions[this.currentPositionIndex];
   }
 
-  constructor(private service: WebserviceService, private snackBar: MatSnackBar, @Inject(PLATFORM_ID) private platformId: object, public dialog: MatDialog) {
+  constructor(private service: WebserviceService, private snackBar: MatSnackBar, @Inject(PLATFORM_ID) private platformId: object, public dialog: MatDialog, private router:Router) {
     this.isBrowser.set(isPlatformBrowser(platformId));
 
     if (this.isBrowser()) {
@@ -83,6 +86,17 @@ export class AppComponent {
     });
   }
 
+  openDialogAngelUpgrade(): void {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      data: { data: this.world, server: this.server, type: "angelupgrade" },
+      height: '600px',
+      width: '800px',
+    });
+    dialogRef.componentInstance.onBuyAngelUpgrade.subscribe((data) => {
+      this.buyAngelUpgrade(data);
+    });
+   }
+
   openDialogUnlock(): void {
     const dialogRef = this.dialog.open(DialogComponent, {
       data: { data: this.world, server: this.server, type: "unlock" },
@@ -91,17 +105,30 @@ export class AppComponent {
     });
   }
 
+  openDialogInvestors(): void {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      data : {data: this.world, server:this.server, type : "investors"},
+      height: '600px',
+      width: '800px',
+    });
+    //claimAngels à definir 
+    dialogRef.componentInstance.onResetWorld.subscribe((data) => {
+      this.resetWorld();
+    });
+  
+  }
+
   onProductionDone(product: Product) {
     if (product.revenu > 0) {
-      let upgrades = this.world.upgrades.filter(upgrads => (upgrads.idcible == product.id) && upgrads.unlocked == true);
-      for (let upgrad of upgrades) {
-        if (upgrad.typeratio == "gain") {
-          product.revenu *= upgrad.ratio;
-        }
+      if(this.world.activeangels > 0){
+        this.world.money += product.revenu * product.quantite * (1 + this.world.activeangels * this.world.angelbonus/100);
       }
-      this.world.money += product.revenu;
+      else{
+        this.world.money += product.revenu * product.quantite;
+      }
       this.calcbadgeManagers();
       this.calcbadgeUpgrades();
+      this.calcbadgeAngelUpgrades();
       console.log(`Production of product ${product.revenu} completed. Total money: ${this.world.money}`);
     } else {
       console.warn(`Production of product with non-positive revenu (${product.revenu}) skipped.`);
@@ -128,8 +155,33 @@ export class AppComponent {
         this.world.products[eventData[1].id].cout = Math.round(eventData[1].cout * (Math.pow(eventData[1].croissance, eventData[2] - 1)) * 100) / 100;
         break;
     }
+    let unlocks: Palier[] = [];
+
+    this.world.allunlocks.forEach((unlock) => {
+      if(unlock.idcible == eventData[1].id) unlocks.push(unlock)
+    })
+
+    let unlocksall = this.world.allunlocks.filter(unlock => unlock.idcible == -1)
+
+    for(let unlock of unlocks){
+      if(unlock.seuil <= this.world.products[eventData[1].id].quantite && !unlock.unlocked){
+        this.world.allunlocks.filter(ul => unlock.name === ul.name).forEach(p => p.unlocked = true); 
+        this.productsComponent?.find((product) => {return product.product.id == unlock.idcible;})?.calcUpgrade(unlock)
+        this.popMessage("Vous avez débloqué l'unlock " + unlock.name); 
+      }
+    }
+
+    for(let unlock of unlocksall){
+      let productslist = this.world.products.filter(product => product.quantite >= unlock.seuil)
+      if(productslist.length >= this.world.products.length && !unlock.unlocked){
+        this.world.allunlocks.filter(ul => unlock.name === ul.name).forEach(p => p.unlocked = true); 
+        this.productsComponent?.forEach(p => p.calcUpgrade(unlock));
+        this.popMessage("Vous avez débloqué l'unlock " + unlock.name);
+      }
+    }
     this.calcbadgeManagers();
     this.calcbadgeUpgrades();
+    this.calcbadgeAngelUpgrades();  
   }
 
   hireManager(manager: Palier) {
@@ -139,6 +191,7 @@ export class AppComponent {
       this.world.money -= manager.seuil;
       this.calcbadgeManagers();
       this.calcbadgeUpgrades();
+      this.calcbadgeAngelUpgrades();
       this.popMessage("Manager " + manager.name + " hired");
     }
     else {
@@ -155,23 +208,47 @@ export class AppComponent {
       this.world.money -= upgrade.seuil;
       this.calcbadgeUpgrades();
       this.calcbadgeManagers();
+      this.calcbadgeAngelUpgrades();  
       this.popMessage("Upgrade " + upgrade.name + " bought");
+
+      this.productsComponent?.find((product) => {return product.product.id == upgrade.idcible;})?.calcUpgrade(upgrade)
     }
     else {
       this.popMessage("Not enough money to buy this upgrade");
     }
   }
 
-  getUnlock(unlock: Palier, product: Product) {
-    let unlocks = [];
-    for (unlock of this.world.allunlocks) {
-      if (unlock.seuil > this.world.products[unlock.idcible].quantite) {
-        unlocks.push(unlock)
+  buyAngelUpgrade(angelupgrade: Palier) {
+    if (this.world.activeangels >= angelupgrade.seuil) {
+      let up = this.world.angelupgrades.find(up => up.name == angelupgrade.name)
+      if (up) {
+        up.unlocked = true;
+      }
+      this.world.activeangels -= angelupgrade.seuil;
+      this.calcbadgeUpgrades();
+      this.calcbadgeManagers();
+      this.calcbadgeAngelUpgrades();
+      this.popMessage("Angel Upgrade " + angelupgrade.name + " bought");
+      if(angelupgrade.typeratio == "gain"){
+        this.productsComponent?.forEach((p) => p.calcUpgrade(angelupgrade));
+      }
+      else if(angelupgrade.typeratio == "ange"){
+        this.world.angelbonus = this.world.angelbonus + angelupgrade.ratio;
       }
     }
-
+    else {
+      this.popMessage("Not enough money to buy this angel upgrade");
+    }
   }
 
+  resetWorld(){
+    console.log("reset")
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([this.router.url]);
+  });
+}
+
+ 
 
   popMessage(message: string): void {
     this.snackBar.open(message, "", { duration: 2000 })
@@ -195,7 +272,14 @@ export class AppComponent {
     }
   }
 
-  
+  calcbadgeAngelUpgrades() {
+    this.badgeAngelUpgrades = 0;
+    for (let AngelUpgrade of this.world.angelupgrades) {
+      if (AngelUpgrade.unlocked == false && this.world.money >= AngelUpgrade.seuil) {
+        this.badgeAngelUpgrades++;
+      }
+    }
+  }
 
   onUsernameChanged() {
     if (this.username == "") {
@@ -204,4 +288,7 @@ export class AppComponent {
     localStorage.setItem('username', this.username);
     this.service.setUser(this.username);
   }
+
+  @ViewChildren(ProductComponent) productsComponent : QueryList<ProductComponent> | undefined;
 }
+

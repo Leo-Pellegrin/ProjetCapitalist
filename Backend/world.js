@@ -260,9 +260,18 @@ module.exports = {
         {
             "name": "Lait demi-écrémé",
             "logo": "icones/lait.png",
-            "seuil": 30,
+            "seuil": 2,
             "idcible": 0,
             "ratio": 2,
+            "typeratio": "gain",
+            "unlocked": false
+        },
+        {
+            "name": "test 1",
+            "logo": "icones/lait.png",
+            "seuil": 3,
+            "idcible": -1,
+            "ratio": 4,
             "typeratio": "gain",
             "unlocked": false
         },
@@ -272,9 +281,18 @@ module.exports = {
             "name": "Petite clope",
             "logo": "icones/petiteclope.jpg",
             "seuil": 1e3,
-            "idcible": 1,
+            "idcible": 0,
             "ratio": 3,
             "typeratio": "gain",
+            "unlocked": false
+        },
+        {
+            "name": "Petite clope 2",
+            "logo": "icones/petiteclope.jpg",
+            "seuil": 1e3,
+            "idcible": 0,
+            "ratio": 2,
+            "typeratio": "vitesse",
             "unlocked": false
         },
         {
@@ -367,7 +385,7 @@ module.exports = {
             "seuil": 10,
             "idcible": 1,
             "ratio": 3,
-            "typeratio": "gain",
+            "typeratio": "ange",
             "unlocked": false
         },
         {

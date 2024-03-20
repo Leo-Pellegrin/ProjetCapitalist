@@ -35,20 +35,19 @@
       
       <div class="bouton-menu">
         <button mat-raised-button (click)="openDialogUpgrade()" [matBadge]="badgeUpgrades"
-        [matBadgeHidden]="badgeUpgrades==0" class="button" type="button">Cash Upgrade</button>
+        [matBadgeHidden]="badgeUpgrades==0" class="button" type="button">Cash Upgrades</button>
       </div>
 
       <div class="bouton-menu">
-        <button class="button" type="button">Angel Upgrade</button>
-      </div>
+        <button mat-raised-button (click)="openDialogAngelUpgrade()" [matBadge]="badgeAngelUpgrades"
+        [matBadgeHidden]="badgeAngelUpgrades==0" class="button" type="button">Angel Upgrades</button>      </div>
       <div class="bouton-menu">
+
         <button mat-raised-button (click)="openDialogManager()" [matBadge]="badgeManagers"           
-          [matBadgeHidden]="badgeManagers==0" class="button" type="button">
-          Managers
-        </button>
+          [matBadgeHidden]="badgeManagers==0" class="button" type="button">Managers</button>
       </div>
       <div class="bouton-menu">
-        <button class="button" type="button">Investors</button>
+        <button mat-raised-button (click)="openDialogInvestors()" class="button" type="button">Investors</button>
       </div>
     </div>
     <div class="product">
