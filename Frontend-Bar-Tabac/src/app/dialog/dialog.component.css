@@ -1,3 +1,13 @@
+.title{
+    font-size: 30px;
+    font-family: "Protest Riot";
+    color: #440B19; 
+    text-align: center;
+    margin-bottom: 20px;
+    /* Espace en bas pour séparer les éléments */
+
+}
+
 .layout {
     display: flex;
     flex-direction: row;
@@ -8,16 +18,34 @@
     padding: 10px;
     /* Ajout de padding */
     margin-top: 40px;
+    font-family: "Protest Riot";
+
 }
 
-.layout .name,
-.layout .cible,
+.layout .name{
+    font-size: 25px;
+    text-align: center;
+    color: #440B19; 
+}
+.layout .cible{
+    color: #440B19; 
+    text-align: center;
+
+}
 .layout .cost {
     /* Styles pour le nom, la cible et le coût du gestionnaire */
     text-align: center;
     /* Centrer le texte */
     margin-bottom: 5px;
+
     /* Espace en bas pour séparer les éléments */
+    color: #440B19; 
+
+}
+
+.layout .bonus{
+    text-align: center;
+    color: #440B19;
 }
 
 .layout .name {
@@ -26,6 +54,7 @@
     /* Police en gras pour le nom */
     margin-bottom: 5px;
     /* Espace en bas pour séparer les éléments */
+   
 }
 
 .layout .cible,
@@ -33,16 +62,17 @@
     /* Styles pour la cible et le coût du gestionnaire */
     margin-bottom: 5px;
     /* Espace en bas pour séparer les éléments */
+
 }
 
 .layout .hirebutton {
     /* Styles pour le bouton d'embauche */
     padding: 5px 10px;
-    border: none;
+    border : 1px solid #440B19;
     border-radius: 5px;
-    background-color: #007bff;
+    background-color: white;
     /* Couleur de fond */
-    color: #fff;
+    color: #440B19 ;
     /* Couleur du texte */
     cursor: pointer;
 }
@@ -55,11 +85,65 @@
     border-radius: 50%;
     /* Pour une forme ronde */
     margin-right: 10px;
-    border: 2px solid #6A819B
+    border: 2px solid #440B19; 
 }
 
 .layout .hirebutton.selectable {
     /* Styles pour le bouton d'embauche sélectionnable */
-    background-color: #28a745;
+    background-color: #440B19;
+    color : white; 
+
     /* Couleur de fond si sélectionnable */
+}
+
+.bouton-fermer{
+    background-color: #440B19;
+    color: white !important; 
+    font-family: "Protest Riot";
+}
+
+.mat-mdc-button-persistent-ripple mdc-button__ripple{
+    color : white; 
+}
+
+.investors{
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+.img-ange{
+    margin-top: 30%;
+}
+
+.colonne2{
+    margin-top: 50%;
+    font-family: "Protest Riot";
+    color: #440B19;
+    font-size: 20px;
+}
+
+.totalangels{
+    margin-bottom: 15px;
+}
+
+.bonusangels{
+    margin-bottom: 15px;
+}
+
+.restartbutton{
+    padding: 5px 10px;
+    border : 1px solid #440B19;
+    border-radius: 5px;
+    background-color: white;
+    /* Couleur de fond */
+    color: #440B19 ;
+    /* Couleur du texte */
+    cursor: pointer;
+    font-family: "Protest Riot";
+    font-size: 20px;
+
+}
+
+.restartbutton:hover {
+    background-color: #440B19;
+    color : white; 
 }

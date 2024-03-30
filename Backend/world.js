@@ -16,13 +16,13 @@ module.exports = {
             "cout": 4,
             "croissance": 1.07,
             "revenu": 1,
-            "vitesse": 10000,
+            "vitesse": 500,
             "quantite": 1,
             "timeleft": 0,
             "managerUnlocked": false,
             "paliers": [
                 {
-                    "name": "Palier1",
+                    "name": "Lait écrémé",
                     "logo": "icones/lait.png",
                     "seuil": 20,
                     "idcible": 0,
@@ -30,8 +30,9 @@ module.exports = {
                     "typeratio": "vitesse",
                     "unlocked": false
                 },
+                
                 {
-                    "name": "Palier2",
+                    "name": "Lait bio",
                     "logo": "icones/lait.png",
                     "seuil": 50,
                     "idcible": 0,
@@ -39,26 +40,9 @@ module.exports = {
                     "typeratio": "gain",
                     "unlocked": false
                 },
+               
                 {
-                    "name": "Palier3",
-                    "logo": "icones/lait.png",
-                    "seuil": 100,
-                    "idcible": 0,
-                    "ratio": 3,
-                    "typeratio": "vitesse",
-                    "unlocked": false
-                },
-                {
-                    "name": "Palier3",
-                    "logo": "icones/lait.png",
-                    "seuil": 100,
-                    "idcible": 0,
-                    "ratio": 3,
-                    "typeratio": "gain",
-                    "unlocked": false
-                },
-                {
-                    "name": "Palier3",
+                    "name": "Lait super bon",
                     "logo": "icones/lait.png",
                     "seuil": 100,
                     "idcible": 0,
@@ -75,13 +59,13 @@ module.exports = {
             "cout": 60,
             "croissance": 1.15,
             "revenu": 60,
-            "vitesse": 30000,
+            "vitesse": 3000,
             "quantite": 0,
             "timeleft": 0,
             "managerUnlocked": false,
             "paliers": [
                 {
-                    "name": "Palier1",
+                    "name": "Fromage de chèvre",
                     "logo": "icones/petit_fromage.png",
                     "seuil": 20,
                     "idcible": 1,
@@ -89,17 +73,19 @@ module.exports = {
                     "typeratio": "vitesse",
                     "unlocked": false
                 },
+                
                 {
-                    "name": "Palier2",
+                    "name": "Fromage bio",
                     "logo": "icones/petit_fromage.png",
-                    "seuil": 50,
+                    "seuil": 100,
                     "idcible": 1,
                     "ratio": 2,
                     "typeratio": "vitesse",
                     "unlocked": false
                 },
+               
                 {
-                    "name": "Palier3",
+                    "name": "Meilleur fromage de tous les temps",
                     "logo": "icones/petit_fromage.png",
                     "seuil": 100,
                     "idcible": 1,
@@ -113,16 +99,16 @@ module.exports = {
             "id": 2,
             "name": "Grand Fromage",
             "logo": "icones/gros_fromage.png",
-            "cout": 60,
-            "croissance": 1.15,
-            "revenu": 60,
-            "vitesse": 30000,
+            "cout": 720,
+            "croissance": 1.14,
+            "revenu": 540,
+            "vitesse": 6000,
             "quantite": 0,
             "timeleft": 0,
             "managerUnlocked": false,
             "paliers": [
                 {
-                    "name": "Palier1",
+                    "name": "Fromage de vache",
                     "logo": "icones/gros_fromage.png",
                     "seuil": 20,
                     "idcible": 2,
@@ -130,17 +116,9 @@ module.exports = {
                     "typeratio": "vitesse",
                     "unlocked": false
                 },
+                
                 {
-                    "name": "Palier2",
-                    "logo": "icones/gros_fromage.png",
-                    "seuil": 50,
-                    "idcible": 2,
-                    "ratio": 2,
-                    "typeratio": "vitesse",
-                    "unlocked": false
-                },
-                {
-                    "name": "Palier3",
+                    "name": "Fromage super bon",
                     "logo": "icones/gros_fromage.png",
                     "seuil": 100,
                     "idcible": 2,
@@ -148,22 +126,33 @@ module.exports = {
                     "typeratio": "vitesse",
                     "unlocked": false
                 },
+                
+                {
+                    "name": "Fromage très gros",
+                    "logo": "icones/gros_fromage.png",
+                    "seuil": 100,
+                    "idcible": 2,
+                    "ratio": 2,
+                    "typeratio": "vitesse",
+                    "unlocked": false
+                },
+                
             ]    
         },
         {
             "id": 3,
             "name": "Vache",
             "logo": "icones/vache.png",
-            "cout": 60,
-            "croissance": 1.15,
-            "revenu": 60,
-            "vitesse": 30000,
+            "cout": 8640,
+            "croissance": 1.13,
+            "revenu": 4320,
+            "vitesse": 12000,
             "quantite": 0,
             "timeleft": 0,
             "managerUnlocked": false,
             "paliers": [
                 {
-                    "name": "Palier1",
+                    "name": "Vache gentille",
                     "logo": "icones/vache.png",
                     "seuil": 20,
                     "idcible": 1,
@@ -171,17 +160,9 @@ module.exports = {
                     "typeratio": "vitesse",
                     "unlocked": false
                 },
+                
                 {
-                    "name": "Palier2",
-                    "logo": "icones/vache.png",
-                    "seuil": 50,
-                    "idcible": 1,
-                    "ratio": 2,
-                    "typeratio": "vitesse",
-                    "unlocked": false
-                },
-                {
-                    "name": "Palier3",
+                    "name": "Vache très rentable",
                     "logo": "icones/vache.png",
                     "seuil": 100,
                     "idcible": 1,
@@ -189,22 +170,33 @@ module.exports = {
                     "typeratio": "vitesse",
                     "unlocked": false
                 },
+                
+                {
+                    "name": "Meilleure vache du troupeau",
+                    "logo": "icones/vache.png",
+                    "seuil": 100,
+                    "idcible": 1,
+                    "ratio": 2,
+                    "typeratio": "vitesse",
+                    "unlocked": false
+                },
+                
             ]    
         },
         {
             "id": 4,
             "name": "Ferme",
             "logo": "icones/ferme.png",
-            "cout": 60,
-            "croissance": 1.15,
-            "revenu": 60,
-            "vitesse": 30000,
+            "cout": 103680,
+            "croissance": 1.12,
+            "revenu": 51840,
+            "vitesse": 24000,
             "quantite": 0,
             "timeleft": 0,
             "managerUnlocked": false,
             "paliers": [
                 {
-                    "name": "Palier1",
+                    "name": "Ferme moyenne",
                     "logo": "icones/ferme.png",
                     "seuil": 20,
                     "idcible": 1,
@@ -213,7 +205,7 @@ module.exports = {
                     "unlocked": false
                 },
                 {
-                    "name": "Palier2",
+                    "name": "Ferme plus efficace",
                     "logo": "icones/ferme.png",
                     "seuil": 50,
                     "idcible": 1,
@@ -222,7 +214,35 @@ module.exports = {
                     "unlocked": false
                 },
                 {
-                    "name": "Palier3",
+                    "name": "Ferme très rentable",
+                    "logo": "icones/ferme.png",
+                    "seuil": 100,
+                    "idcible": 1,
+                    "ratio": 2,
+                    "typeratio": "vitesse",
+                    "unlocked": false
+                },
+                
+                {
+                    "name": "Meilleure ferme du village",
+                    "logo": "icones/ferme.png",
+                    "seuil": 100,
+                    "idcible": 1,
+                    "ratio": 2,
+                    "typeratio": "vitesse",
+                    "unlocked": false
+                },
+                {
+                    "name": "Ferme de luxe",
+                    "logo": "icones/ferme.png",
+                    "seuil": 100,
+                    "idcible": 1,
+                    "ratio": 2,
+                    "typeratio": "vitesse",
+                    "unlocked": false
+                },
+                {
+                    "name": "Meilleure ferme du monde",
                     "logo": "icones/ferme.png",
                     "seuil": 100,
                     "idcible": 1,
@@ -236,16 +256,16 @@ module.exports = {
             "id": 5,
             "name": "Exploitation",
             "logo": "icones/grandeferme.png",
-            "cout": 60,
-            "croissance": 1.15,
-            "revenu": 60,
-            "vitesse": 30000,
+            "cout": 1244160,
+            "croissance": 1.11,
+            "revenu": 622080,
+            "vitesse": 136000,
             "quantite": 0,
             "timeleft": 0,
             "managerUnlocked": false,
             "paliers": [
                 {
-                    "name": "Palier1",
+                    "name": "Exploitation moyenne",
                     "logo": "icones/grandeferme.png",
                     "seuil": 20,
                     "idcible": 1,
@@ -253,17 +273,9 @@ module.exports = {
                     "typeratio": "vitesse",
                     "unlocked": false
                 },
+              
                 {
-                    "name": "Palier2",
-                    "logo": "icones/grandeferme.png",
-                    "seuil": 50,
-                    "idcible": 1,
-                    "ratio": 2,
-                    "typeratio": "vitesse",
-                    "unlocked": false
-                },
-                {
-                    "name": "Palier3",
+                    "name": "Exploitation très rentable",
                     "logo": "icones/grandeferme.png",
                     "seuil": 100,
                     "idcible": 1,
@@ -271,14 +283,25 @@ module.exports = {
                     "typeratio": "vitesse",
                     "unlocked": false
                 },
+              
+                {
+                    "name": "Exploitation de luxe",
+                    "logo": "icones/grandeferme.png",
+                    "seuil": 100,
+                    "idcible": 1,
+                    "ratio": 2,
+                    "typeratio": "vitesse",
+                    "unlocked": false
+                },
+                
             ]    
         }
     ],
     "allunlocks": [
         {
-            "name": "Lait demi-écrémé",
-            "logo": "icones/lait.png",
-            "seuil": 2,
+            "name": "Vache surpuissante",
+            "logo": "icones/vache.png",
+            "seuil": 3,
             "idcible": 3,
             "ratio": 2,
             "typeratio": "gain",
@@ -286,8 +309,8 @@ module.exports = {
         },
         {
             "name": "test 1",
-            "logo": "icones/lait.png",
-            "seuil": 3,
+            "logo": "icones/money.png",
+            "seuil": 2,
             "idcible": -1,
             "ratio": 4,
             "typeratio": "gain",
@@ -296,7 +319,7 @@ module.exports = {
     ],
     "upgrades": [
         {
-            "name": "Petite clope",
+            "name": "Lait entier",
             "logo": "icones/lait.png",
             "seuil": 1e3,
             "idcible": 0,
@@ -305,7 +328,7 @@ module.exports = {
             "unlocked": false
         },
         {
-            "name": "Petite clope 2",
+            "name": "Lait de chèvre",
             "logo": "icones/lait.png",
             "seuil": 1e3,
             "idcible": 0,
@@ -314,7 +337,7 @@ module.exports = {
             "unlocked": false
         },
         {
-            "name": "Clope industrielle",
+            "name": "Lait de luxe",
             "logo": "icones/lait.png",
             "seuil": 1e4,
             "idcible": 2,
@@ -323,8 +346,8 @@ module.exports = {
             "unlocked": false
         },
         {
-            "name": "Clope industrielle",
-            "logo": "icones/petiteclope.jpg",
+            "name": "Fromage de brebis",
+            "logo": "icones/petit_fromage.png",
             "seuil": 1e4,
             "idcible": 2,
             "ratio": 3,
@@ -332,8 +355,8 @@ module.exports = {
             "unlocked": false
         },
         {
-            "name": "Clope industrielle",
-            "logo": "icones/petiteclope.jpg",
+            "name": "Fromage de super qualité",
+            "logo": "icones/petit_fromage.png",
             "seuil": 1e4,
             "idcible": 2,
             "ratio": 3,
@@ -341,8 +364,8 @@ module.exports = {
             "unlocked": false
         },
         {
-            "name": "Clope industrielle",
-            "logo": "icones/petiteclope.jpg",
+            "name": "Fromage de luxe",
+            "logo": "icones/petit_fromage.png",
             "seuil": 1e4,
             "idcible": 2,
             "ratio": 3,
@@ -350,8 +373,8 @@ module.exports = {
             "unlocked": false
         },
         {
-            "name": "Clope industrielle",
-            "logo": "icones/petiteclope.jpg",
+            "name": "Fromage bio",
+            "logo": "icones/gros_fromage.png",
             "seuil": 1e4,
             "idcible": 2,
             "ratio": 3,
@@ -359,8 +382,8 @@ module.exports = {
             "unlocked": false
         },
         {
-            "name": "Clope industrielle",
-            "logo": "icones/petiteclope.jpg",
+            "name": "Fromage de grande qualité",
+            "logo": "icones/gros_fromage.png",
             "seuil": 1e4,
             "idcible": 2,
             "ratio": 3,
@@ -368,8 +391,8 @@ module.exports = {
             "unlocked": false
         },
         {
-            "name": "Clope industrielle",
-            "logo": "icones/petiteclope.jpg",
+            "name": "Fromage de luxe",
+            "logo": "icones/gros_fromage.png",
             "seuil": 1e4,
             "idcible": 2,
             "ratio": 3,
@@ -377,8 +400,8 @@ module.exports = {
             "unlocked": false
         },
         {
-            "name": "Clope industrielle",
-            "logo": "icones/petiteclope.jpg",
+            "name": "Vache plus efficace",
+            "logo": "icones/vache.png",
             "seuil": 1e4,
             "idcible": 2,
             "ratio": 3,
@@ -386,8 +409,71 @@ module.exports = {
             "unlocked": false
         },
         {
-            "name": "Clope industrielle",
-            "logo": "icones/petiteclope.jpg",
+            "name": "Vache surpuissante",
+            "logo": "icones/vache.png",
+            "seuil": 1e4,
+            "idcible": 2,
+            "ratio": 3,
+            "typeratio": "gain",
+            "unlocked": false
+        },
+        {
+            "name": "Vache qui remporte le salon de l'agriculture",
+            "logo": "icones/vache.png",
+            "seuil": 1e4,
+            "idcible": 2,
+            "ratio": 3,
+            "typeratio": "gain",
+            "unlocked": false
+        },
+        {
+            "name": "Ferme plus efficace",
+            "logo": "icones/ferme.png",
+            "seuil": 1e4,
+            "idcible": 2,
+            "ratio": 3,
+            "typeratio": "gain",
+            "unlocked": false
+        },
+        {
+            "name": "Meilleure ferme du village",
+            "logo": "icones/ferme.png",
+            "seuil": 1e4,
+            "idcible": 2,
+            "ratio": 3,
+            "typeratio": "gain",
+            "unlocked": false
+        },
+        {
+            "name": "Meilleure ferme du monde",
+            "logo": "icones/ferme.png",
+            "seuil": 1e4,
+            "idcible": 2,
+            "ratio": 3,
+            "typeratio": "gain",
+            "unlocked": false
+        },
+        {
+            "name": "Super exploitation",
+            "logo": "icones/grandeferme.png",
+            "seuil": 1e4,
+            "idcible": 2,
+            "ratio": 3,
+            "typeratio": "gain",
+            "unlocked": false
+        },
+        {
+            "name": "Meilleure exploitation de la région",
+            "logo": "icones/grandeferme.png",
+            "seuil": 1e4,
+            "idcible": 2,
+            "ratio": 3,
+            "typeratio": "gain",
+            "unlocked": false
+        },
+        {
+            "name": "Meilleure exploitation du monde",
+            "logo": "icones/grandeferme.png",
             "seuil": 1e4,
             "idcible": 2,
             "ratio": 3,
@@ -427,7 +513,7 @@ module.exports = {
     ],
     "managers": [
         {
-            "name": "Lucas Miralles",            
+            "name": "Lucas",            
             "logo": "icones/lucasmanager.png",
             "seuil": 10,
             "idcible": 0,
@@ -436,7 +522,7 @@ module.exports = {
             "unlocked": false
         },
         {
-            "name": "Mélia Ferreira",            
+            "name": "Mélia",            
             "logo": "icones/meliamanager.png",
             "seuil": 100,
             "idcible": 1,
@@ -445,8 +531,8 @@ module.exports = {
             "unlocked": false
         },
         {
-            "name": "Salomé Roland",            
-            "logo": "icones/meliamanager.png",
+            "name": "Alexia",            
+            "logo": "icones/alexiamanager.png",
             "seuil": 1000,
             "idcible": 2,
             "ratio": 0,
@@ -454,7 +540,7 @@ module.exports = {
             "unlocked": false
         },
         {
-            "name": "Lois Garcion",            
+            "name": "Lois",            
             "logo": "icones/loismanager.png",
             "seuil": 10000,
             "idcible": 3,
@@ -472,7 +558,7 @@ module.exports = {
             "unlocked": false
         },
         {
-            "name": "Léo Pellegrin",            
+            "name": "Léo",            
             "logo": "icones/leomanager.png",
             "seuil": 100000,
             "idcible": 5,

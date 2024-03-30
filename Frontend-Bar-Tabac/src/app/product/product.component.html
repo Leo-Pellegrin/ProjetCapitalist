@@ -13,7 +13,7 @@
             <mat-progress-bar [value]="progressbarvalue" class="product-progress">
             </mat-progress-bar>
             <div>
-                <span>  {{product.timeleft | msToTime}} </span>
+                <p class="timeleft">  {{product.timeleft | msToTime}} </p>
             </div>
         </div>
         <button class="buy-button" type="button" (click)="buyProduct()" [disabled]="disabledButtonBuy">
