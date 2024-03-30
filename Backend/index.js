@@ -10,7 +10,7 @@ const resolvers = require("./resolvers");
 
 async function readUserWorld(user) {
     try {
-        const data = await fs.promises.readFile("userworlds/" + user + "-world.json");
+        const data = await fs.promises.readFile("../userworlds/" + user + "-world.json");
         return JSON.parse(data);
     }
     catch(error) {
@@ -35,7 +35,6 @@ server.start().then( res => {
     app.listen({port: 4000}, () =>
     {
         console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`);
-        console.log(server.context.world);
     }
     );
 })

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { createClient, fetchExchange } from '@urql/core';
-import { BUY_UPGRADE, GET_WORLD, LANCER_PRODUCTION, HIRE_MANAGER, BUY_QT_PRODUIT } from './grapqhrequests';
+import { BUY_CASH_UPGRADE, GET_WORLD, LANCER_PRODUCTION, HIRE_MANAGER, BUY_QT_PRODUIT } from './grapqhrequests';
 import { Product } from './world';
 
 @Injectable({
@@ -40,12 +40,12 @@ export class WebserviceService {
 
   buyManager(palier: any) {
     return this.createClient().mutation(HIRE_MANAGER,
-      { id: palier.id }).toPromise();
+      { name: palier.name }).toPromise();
   }
 
   buyUpgrade(palier: any) {
-    return this.createClient().mutation(BUY_UPGRADE,
-      { id: palier.id }).toPromise();
+    return this.createClient().mutation(BUY_CASH_UPGRADE,
+      { name: palier.name }).toPromise();
   }
 
   BuyqtProduct(idProduct: number, qtmulti: number) {

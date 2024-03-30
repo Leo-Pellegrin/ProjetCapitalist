@@ -42,15 +42,17 @@ export class ProductComponent implements AfterViewInit {
   // Calcul de la progression de la production
   calcScore() {
     if (this.product.timeleft == 0 && !this.product.managerUnlocked) {
+      this.progressbarvalue = 0;
       return;
     }
     else {
       if (this.product.timeleft == 0 && this.product.managerUnlocked) {
         this.product.timeleft = this.product.vitesse;
+        this.progressbarvalue = 0;
       }
 
       const timeElapsed = Date.now() - this.lastupdate;
-
+      
       if (this.product.timeleft < 0) {
         this.product.timeleft = 0;
 
@@ -58,9 +60,11 @@ export class ProductComponent implements AfterViewInit {
         this.notifyProduction.emit(this.product);
       }
       else {
+
         this.product.timeleft = this.product.timeleft - timeElapsed;
 
         this.progressbarvalue = Math.round(((this.product.vitesse - this.product.timeleft) / this.product.vitesse) * 100);
+        this.lastupdate = Date.now();
       }
     }
   }
@@ -101,22 +105,12 @@ export class ProductComponent implements AfterViewInit {
     if (numberOfItems > 0) this.maxCanBuy = Math.round(numberOfItems);
   }
 
-  calcUpgrade(Upgrade: Palier){
-    console.log("Upgrade", Upgrade)
-    console.log("product vitesse", this.product.vitesse)
-    console.log("product gain", this.product.revenu)
-    console.log("type", Upgrade.typeratio)
-    console.log(Upgrade.unlocked)
-
-
-    if(Upgrade.unlocked && Upgrade.typeratio == "vitesse"){
-      this.product.vitesse = this.product.vitesse / Upgrade.ratio; 
-      console.log("product vitesse apres upgrade", this.product.vitesse)
+  calcUpgrade(Upgrade: Palier) {
+    if (Upgrade.unlocked && Upgrade.typeratio == "vitesse") {
+      this.product.vitesse = this.product.vitesse / Upgrade.ratio;
     }
-    else if(Upgrade.unlocked && Upgrade.typeratio == "gain"){
+    else if (Upgrade.unlocked && Upgrade.typeratio == "gain") {
       this.product.revenu = this.product.revenu * Upgrade.ratio;
-      console.log("ratio", Upgrade.ratio)
-      console.log("product gain apres upgarde", this.product.revenu)
     }
   }
 
@@ -126,11 +120,13 @@ export class ProductComponent implements AfterViewInit {
 
   // Lancement d'un produit
   onClick() {
-    this.product.timeleft = this.product.vitesse;
-    this.lastupdate = Date.now();
-    this.service.lancerProduction(this.product.id).catch(reason =>
-      console.log("erreur: " + reason)
-    );
+    if (this.product.quantite > 0) {
+      this.product.timeleft = this.product.vitesse;
+      this.lastupdate = Date.now();
+      this.service.lancerProduction(this.product.id).catch(reason =>
+        console.log("erreur: " + reason)
+      );
+    }
   }
 
   // Achat d'un produit

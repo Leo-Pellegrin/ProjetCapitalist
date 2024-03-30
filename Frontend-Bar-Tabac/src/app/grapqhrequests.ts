@@ -80,16 +80,16 @@ export const LANCER_PRODUCTION = gql`
     }`
 
 export const HIRE_MANAGER = gql`
-    mutation hireManager($id: Int!) {
-        hireManager(id: $id) {
-            id
+    mutation engagerManager($name: String!) {
+        engagerManager(name: $name) {
+            name
         }
     }`
 
-export const BUY_UPGRADE = gql`
-    mutation buyUpgrade($id: Int!) {
-        buyUpgrade(id: $id) {
-            id
+export const BUY_CASH_UPGRADE = gql`
+    mutation acheterCashUpgrade($name: String!) {
+        acheterCashUpgrade(name: $name) {
+            name
         }
     }`
 
