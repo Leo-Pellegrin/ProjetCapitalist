@@ -14,8 +14,6 @@ function saveWorld(context) {
 
 function CalcNbProduct(product, tempsEcoule) {
     let tempsRestant = product.timeleft - tempsEcoule;
-    console.log("Temps restant : " + tempsRestant)
-    console.log("Temps écoulé : " + tempsEcoule)
     if (!product.managerUnlocked) {
         if (product.timeleft !== 0 && tempsRestant <= 0) {
             product.timeleft = 0;
@@ -49,16 +47,25 @@ function updateScore(context) {
     let addscore = 0;
     for (let product of context.world.products) {
         let tempsEcoule = Date.now() - Number(context.world.lastupdate);
-        // console.log("Temps écoulé : " + tempsEcoule)
         let nbProduct = CalcNbProduct(product, tempsEcoule);
-        // console.log("Nombre de produit : " + nbProduct)
         addscore += nbProduct * product.quantite * product.revenu * (1 + context.world.activeangels * context.world.angelbonus / 100)
     }
     context.world.lastupdate = Date.now().toString()
     context.world.money += addscore
     context.world.score += addscore
-    return context
 }
+
+function calcUpgrade(context, upgrade, product) {
+    if (upgrade.unlocked && upgrade.typeratio == "vitesse") {
+        context.world.products[product.id].vitesse = context.world.products[product.id].vitesse / upgrade.ratio;
+    }
+    else if (upgrade.unlocked && upgrade.typeratio == "gain") {
+        context.world.products[product.id].revenu = context.world.products[product.id].revenu * upgrade.ratio;
+    }
+
+    return context;
+}
+
 
 module.exports = {
     Query: {
@@ -85,6 +92,31 @@ module.exports = {
                     throw new Error(`Vous n'avez pas assez d'argent pour acheter ${args.quantite} ${product.name}`)
                 }
                 product.quantite += args.quantite;
+
+
+                for (let unlock of context.world.products[product.id].paliers) {
+                    if (unlock.seuil <= context.world.products[product.id].quantite && !unlock.unlocked) {
+                        context.world.products[product.id].paliers.find(ul => unlock.name === ul.name).unlocked = true;
+                        //Calc upgrade
+                        // this.productsComponent?.find((product) => { return product.product.id == unlock.idcible; })?.calcUpgrade(unlock)
+                    }
+                }
+
+                for (let unlock of context.world.allunlocks) {
+                    let productslist = context.world.products.filter(product => product.quantite >= unlock.seuil)
+                    if (productslist.length >= context.world.products.length && !unlock.unlocked) {
+                        if (unlock.idcible == -1) {
+                            // Calc upgrade for all products
+                            // this.productsComponent?.forEach(p => p.calcUpgrade(unlock));
+                        }
+                        else {
+                            // Calc upgrade only on the product with the idcible
+                            // this.productsComponent?.find((product) => { return product.product.id == unlock.idcible; })?.calcUpgrade(unlock)
+                        }
+                        context.world.allunlocks.find(ul => unlock.name === ul.name).unlocked = true;
+                    }
+                }
+
                 product.cout = product.cout * Math.pow(product.croissance, args.quantite)
                 context.world.money -= couttotal
                 saveWorld(context)
@@ -93,7 +125,6 @@ module.exports = {
 
         },
         lancerProductionProduit(parent, args, context) {
-            console.log("Lancement de production de " + args.id)
             updateScore(context)
             let product;
             try {

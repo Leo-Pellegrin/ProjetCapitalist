@@ -164,25 +164,29 @@ export class AppComponent {
     }
     let unlocks: Palier[] = [];
 
-    this.world.allunlocks.forEach((unlock) => {
+    this.world.products[eventData[1].id].paliers.forEach((unlock) => {
       if(unlock.idcible == eventData[1].id) unlocks.push(unlock)
     })
 
-    let unlocksall = this.world.allunlocks.filter(unlock => unlock.idcible == -1)
-
     for(let unlock of unlocks){
       if(unlock.seuil <= this.world.products[eventData[1].id].quantite && !unlock.unlocked){
-        this.world.allunlocks.filter(ul => unlock.name === ul.name).forEach(p => p.unlocked = true); 
+        this.world.products[eventData[1].id].paliers.filter(ul => unlock.name === ul.name).forEach(p => p.unlocked = true); 
         this.productsComponent?.find((product) => {return product.product.id == unlock.idcible;})?.calcUpgrade(unlock)
         this.popMessage("Vous avez débloqué l'unlock " + unlock.name); 
       }
     }
 
-    for(let unlock of unlocksall){
+    for(let unlock of this.world.allunlocks){
       let productslist = this.world.products.filter(product => product.quantite >= unlock.seuil)
       if(productslist.length >= this.world.products.length && !unlock.unlocked){
+        if(unlock.idcible == -1){
+          this.productsComponent?.forEach(p => p.calcUpgrade(unlock));
+        }
+        else{
+          this.productsComponent?.find((product) => {return product.product.id == unlock.idcible;})?.calcUpgrade(unlock)
+        }
+        
         this.world.allunlocks.filter(ul => unlock.name === ul.name).forEach(p => p.unlocked = true); 
-        this.productsComponent?.forEach(p => p.calcUpgrade(unlock));
         this.popMessage("Vous avez débloqué l'unlock " + unlock.name);
       }
     }
