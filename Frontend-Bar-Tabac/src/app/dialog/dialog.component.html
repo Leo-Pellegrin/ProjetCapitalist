@@ -6,12 +6,12 @@
                 @if(!manager.unlocked){
                     <div class="layout">
                         <div>
-                            <div class="logo"><img [attr.src]="data.server+manager.logo" /> </div>
+                            <div class="logo"><img [attr.src]="data.server + manager.logo" /> </div>
                         </div>
                         <div>
                             <div class="name"> {{ manager.name}} </div>
                             <div class="cible"> {{ data.data.products[manager.idcible].name }} </div>
-                            <div class="cost"> {{ manager.seuil}} </div>
+                            <div class="cost"> {{"Cout : " + manager.seuil}} </div>
                         </div>
                         <div>
                             <!-- (click)="hireManager(manager)" -->
@@ -35,12 +35,15 @@
                         @if(!upgrade.unlocked){
                             <div class="layout">
                                 <div>
-                                    <div class="logo"><img class="round" [attr.src]="data.server" /> </div>
+                                    <div class="logo"><img class="round" [attr.src]="data.server + upgrade.logo" /> </div>
                                 </div>
                                 <div>
                                     <div class="name"> {{ upgrade.name}} </div>
                                     <div class="cible"> {{ data.data.products[upgrade.idcible].name }} </div>
-                                    <div class="cost"> {{ upgrade.seuil}} </div>
+                                    <div class="cost"> {{ "Cout : " + upgrade.seuil}} </div>
+                                    <div class="bonus">
+                                        {{ upgrade.typeratio == 'gain' ?  ("Amélioration du profit : " + data.data.products[upgrade.idcible].name + " x" + upgrade.ratio) : ("Amélioration de la vitesse de production : " + data.data.products[upgrade.idcible].name + " x" + upgrade.ratio ) }}
+                                      </div>
                                 </div>
                                 <div>
                                     
@@ -60,17 +63,20 @@
               <h1 class="title">Want to maximize profits? Get your investments to this quotas !</h1>
             </div>
             <div class="two-column-list">
-              @for(unlock of getUnlocks(); track unlock.name){
+              @for(unlock of listClosestUnlock.slice(0,7); track unlock.name){
                 <div>
                   @if(!unlock.unlocked){
-                    <div class="unlockslayout">
+                    <div class="layout">
                       <div>
-                        <div class="logo"><img class="round" [attr.src]="data.server+unlock.logo" /> </div>
+                        <div class="logo"><img class="round" [attr.src]="data.server + unlock.logo"/> </div>
                       </div>
                       <div>
-                        <div class="unlockname"> {{ unlock.name}} </div>
-                        <div class="unlockcible"> {{ data.data.products[unlock.idcible].name }} </div>
-                        <div class="unlockseuil"> {{ unlock.seuil}} </div>
+                        <div class="name"> {{ unlock.name}} </div>
+                        <div class="cible"> {{ data.data.products[unlock.idcible].name }} </div>
+                        <div class="cost"> {{ unlock.seuil}} </div>
+                        <div class="bonus">
+                            {{ unlock.typeratio == 'gain' ?  (data.data.products[unlock.idcible].name + " Profits x" + unlock.ratio) : (data.data.products[unlock.idcible].name + " Production Speed x" + unlock.ratio ) }}
+                          </div>
                       </div>
                     </div>
                   }
@@ -108,14 +114,14 @@
                         @if(!angelupgrade.unlocked){
                             <div class="layout">
                                 <div>
-                                    <div class="logo"><img class="round" [attr.src]="data.server" /> </div>
+                                    <div class="logo"><img class="round" [attr.src]="data.server + angelupgrade.logo" /> </div>
                                 </div>
                                 <div>
                                     <div class="name"> {{ angelupgrade.name}} </div>
                                     <div class="cible"> {{ data.data.products[angelupgrade.idcible].name }} </div>
                                     <div class="cost"> {{ angelupgrade.seuil}} </div>
                                     <div class="bonus">
-                                        {{ angelupgrade.typeratio == 'gain' ?  ("All Products Profits x" + angelupgrade.ratio) : (" Angel Effectiveness + " + angelupgrade.ratio + "%") }}
+                                        {{ angelupgrade.typeratio == 'gain' ?  ("Augmentation de tous les profits x" + angelupgrade.ratio) : (" Augmentation de l'éfficacité des anges + " + angelupgrade.ratio + "%") }}
                                       </div>
                                 </div>
                                 <div>

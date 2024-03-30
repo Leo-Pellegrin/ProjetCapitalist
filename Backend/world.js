@@ -23,27 +23,45 @@ module.exports = {
             "paliers": [
                 {
                     "name": "Palier1",
-                    "logo": "icones/premierpalier.jpg",
+                    "logo": "icones/lait.png",
                     "seuil": 20,
-                    "idcible": 1,
+                    "idcible": 0,
                     "ratio": 2,
                     "typeratio": "vitesse",
                     "unlocked": false
                 },
                 {
                     "name": "Palier2",
-                    "logo": "icones/deuxiemepalier.jpg",
+                    "logo": "icones/lait.png",
                     "seuil": 50,
-                    "idcible": 1,
+                    "idcible": 0,
                     "ratio": 2,
+                    "typeratio": "gain",
+                    "unlocked": false
+                },
+                {
+                    "name": "Palier3",
+                    "logo": "icones/lait.png",
+                    "seuil": 100,
+                    "idcible": 0,
+                    "ratio": 3,
                     "typeratio": "vitesse",
                     "unlocked": false
                 },
                 {
                     "name": "Palier3",
-                    "logo": "icones/troisiemepalier.jpg",
+                    "logo": "icones/lait.png",
                     "seuil": 100,
-                    "idcible": 1,
+                    "idcible": 0,
+                    "ratio": 3,
+                    "typeratio": "gain",
+                    "unlocked": false
+                },
+                {
+                    "name": "Palier3",
+                    "logo": "icones/lait.png",
+                    "seuil": 100,
+                    "idcible": 0,
                     "ratio": 2,
                     "typeratio": "vitesse",
                     "unlocked": false
@@ -61,10 +79,10 @@ module.exports = {
             "quantite": 0,
             "timeleft": 0,
             "managerUnlocked": false,
-            "palliers": [
+            "paliers": [
                 {
                     "name": "Palier1",
-                    "logo": "icones/premierpalier.jpg",
+                    "logo": "icones/petit_fromage.png",
                     "seuil": 20,
                     "idcible": 1,
                     "ratio": 2,
@@ -73,7 +91,7 @@ module.exports = {
                 },
                 {
                     "name": "Palier2",
-                    "logo": "icones/deuxiemepalier.jpg",
+                    "logo": "icones/petit_fromage.png",
                     "seuil": 50,
                     "idcible": 1,
                     "ratio": 2,
@@ -82,7 +100,7 @@ module.exports = {
                 },
                 {
                     "name": "Palier3",
-                    "logo": "icones/troisiemepalier.jpg",
+                    "logo": "icones/petit_fromage.png",
                     "seuil": 100,
                     "idcible": 1,
                     "ratio": 2,
@@ -102,30 +120,30 @@ module.exports = {
             "quantite": 0,
             "timeleft": 0,
             "managerUnlocked": false,
-            "palliers": [
+            "paliers": [
                 {
                     "name": "Palier1",
-                    "logo": "icones/premierpalier.jpg",
+                    "logo": "icones/gros_fromage.png",
                     "seuil": 20,
-                    "idcible": 1,
+                    "idcible": 2,
                     "ratio": 2,
                     "typeratio": "vitesse",
                     "unlocked": false
                 },
                 {
                     "name": "Palier2",
-                    "logo": "icones/deuxiemepalier.jpg",
+                    "logo": "icones/gros_fromage.png",
                     "seuil": 50,
-                    "idcible": 1,
+                    "idcible": 2,
                     "ratio": 2,
                     "typeratio": "vitesse",
                     "unlocked": false
                 },
                 {
                     "name": "Palier3",
-                    "logo": "icones/troisiemepalier.jpg",
+                    "logo": "icones/gros_fromage.png",
                     "seuil": 100,
-                    "idcible": 1,
+                    "idcible": 2,
                     "ratio": 2,
                     "typeratio": "vitesse",
                     "unlocked": false
@@ -143,10 +161,10 @@ module.exports = {
             "quantite": 0,
             "timeleft": 0,
             "managerUnlocked": false,
-            "palliers": [
+            "paliers": [
                 {
                     "name": "Palier1",
-                    "logo": "icones/premierpalier.jpg",
+                    "logo": "icones/vache.png",
                     "seuil": 20,
                     "idcible": 1,
                     "ratio": 2,
@@ -155,7 +173,7 @@ module.exports = {
                 },
                 {
                     "name": "Palier2",
-                    "logo": "icones/deuxiemepalier.jpg",
+                    "logo": "icones/vache.png",
                     "seuil": 50,
                     "idcible": 1,
                     "ratio": 2,
@@ -164,7 +182,7 @@ module.exports = {
                 },
                 {
                     "name": "Palier3",
-                    "logo": "icones/troisiemepalier.jpg",
+                    "logo": "icones/vache.png",
                     "seuil": 100,
                     "idcible": 1,
                     "ratio": 2,
@@ -184,10 +202,10 @@ module.exports = {
             "quantite": 0,
             "timeleft": 0,
             "managerUnlocked": false,
-            "palliers": [
+            "paliers": [
                 {
                     "name": "Palier1",
-                    "logo": "icones/premierpalier.jpg",
+                    "logo": "icones/ferme.png",
                     "seuil": 20,
                     "idcible": 1,
                     "ratio": 2,
@@ -196,7 +214,7 @@ module.exports = {
                 },
                 {
                     "name": "Palier2",
-                    "logo": "icones/deuxiemepalier.jpg",
+                    "logo": "icones/ferme.png",
                     "seuil": 50,
                     "idcible": 1,
                     "ratio": 2,
@@ -205,7 +223,7 @@ module.exports = {
                 },
                 {
                     "name": "Palier3",
-                    "logo": "icones/troisiemepalier.jpg",
+                    "logo": "icones/ferme.png",
                     "seuil": 100,
                     "idcible": 1,
                     "ratio": 2,
@@ -228,7 +246,7 @@ module.exports = {
             "paliers": [
                 {
                     "name": "Palier1",
-                    "logo": "icones/premierpalier.jpg",
+                    "logo": "icones/grandeferme.png",
                     "seuil": 20,
                     "idcible": 1,
                     "ratio": 2,
@@ -237,7 +255,7 @@ module.exports = {
                 },
                 {
                     "name": "Palier2",
-                    "logo": "icones/deuxiemepalier.jpg",
+                    "logo": "icones/grandeferme.png",
                     "seuil": 50,
                     "idcible": 1,
                     "ratio": 2,
@@ -246,7 +264,7 @@ module.exports = {
                 },
                 {
                     "name": "Palier3",
-                    "logo": "icones/troisiemepalier.jpg",
+                    "logo": "icones/grandeferme.png",
                     "seuil": 100,
                     "idcible": 1,
                     "ratio": 2,
@@ -261,7 +279,7 @@ module.exports = {
             "name": "Lait demi-écrémé",
             "logo": "icones/lait.png",
             "seuil": 2,
-            "idcible": 0,
+            "idcible": 3,
             "ratio": 2,
             "typeratio": "gain",
             "unlocked": false
@@ -279,7 +297,7 @@ module.exports = {
     "upgrades": [
         {
             "name": "Petite clope",
-            "logo": "icones/petiteclope.jpg",
+            "logo": "icones/lait.png",
             "seuil": 1e3,
             "idcible": 0,
             "ratio": 3,
@@ -288,7 +306,7 @@ module.exports = {
         },
         {
             "name": "Petite clope 2",
-            "logo": "icones/petiteclope.jpg",
+            "logo": "icones/lait.png",
             "seuil": 1e3,
             "idcible": 0,
             "ratio": 2,
@@ -297,7 +315,7 @@ module.exports = {
         },
         {
             "name": "Clope industrielle",
-            "logo": "icones/petiteclope.jpg",
+            "logo": "icones/lait.png",
             "seuil": 1e4,
             "idcible": 2,
             "ratio": 3,
