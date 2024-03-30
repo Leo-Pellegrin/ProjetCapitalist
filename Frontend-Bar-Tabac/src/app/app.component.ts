@@ -1,4 +1,4 @@
-import { Component, signal, Inject, PLATFORM_ID, ViewChildren, QueryList } from '@angular/core';
+import { Component, signal, Inject, PLATFORM_ID, ViewChildren, QueryList, AfterViewInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { World, Palier, Product } from './world';
 import { WebserviceService } from './webservice.service';
@@ -53,17 +53,20 @@ export class AppComponent {
     this.isBrowser.set(isPlatformBrowser(platformId));
 
     if (this.isBrowser()) {
-      
       this.username = localStorage.getItem("username") || "Anonymous" + Math.floor(Math.random() * 100000).toString();
       this.service.setUser(this.username);
-      console.log(this.username);
     }
 
     this.service.getWorld().then(
       world => {
         this.world = world.data.getWorld;
+        this.calcbadgeManagers();
+        this.calcbadgeUpgrades();
+        this.calcbadgeAngelUpgrades();
       }
     );
+
+
   }
 
   openDialogManager(): void {
@@ -258,6 +261,10 @@ export class AppComponent {
       else if (angelupgrade.typeratio == "ange") {
         this.world.angelbonus = this.world.angelbonus + angelupgrade.ratio;
       }
+
+      this.service.buyAngelUpgrade(angelupgrade).catch(reason =>
+        console.log("erreur: " + reason)
+      );
     }
     else {
       this.popMessage("Not enough anges to buy this angel upgrade");

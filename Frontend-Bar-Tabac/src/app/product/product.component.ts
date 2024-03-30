@@ -31,7 +31,9 @@ export class ProductComponent implements AfterViewInit {
   run: boolean = this.product.timeleft != 0;
   auto: boolean = this.product.managerUnlocked;
   initialValue: number = 0;
-
+  _activeAngels: number = 0;
+  _bonusAngels: number = 0;
+  
   protected readonly Orientation = Orientation;
 
   constructor(
@@ -105,6 +107,16 @@ export class ProductComponent implements AfterViewInit {
     if (this._qtmulti && this.product) this.calcMaxCanBuy();
   }
 
+  @Input()
+  set activeAngels(value: number){
+    this._activeAngels = value;
+  }
+
+  @Input()
+  set bonusAngels(value: number){
+    this._bonusAngels = value;
+  }
+
   // Quantité maximale que l'on peut acheter avec l'argent actuel
   calcMaxCanBuy() {
     let numberOfItems = Math.log(1 - (this._worldmoney / this.product.cout) * (1 - this.product.croissance)) / Math.log(this.product.croissance);
@@ -113,7 +125,7 @@ export class ProductComponent implements AfterViewInit {
 
   calcUpgrade(Upgrade: Palier) {
     if (Upgrade.unlocked && Upgrade.typeratio == "vitesse") {
-      this.product.vitesse = this.product.vitesse / Upgrade.ratio;
+      this.product.vitesse = Math.round(this.product.vitesse / Upgrade.ratio);
     }
     else if (Upgrade.unlocked && Upgrade.typeratio == "gain") {
       this.product.revenu = this.product.revenu * Upgrade.ratio;

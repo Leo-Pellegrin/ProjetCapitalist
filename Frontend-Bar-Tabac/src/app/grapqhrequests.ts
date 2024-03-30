@@ -100,6 +100,13 @@ export const BUY_QT_PRODUIT = gql`
         }
     }`
 
+export const BUY_ANGEL_UPGRADE = gql`
+    mutation acheterAngelUpgrade($name: String!) {
+        acheterAngelUpgrade(name: $name) {
+            name
+        }
+    }`
+
 export const RESET_WORLD = gql`
     mutation resetWorld {
         resetWorld {        

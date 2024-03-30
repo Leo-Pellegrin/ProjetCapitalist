@@ -218,7 +218,7 @@ module.exports = {
 
             return newWorld;
         },
-        acheterAngelUpgrade(parent, args, context) {
+        acheterAngelUpgrade(parent, args, context) {        
             updateScore(context)
             let upgrade;
             try {
@@ -232,7 +232,8 @@ module.exports = {
                 if (context.world.activeangels < upgrade.seuil) {
                     throw new Error(`Vous n'avez pas assez d'anges pour acheter l'angelupgrade ${upgrade.name}`)
                 }
-                context.world.upgrades.find(p => p.name === args.name).unlocked = true;
+
+                context.world.angelupgrades.find(p => p.name === args.name).unlocked = true;
 
                 if (upgrade.typeratio == "ange") {
                     context.world.angelbonus += upgrade.ratio;

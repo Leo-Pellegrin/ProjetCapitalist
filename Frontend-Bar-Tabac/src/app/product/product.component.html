@@ -8,7 +8,7 @@
         <p class="product-name">{{ product.name }}</p>
 
         <div class="price-progress-wrapper">
-            <p class="product-price">{{ product.revenu }}</p>
+            <p class="product-price">{{ product.revenu * (1 + _activeAngels * _bonusAngels / 100) }}</p>
             <div class="progressbardiv">
                 <app-my-progress-bar
                     [run]="run"

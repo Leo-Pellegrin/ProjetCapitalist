@@ -52,7 +52,7 @@
     </div>
     <div class="product">
       @for (product of world.products; track product.name) {      
-        <app-product [prod]="product" [qtmulti]="qtmulti" class="product col-md-6"
+        <app-product [prod]="product" [qtmulti]="qtmulti" [activeAngels]="world.activeangels" [bonusAngels]="world.angelbonus" class="product col-md-6"
           (notifyProduction)="onProductionDone($event)" [worldmoney]="world.money" (notifyBuy)="onBuy($event)" />
       }
     </div>
