@@ -8,7 +8,7 @@ import {
     MatDialogClose,
 } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-import { Palier, World  } from '../world';
+import { Palier, World } from '../world';
 
 import { CommonModule } from '@angular/common';
 
@@ -38,12 +38,15 @@ export class DialogComponent implements OnInit, OnDestroy {
     listClosestUnlock: Palier[] = [];
     listClosestUpgrade: Palier[] = [];  
     
+    angelsToClaim = 0;
 
    
     constructor(
         public dialogRef: MatDialogRef<DialogComponent>,
         @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    ) { }
+    ) {
+        this.angelsToClaim = this.calcAngelsToClaim()
+    }
 
     onNoClick(): void {
         this.dialogRef.close();
@@ -61,7 +64,7 @@ export class DialogComponent implements OnInit, OnDestroy {
         this.listClosestUpgrade = [];
     }
 
-    getUnlocks() {   
+    getUnlocks() {
         this.data.data.products.forEach((product) => {
             product.paliers.forEach((palier) => {
                 if (palier.seuil >= product.quantite) {
@@ -81,7 +84,7 @@ export class DialogComponent implements OnInit, OnDestroy {
         this.data.data.products.forEach((product) => {
             let closestUnlock: Palier | null = null;
             let closestDistance = Infinity; // Initialisation à une valeur très grande
-    
+
             product.paliers.forEach((palier) => {
                 const distance = Math.abs(product.quantite - palier.seuil);
                 if (distance < closestDistance) {
@@ -90,17 +93,17 @@ export class DialogComponent implements OnInit, OnDestroy {
                 }
             });
 
-            if(closestUnlock !== null){
+            if (closestUnlock !== null) {
                 this.listClosestUnlock.push(closestUnlock); // Stocke le palier le plus proche pour ce produit
             }
         });
 
-        let seuilmin = Infinity ; 
+        let seuilmin = Infinity;
         let closestAllUnlocks: Palier | null = null;
         this.data.data.allunlocks.forEach((unlock) => {
-            if(!unlock.unlocked){
-                console.log("unlock", unlock.name, "seuil", unlock.seuil, "min", seuilmin)
-                if(unlock.seuil < seuilmin){
+            if (!unlock.unlocked) {
+                console.log()
+                if (unlock.seuil < seuilmin) {
                     seuilmin = unlock.seuil;
                     closestAllUnlocks = unlock;
                     console.log("closestAllUnlocks", closestAllUnlocks)
@@ -135,11 +138,14 @@ export class DialogComponent implements OnInit, OnDestroy {
         this.onBuyAngelUpgrade.emit(palier);
     }
 
-
     resetWorld() {
         this.onResetWorld.emit();
     }
-    
+
+    calcAngelsToClaim() {
+        return Math.round(150 * Math.sqrt(this.data.data.score / Math.pow(10, 15)) - this.data.data.totalangels);
+    }
+
 
     @Output() onBuyManager: EventEmitter<Palier> = new EventEmitter<Palier>();
 

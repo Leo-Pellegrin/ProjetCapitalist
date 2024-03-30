@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter, AfterViewInit, signal, Inject, 
 import { Product, Palier } from '../world';
 import { isPlatformBrowser, CommonModule } from "@angular/common"; // update this
 import { MatProgressBarModule } from '@angular/material/progress-bar'
+import { MyProgressBarComponent, Orientation } from '../progressbar/progressbar.component';
 import { GET_SERV } from '../../request';
 import { WebserviceService } from '../webservice.service';
 import { MsToTimePipe } from '../ms-to-time.pipe';
@@ -10,7 +11,7 @@ import { MsToTimePipe } from '../ms-to-time.pipe';
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [MatProgressBarModule, CommonModule, MsToTimePipe],
+  imports: [MatProgressBarModule, CommonModule, MsToTimePipe, MyProgressBarComponent],
   templateUrl: './product.component.html',
   styleUrl: './product.component.css'
 })
@@ -26,9 +27,14 @@ export class ProductComponent implements AfterViewInit {
   isBrowser = signal(false);
   productCost: number = 0;
   disabledButtonBuy: boolean = true;
-  
-
   qmultiButton: string = "x1";
+  run: boolean = this.product.timeleft != 0;
+  auto: boolean = this.product.managerUnlocked;
+  initialValue: number = 0;
+  _activeAngels: number = 0;
+  _bonusAngels: number = 0;
+  
+  protected readonly Orientation = Orientation;
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: object,
@@ -45,26 +51,21 @@ export class ProductComponent implements AfterViewInit {
 
   // Calcul de la progression de la production
   calcScore() {
-    if (this.product.timeleft == 0 && !this.product.managerUnlocked) {
-      return;
-    }
-    else {
-      if (this.product.timeleft == 0 && this.product.managerUnlocked) {
-        this.product.timeleft = this.product.vitesse;
-      }
+    if (this.product.timeleft != 0) {
+      let timeElapsed = Date.now() - this.lastupdate;
+      this.product.timeleft -= timeElapsed;
+      this.lastupdate = Date.now();
 
-      const timeElapsed = Date.now() - this.lastupdate;
-
-      if (this.product.timeleft < 0) {
-        this.product.timeleft = 0;
-
-        this.progressbarvalue = 0;
+      if (this.product.timeleft <= 0) {
+        if (this.product.managerUnlocked) {
+          this.product.timeleft = this.product.vitesse + (this.product.timeleft % this.product.vitesse);
+          this.auto = true;
+        }
+        else {
+          this.product.timeleft = 0;
+          this.run = false;
+        }
         this.notifyProduction.emit(this.product);
-      }
-      else {
-        this.product.timeleft = this.product.timeleft - timeElapsed;
-
-        this.progressbarvalue = Math.round(((this.product.vitesse - this.product.timeleft) / this.product.vitesse) * 100);
       }
     }
   }
@@ -75,12 +76,19 @@ export class ProductComponent implements AfterViewInit {
     if (value != undefined) {
       this.product = value;
       this.productCost = Math.round(this.product.cout * 100) / 100
-      if (this.product && this.product.timeleft > 0) {
-        this.lastupdate = Date.now();
-        let progress = (this.product.vitesse - this.product.timeleft) / this.product.vitesse;
-        // this.progressbar.set(progress);
-        // this.progressbar.animate(1, { duration: this.product.timeleft });
+
+      this.auto = this.product.managerUnlocked;
+      
+      if (this.product && this.product.timeleft > 0) {     
+        console.log("timeleft: " + this.product.timeleft)   
+        this.initialValue = this.product.vitesse - this.product.timeleft;
+        this.run = true;
       }
+      else{       
+        this.initialValue = 0;
+        this.run = false;
+      }
+      
       this.buyDisabled();
     }
   }
@@ -99,28 +107,28 @@ export class ProductComponent implements AfterViewInit {
     if (this._qtmulti && this.product) this.calcMaxCanBuy();
   }
 
+  @Input()
+  set activeAngels(value: number){
+    this._activeAngels = value;
+  }
+
+  @Input()
+  set bonusAngels(value: number){
+    this._bonusAngels = value;
+  }
+
   // Quantité maximale que l'on peut acheter avec l'argent actuel
   calcMaxCanBuy() {
     let numberOfItems = Math.log(1 - (this._worldmoney / this.product.cout) * (1 - this.product.croissance)) / Math.log(this.product.croissance);
     if (numberOfItems > 0) this.maxCanBuy = Math.round(numberOfItems);
   }
 
-  calcUpgrade(Upgrade: Palier){
-    console.log("Upgrade", Upgrade)
-    console.log("product vitesse", this.product.vitesse)
-    console.log("product gain", this.product.revenu)
-    console.log("type", Upgrade.typeratio)
-    console.log(Upgrade.unlocked)
-
-
-    if(Upgrade.unlocked && Upgrade.typeratio == "vitesse"){
-      this.product.vitesse = this.product.vitesse / Upgrade.ratio; 
-      console.log("product vitesse apres upgrade", this.product.vitesse)
+  calcUpgrade(Upgrade: Palier) {
+    if (Upgrade.unlocked && Upgrade.typeratio == "vitesse") {
+      this.product.vitesse = Math.round(this.product.vitesse / Upgrade.ratio);
     }
-    else if(Upgrade.unlocked && Upgrade.typeratio == "gain"){
+    else if (Upgrade.unlocked && Upgrade.typeratio == "gain") {
       this.product.revenu = this.product.revenu * Upgrade.ratio;
-      console.log("ratio", Upgrade.ratio)
-      console.log("product gain apres upgarde", this.product.revenu)
     }
   }
 
@@ -130,16 +138,15 @@ export class ProductComponent implements AfterViewInit {
 
   // Lancement d'un produit
   onClick() {
-    if(this.product.quantite > 0){
+    if (this.product.quantite > 0 && !this.run ) {
+      this.initialValue = 0;
+      this.run = true;
       this.product.timeleft = this.product.vitesse;
       this.lastupdate = Date.now();
       this.service.lancerProduction(this.product.id).catch(reason =>
         console.log("erreur: " + reason)
       );
-    } else {
-      console.log("Quantité insuffisante pour lancer la production"); 
     }
-    console.log(this.product.timeleft);
   }
 
   // Achat d'un produit
@@ -219,7 +226,7 @@ export class ProductComponent implements AfterViewInit {
     }
   }
 
-  
+
   // Evénement de fin de production
   @Output() notifyProduction: EventEmitter<Product> = new EventEmitter<Product>();
 

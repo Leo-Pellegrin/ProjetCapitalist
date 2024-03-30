@@ -108,8 +108,9 @@
                 <div class="colonne2">           
                     <div class="totalangels">  Total anges : {{data.data.activeangels}}  </div>
                     <div class="bonusangels"> Pourcentage de bonus par anges : {{data.data.angelbonus}} % </div>
-                
-                    <button class="restartbutton" (click)="resetWorld()"> {{data.data.totalangels}} To Claim with Restart</button>
+                </div>   
+                <div>
+                    <button class="hirebutton" (click)="resetWorld()"> {{angelsToClaim}} To Claim with Restart</button>
                 </div>  
             </div> 
 
