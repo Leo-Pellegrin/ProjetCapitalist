@@ -4,11 +4,13 @@ import { isPlatformBrowser, CommonModule } from "@angular/common"; // update thi
 import { MatProgressBarModule } from '@angular/material/progress-bar'
 import { GET_SERV } from '../../request';
 import { WebserviceService } from '../webservice.service';
+import { MsToTimePipe } from '../ms-to-time.pipe';
+
 
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [MatProgressBarModule, CommonModule],
+  imports: [MatProgressBarModule, CommonModule, MsToTimePipe],
   templateUrl: './product.component.html',
   styleUrl: './product.component.css'
 })
@@ -24,6 +26,8 @@ export class ProductComponent implements AfterViewInit {
   isBrowser = signal(false);
   productCost: number = 0;
   disabledButtonBuy: boolean = true;
+  
+
   qmultiButton: string = "x1";
 
   constructor(
@@ -206,6 +210,7 @@ export class ProductComponent implements AfterViewInit {
     }
   }
 
+  
   // Evénement de fin de production
   @Output() notifyProduction: EventEmitter<Product> = new EventEmitter<Product>();
 
