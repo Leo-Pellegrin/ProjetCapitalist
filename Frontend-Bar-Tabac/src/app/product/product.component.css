@@ -154,3 +154,8 @@ product_qte{
 .qmulti-product {
     font-size: smaller;
 }
+
+.progressbardiv{
+  margin-bottom: 3vh;
+  height: 5vh;
+}

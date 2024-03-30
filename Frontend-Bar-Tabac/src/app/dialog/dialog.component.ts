@@ -8,7 +8,7 @@ import {
     MatDialogClose,
 } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-import { Palier, World  } from '../world';
+import { Palier, World } from '../world';
 
 import { CommonModule } from '@angular/common';
 
@@ -36,11 +36,14 @@ export interface DialogData {
 export class DialogComponent implements AfterViewInit {
     listunlocks: Palier[] = [];
     listClosestUnlock: Palier[] = [];
+    angelsToClaim = 0;
 
     constructor(
         public dialogRef: MatDialogRef<DialogComponent>,
         @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    ) { }
+    ) {
+        this.angelsToClaim = this.calcAngelsToClaim()
+    }
 
     onNoClick(): void {
         this.dialogRef.close();
@@ -49,11 +52,9 @@ export class DialogComponent implements AfterViewInit {
     ngAfterViewInit() {
         this.getUnlocks();
         this.getClosestUnlockForProducts();
-
-        console.log(this.listClosestUnlock)
     }
 
-    getUnlocks() {   
+    getUnlocks() {
         this.data.data.products.forEach((product) => {
             product.paliers.forEach((palier) => {
                 if (palier.seuil >= product.quantite) {
@@ -71,12 +72,12 @@ export class DialogComponent implements AfterViewInit {
         const closestUnlocks: { [productId: string]: Palier | null } = {};
 
 
-        
-    
+
+
         this.data.data.products.forEach((product) => {
             let closestUnlock: Palier | null = null;
             let closestDistance = Infinity; // Initialisation à une valeur très grande
-    
+
             product.paliers.forEach((palier) => {
                 const distance = Math.abs(product.quantite - palier.seuil);
                 if (distance < closestDistance) {
@@ -85,30 +86,30 @@ export class DialogComponent implements AfterViewInit {
                 }
             });
 
-            if(closestUnlock !== null){
+            if (closestUnlock !== null) {
                 this.listClosestUnlock.push(closestUnlock); // Stocke le palier le plus proche pour ce produit
             }
         });
 
-        let seuilmin = Infinity ; 
+        let seuilmin = Infinity;
         this.data.data.allunlocks.forEach((unlock) => {
             let closestAllUnlocks: Palier | null = null;
-            if(!unlock.unlocked){
+            if (!unlock.unlocked) {
                 console.log()
-                if(unlock.seuil < seuilmin){
+                if (unlock.seuil < seuilmin) {
                     seuilmin = unlock.seuil;
                     closestAllUnlocks = unlock;
                 }
             }
-        
-            if(closestAllUnlocks !== null){
+
+            if (closestAllUnlocks !== null) {
                 this.listClosestUnlock.push(closestAllUnlocks);
-        
+
             }
-        }); 
-        console.log(this.listClosestUnlock); 
+        });
+        console.log(this.listClosestUnlock);
     }
-    
+
 
     buyManager(palier: Palier) {
         this.onBuyManager.emit(palier);
@@ -122,11 +123,14 @@ export class DialogComponent implements AfterViewInit {
         this.onBuyAngelUpgrade.emit(palier);
     }
 
-
     resetWorld() {
         this.onResetWorld.emit();
     }
-    
+
+    calcAngelsToClaim() {
+        return Math.round(150 * Math.sqrt(this.data.data.score / Math.pow(10, 15)) - this.data.data.totalangels);
+    }
+
 
     @Output() onBuyManager: EventEmitter<Palier> = new EventEmitter<Palier>();
 

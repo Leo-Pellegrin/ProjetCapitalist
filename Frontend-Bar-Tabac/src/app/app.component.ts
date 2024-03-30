@@ -260,15 +260,14 @@ export class AppComponent {
       }
     }
     else {
-      this.popMessage("Not enough money to buy this angel upgrade");
+      this.popMessage("Not enough anges to buy this angel upgrade");
     }
   }
 
   resetWorld() {
     console.log("reset")
-    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-      this.router.navigate([this.router.url]);
-    });
+    this.service.resetWorld();
+    window.location.reload();
   }
 
   popMessage(message: string): void {

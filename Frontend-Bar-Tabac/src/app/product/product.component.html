@@ -9,9 +9,17 @@
 
         <div class="price-progress-wrapper">
             <p class="product-price">{{ product.revenu }}</p>
-
-            <mat-progress-bar [value]="progressbarvalue" class="product-progress">
-            </mat-progress-bar>
+            <div class="progressbardiv">
+                <app-my-progress-bar
+                    [run]="run"
+                    [auto]="product.managerUnlocked"
+                    [orientation]="Orientation.horizontal"
+                    [vitesse]="product.vitesse"
+                    [initialValue]="initialValue"
+                >
+                </app-my-progress-bar>
+            </div>
+          
             <div>
                 <span>  {{product.timeleft | msToTime}} </span>
             </div>

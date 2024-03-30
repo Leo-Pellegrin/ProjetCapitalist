@@ -165,8 +165,8 @@ module.exports = {
             if (manager && product) {
                 context.world.managers.find(p => p.name === args.name).unlocked = true;
                 context.world.products[product.id].managerUnlocked = true;
+                context.world.money -= manager.cout;    
                 saveWorld(context);
-                console.log("Manager " + manager.name + " engagé pour le produit " + product.name)
             }
         },
         acheterCashUpgrade(parent, args, context) {
@@ -201,11 +201,12 @@ module.exports = {
             let totalangels = context.world.totalangels
             let activeangels = context.world.activeangels
 
-            let angelstoAdd = 150 * Math.sqrt(score / Math.pow(10, 15)) - totalangels
+            let angelstoAdd = Math.round(150 * Math.sqrt(score / Math.pow(10, 15)) - totalangels)
 
             newWorld = require("./world")
 
-            newWorldtotalangels = totalangels + angelstoAdd
+            newWorld.score = score
+            newWorld.totalangels = totalangels + angelstoAdd
             newWorld.activeangels = activeangels + angelstoAdd
 
             writeFile("../userworlds/" + context.user + "-world.json", JSON.stringify(newWorld), err => {
@@ -214,6 +215,8 @@ module.exports = {
                     throw new Error(`Erreur d'écriture du monde coté serveur`)
                 }
             })
+
+            return newWorld;
         },
         acheterAngelUpgrade(parent, args, context) {
             updateScore(context)
