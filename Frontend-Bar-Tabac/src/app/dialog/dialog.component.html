@@ -63,7 +63,7 @@
               <h1 class="title">Want to maximize profits? Get your investments to this quotas !</h1>
             </div>
             <div class="two-column-list">
-              @for(unlock of listClosestUnlock.slice(0,6); track unlock.name){
+              @for(unlock of listClosestUnlock.slice(0,7); track unlock.name){
                 <div>
                   @if(!unlock.unlocked){
                     <div class="layout">
@@ -74,7 +74,7 @@
                         @if(unlock.idcible != -1){
                             <div class="name"> {{ unlock.name}} </div>
                             <div class="cible"> {{ data.data.products[unlock.idcible].name }} </div>
-                            <div class="cost"> {{ unlock.seuil}} </div>
+                            <div class="cost"> {{ "Atteint le niveau " + unlock.seuil + " pour débloquer !"}} </div>
                             <div class="bonus">
                                 {{ unlock.typeratio == 'gain' ?  (data.data.products[unlock.idcible].name + " Profits x" + unlock.ratio) : (data.data.products[unlock.idcible].name + " Production Speed x" + unlock.ratio ) }}
                             </div>
@@ -108,9 +108,8 @@
                 <div class="colonne2">           
                     <div class="totalangels">  Total anges : {{data.data.activeangels}}  </div>
                     <div class="bonusangels"> Pourcentage de bonus par anges : {{data.data.angelbonus}} % </div>
-                </div>   
-                <div>
-                    <button class="hirebutton" (click)="resetWorld()"> {{angelsToClaim}} To Claim with Restart</button>
+                
+                    <button class="restartbutton" (click)="resetWorld()"> {{angelsToClaim}} To Claim with Restart</button>
                 </div>  
             </div> 
 
@@ -132,11 +131,11 @@
                                 </div>
                                 <div>
                                     <div class="name"> {{ angelupgrade.name}} </div>
-                                    <div class="cible"> {{ data.data.products[angelupgrade.idcible].name }} </div>
-                                    <div class="cost"> {{ angelupgrade.seuil}} </div>
+                                    <div class="cible"> {{ angelupgrade.idcible == -1 ? ("All Products") : data.data.products[angelupgrade.idcible].name }} </div>
+                                    <div class="cost"> {{ angelupgrade.seuil + " anges"}} </div>
                                     <div class="bonus">
-                                        {{ angelupgrade.typeratio == 'gain' ?  ("Augmentation de tous les profits x" + angelupgrade.ratio) : (" Augmentation de l'éfficacité des anges + " + angelupgrade.ratio + "%") }}
-                                      </div>
+                                                {{ angelupgrade.typeratio == 'gain' ?  ( angelupgrade.idcible == -1 ? ("All profits x" + angelupgrade.ratio) : (data.data.products[angelupgrade.idcible].name) + " profits x" + angelupgrade.ratio)  : (" Increase in angel efficiency + " + angelupgrade.ratio + "%") }}
+                                            </div>
                                 </div>
                                 <div>
                                     
