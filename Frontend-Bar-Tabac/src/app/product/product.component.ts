@@ -34,6 +34,7 @@ export class ProductComponent implements AfterViewInit {
   initialValue: number = 0;
   _activeAngels: number = 0;
   _bonusAngels: number = 0;
+  productprice: number = 0;
 
   protected readonly Orientation = Orientation;
 
@@ -52,21 +53,30 @@ export class ProductComponent implements AfterViewInit {
 
   // Calcul de la progression de la production
   calcScore() {
-    if (this.product.timeleft != 0) {
-      let timeElapsed = Date.now() - this.lastupdate;
-      this.product.timeleft -= timeElapsed;
-      this.lastupdate = Date.now();
+    if (this.product.quantite > 0) {
+      if (this.product.timeleft != 0) {
+        let timeElapsed = Date.now() - this.lastupdate;
+        this.product.timeleft -= timeElapsed;
+        this.lastupdate = Date.now();
 
-      if (this.product.timeleft <= 0) {
+        if (this.product.timeleft <= 0) {
+          if (this.product.managerUnlocked) {
+            this.product.timeleft = this.product.vitesse + (this.product.timeleft % this.product.vitesse);
+            this.auto = true;
+            this.run = true;
+          }
+          else {
+            this.product.timeleft = 0;
+            this.run = false;
+          }
+          this.notifyProduction.emit(this.product);
+        }
+      }
+      else {
         if (this.product.managerUnlocked) {
-          this.product.timeleft = this.product.vitesse + (this.product.timeleft % this.product.vitesse);
-          this.auto = true;
+          this.product.timeleft = this.product.vitesse;
+          this.run = true;
         }
-        else {
-          this.product.timeleft = 0;
-          this.run = false;
-        }
-        this.notifyProduction.emit(this.product);
       }
     }
   }
@@ -76,8 +86,9 @@ export class ProductComponent implements AfterViewInit {
   set prod(value: Product) {
     if (value != undefined) {
       this.product = value;
-      this.productCost = Math.round(this.product.cout * 100) / 100
+      this.productCost = Math.round((this.product.revenu * (1 + this._activeAngels * this._bonusAngels / 100)) * 100) / 100
 
+      if (this.product.managerUnlocked && this.product.timeleft == 0) this.run = true;
       this.auto = this.product.managerUnlocked;
 
       if (this.product && this.product.timeleft > 0) {
@@ -111,11 +122,13 @@ export class ProductComponent implements AfterViewInit {
   @Input()
   set activeAngels(value: number) {
     this._activeAngels = value;
+    this.productCost = Math.round((this.product.revenu * (1 + this._activeAngels * this._bonusAngels / 100)) * 100) / 100
   }
 
   @Input()
   set bonusAngels(value: number) {
     this._bonusAngels = value;
+    this.productCost = Math.round((this.product.revenu * (1 + this._activeAngels * this._bonusAngels / 100)) * 100) / 100
   }
 
   // Quantité maximale que l'on peut acheter avec l'argent actuel
@@ -172,7 +185,7 @@ export class ProductComponent implements AfterViewInit {
     if (this.product.cout > 0) {
       switch (this._qtmulti) {
         case "x1":
-          this.qmultiButton = "x1";
+          this.qmultiButton = " x1";
           this.productCost = this.product.cout * (1 - Math.pow(this.product.croissance, 1)) / (1 - this.product.croissance);
           this.productCost = Math.round(this.productCost * 100) / 100;
           if (this._worldmoney >= this.productCost) {
@@ -183,7 +196,7 @@ export class ProductComponent implements AfterViewInit {
           }
           break;
         case "x10":
-          this.qmultiButton = "x10";
+          this.qmultiButton = " x10";
           this.productCost = this.product.cout * (1 - Math.pow(this.product.croissance, 10)) / (1 - this.product.croissance);
           this.productCost = Math.round(this.productCost * 100) / 100;
           if (this._worldmoney >= this.productCost) {
@@ -194,7 +207,7 @@ export class ProductComponent implements AfterViewInit {
           }
           break;
         case "x100":
-          this.qmultiButton = "x100";
+          this.qmultiButton = " x100";
           this.productCost = this.product.cout * (1 - Math.pow(this.product.croissance, 100)) / (1 - this.product.croissance);
           this.productCost = Math.round(this.productCost * 100) / 100;
           if (this._worldmoney >= this.productCost) {
@@ -206,7 +219,7 @@ export class ProductComponent implements AfterViewInit {
           break;
         case "Max":
           if (this.maxCanBuy > 0) {
-            this.qmultiButton = "x" + this.maxCanBuy.toString();
+            this.qmultiButton = " x" + this.maxCanBuy.toString();
 
             let priceMaxcanBuy = this.product.cout * (1 - Math.pow(this.product.croissance, this.maxCanBuy)) / (1 - this.product.croissance);
             this.productCost = Math.round(priceMaxcanBuy * 100) / 100;

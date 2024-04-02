@@ -207,9 +207,11 @@ export class AppComponent {
       this.world.managers[manager.idcible].unlocked = true;
       this.world.products[manager.idcible].managerUnlocked = true;
       this.world.money -= manager.seuil;
+
       this.calcbadgeManagers();
       this.calcbadgeUpgrades();
       this.calcbadgeAngelUpgrades();
+      
       this.popMessage("Manager " + manager.name + " hired");
       this.service.buyManager(manager).catch(reason => {
         console.log("erreur: " + reason)

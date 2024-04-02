@@ -1,13 +1,12 @@
-module.exports = {
-
+{
     "name": "La Fromagerie",
     "logo": "icones/logomonde.png",
-    "money": 0,
-    "score": 0,
+    "money": 500000000000,
+    "score": 500000000000,
     "totalangels": 0,
     "activeangels": 0,
     "angelbonus": 2,
-    "lastupdate": 0,
+    "lastupdate": "1712050849929",
     "products": [
         {
             "id": 0,
@@ -30,7 +29,6 @@ module.exports = {
                     "typeratio": "vitesse",
                     "unlocked": false
                 },
-
                 {
                     "name": "Lait bio",
                     "logo": "icones/lait.png",
@@ -40,7 +38,6 @@ module.exports = {
                     "typeratio": "gain",
                     "unlocked": false
                 },
-
                 {
                     "name": "Lait super bon",
                     "logo": "icones/lait.png",
@@ -49,7 +46,7 @@ module.exports = {
                     "ratio": 3,
                     "typeratio": "vitesse",
                     "unlocked": false
-                },
+                }
             ]
         },
         {
@@ -73,7 +70,6 @@ module.exports = {
                     "typeratio": "vitesse",
                     "unlocked": false
                 },
-
                 {
                     "name": "Fromage bio",
                     "logo": "icones/petit_fromage.png",
@@ -83,7 +79,6 @@ module.exports = {
                     "typeratio": "gain",
                     "unlocked": false
                 },
-
                 {
                     "name": "Meilleur fromage de tous les temps",
                     "logo": "icones/petit_fromage.png",
@@ -92,7 +87,7 @@ module.exports = {
                     "ratio": 2,
                     "typeratio": "vitesse",
                     "unlocked": false
-                },
+                }
             ]
         },
         {
@@ -116,7 +111,6 @@ module.exports = {
                     "typeratio": "vitesse",
                     "unlocked": false
                 },
-
                 {
                     "name": "Fromage super bon",
                     "logo": "icones/gros_fromage.png",
@@ -126,7 +120,6 @@ module.exports = {
                     "typeratio": "gain",
                     "unlocked": false
                 },
-
                 {
                     "name": "Fromage très gros",
                     "logo": "icones/gros_fromage.png",
@@ -135,8 +128,7 @@ module.exports = {
                     "ratio": 2,
                     "typeratio": "vitesse",
                     "unlocked": false
-                },
-
+                }
             ]
         },
         {
@@ -160,7 +152,6 @@ module.exports = {
                     "typeratio": "vitesse",
                     "unlocked": false
                 },
-
                 {
                     "name": "Vache très rentable",
                     "logo": "icones/vache.png",
@@ -170,7 +161,6 @@ module.exports = {
                     "typeratio": "gain",
                     "unlocked": false
                 },
-
                 {
                     "name": "Meilleure vache du troupeau",
                     "logo": "icones/vache.png",
@@ -179,8 +169,7 @@ module.exports = {
                     "ratio": 2,
                     "typeratio": "vitesse",
                     "unlocked": false
-                },
-
+                }
             ]
         },
         {
@@ -204,7 +193,6 @@ module.exports = {
                     "typeratio": "vitesse",
                     "unlocked": false
                 },
-
                 {
                     "name": "Ferme très rentable",
                     "logo": "icones/ferme.png",
@@ -214,8 +202,6 @@ module.exports = {
                     "typeratio": "gain",
                     "unlocked": false
                 },
-
-
                 {
                     "name": "Ferme de luxe",
                     "logo": "icones/ferme.png",
@@ -224,8 +210,7 @@ module.exports = {
                     "ratio": 2,
                     "typeratio": "vitesse",
                     "unlocked": false
-                },
-
+                }
             ]
         },
         {
@@ -249,7 +234,6 @@ module.exports = {
                     "typeratio": "vitesse",
                     "unlocked": false
                 },
-
                 {
                     "name": "Exploitation très rentable",
                     "logo": "icones/grandeferme.png",
@@ -259,7 +243,6 @@ module.exports = {
                     "typeratio": "gain",
                     "unlocked": false
                 },
-
                 {
                     "name": "Exploitation de luxe",
                     "logo": "icones/grandeferme.png",
@@ -268,8 +251,7 @@ module.exports = {
                     "ratio": 2,
                     "typeratio": "vitesse",
                     "unlocked": false
-                },
-
+                }
             ]
         }
     ],
@@ -310,7 +292,6 @@ module.exports = {
             "typeratio": "gain",
             "unlocked": false
         },
-
         {
             "name": "Revenue du grand fromage",
             "logo": "icones/gros_fromage.png",
@@ -346,14 +327,13 @@ module.exports = {
             "ratio": 2,
             "typeratio": "gain",
             "unlocked": false
-        },
-
+        }
     ],
     "upgrades": [
         {
             "name": "Lait entier",
             "logo": "icones/lait.png",
-            "seuil": 1e3,
+            "seuil": 1000,
             "idcible": 0,
             "ratio": 2,
             "typeratio": "gain",
@@ -362,7 +342,7 @@ module.exports = {
         {
             "name": "Lait de chèvre",
             "logo": "icones/lait.png",
-            "seuil": 1e4,
+            "seuil": 10000,
             "idcible": 0,
             "ratio": 2,
             "typeratio": "vitesse",
@@ -371,7 +351,7 @@ module.exports = {
         {
             "name": "Lait de luxe",
             "logo": "icones/lait.png",
-            "seuil": 15e3,
+            "seuil": 15000,
             "idcible": 0,
             "ratio": 3,
             "typeratio": "gain",
@@ -380,7 +360,7 @@ module.exports = {
         {
             "name": "Fromage de brebis",
             "logo": "icones/petit_fromage.png",
-            "seuil": 1e3,
+            "seuil": 1000,
             "idcible": 1,
             "ratio": 2,
             "typeratio": "vitese",
@@ -389,7 +369,7 @@ module.exports = {
         {
             "name": "Fromage de super qualité",
             "logo": "icones/petit_fromage.png",
-            "seuil": 15e3,
+            "seuil": 15000,
             "idcible": 1,
             "ratio": 2,
             "typeratio": "gain",
@@ -398,7 +378,7 @@ module.exports = {
         {
             "name": "Fromage de luxe",
             "logo": "icones/petit_fromage.png",
-            "seuil": 25e3,
+            "seuil": 25000,
             "idcible": 1,
             "ratio": 2,
             "typeratio": "gain",
@@ -407,7 +387,7 @@ module.exports = {
         {
             "name": "Fromage bio",
             "logo": "icones/gros_fromage.png",
-            "seuil": 15e2,
+            "seuil": 1500,
             "idcible": 2,
             "ratio": 3,
             "typeratio": "vitesse",
@@ -416,7 +396,7 @@ module.exports = {
         {
             "name": "Fromage de grande qualité",
             "logo": "icones/gros_fromage.png",
-            "seuil": 15e3,
+            "seuil": 15000,
             "idcible": 2,
             "ratio": 2,
             "typeratio": "gain",
@@ -425,7 +405,7 @@ module.exports = {
         {
             "name": "Fromage de luxe",
             "logo": "icones/gros_fromage.png",
-            "seuil": 30e3,
+            "seuil": 30000,
             "idcible": 2,
             "ratio": 2,
             "typeratio": "gain",
@@ -434,7 +414,7 @@ module.exports = {
         {
             "name": "Vache plus efficace",
             "logo": "icones/vache.png",
-            "seuil": 1e4,
+            "seuil": 10000,
             "idcible": 3,
             "ratio": 2,
             "typeratio": "vitesse",
@@ -443,7 +423,7 @@ module.exports = {
         {
             "name": "Vache surpuissante",
             "logo": "icones/vache.png",
-            "seuil": 30e3,
+            "seuil": 30000,
             "idcible": 3,
             "ratio": 2,
             "typeratio": "gain",
@@ -452,7 +432,7 @@ module.exports = {
         {
             "name": "Vache qui remporte le salon de l'agriculture",
             "logo": "icones/vache.png",
-            "seuil": 60e3,
+            "seuil": 60000,
             "idcible": 3,
             "ratio": 3,
             "typeratio": "gain",
@@ -461,7 +441,7 @@ module.exports = {
         {
             "name": "Ferme plus efficace",
             "logo": "icones/ferme.png",
-            "seuil": 15e3,
+            "seuil": 15000,
             "idcible": 4,
             "ratio": 2,
             "typeratio": "gain",
@@ -470,7 +450,7 @@ module.exports = {
         {
             "name": "Meilleure ferme du village",
             "logo": "icones/ferme.png",
-            "seuil": 40e3,
+            "seuil": 40000,
             "idcible": 4,
             "ratio": 2,
             "typeratio": "vitesse",
@@ -479,7 +459,7 @@ module.exports = {
         {
             "name": "Meilleure ferme du monde",
             "logo": "icones/ferme.png",
-            "seuil": 70e3,
+            "seuil": 70000,
             "idcible": 4,
             "ratio": 2,
             "typeratio": "gain",
@@ -488,7 +468,7 @@ module.exports = {
         {
             "name": "Super exploitation",
             "logo": "icones/grandeferme.png",
-            "seuil": 20e3,
+            "seuil": 20000,
             "idcible": 5,
             "ratio": 2,
             "typeratio": "vitesse",
@@ -497,7 +477,7 @@ module.exports = {
         {
             "name": "Meilleure exploitation de la région",
             "logo": "icones/grandeferme.png",
-            "seuil": 75e3,
+            "seuil": 75000,
             "idcible": 5,
             "ratio": 2,
             "typeratio": "gain",
@@ -506,13 +486,12 @@ module.exports = {
         {
             "name": "Meilleure exploitation du monde",
             "logo": "icones/grandeferme.png",
-            "seuil": 12e4,
+            "seuil": 120000,
             "idcible": 5,
             "ratio": 2,
             "typeratio": "vitesse",
             "unlocked": false
-        },
-
+        }
     ],
     "angelupgrades": [
         {
@@ -613,7 +592,7 @@ module.exports = {
             "ratio": 2,
             "typeratio": "gain",
             "unlocked": false
-        },
+        }
     ],
     "managers": [
         {
@@ -671,4 +650,4 @@ module.exports = {
             "unlocked": false
         }
     ]
-};
+}

@@ -36,16 +36,17 @@ export interface DialogData {
 export class DialogComponent implements OnInit, OnDestroy {
     listunlocks: Palier[] = [];
     listClosestUnlock: Palier[] = [];
-    listClosestUpgrade: Palier[] = [];  
-    
+    listClosestUpgrade: Palier[] = [];
+
     angelsToClaim = 0;
 
-   
+
     constructor(
         public dialogRef: MatDialogRef<DialogComponent>,
         @Inject(MAT_DIALOG_DATA) public data: DialogData,
     ) {
         this.angelsToClaim = this.calcAngelsToClaim()
+        console.log(this.angelsToClaim)
     }
 
     onNoClick(): void {
@@ -57,7 +58,7 @@ export class DialogComponent implements OnInit, OnDestroy {
         this.getClosestUnlockForProducts();
         this.getSortedUpgrades();
     }
-    
+
     ngOnDestroy(): void {
         this.listunlocks = [];
         this.listClosestUnlock = [];
@@ -109,17 +110,17 @@ export class DialogComponent implements OnInit, OnDestroy {
                     console.log("closestAllUnlocks", closestAllUnlocks)
                 }
             }
-        }); 
-        if(closestAllUnlocks !== null){
+        });
+        if (closestAllUnlocks !== null) {
             this.listClosestUnlock.push(closestAllUnlocks);
-    
+
         }
     }
-   
-    getSortedUpgrades(){
+
+    getSortedUpgrades() {
         this.data.data.upgrades.forEach((upgrade) => {
-            if(!upgrade.unlocked){
-                this.listClosestUpgrade.push(upgrade);                
+            if (!upgrade.unlocked) {
+                this.listClosestUpgrade.push(upgrade);
             }
         });
         this.listClosestUpgrade.sort((a, b) => a.seuil - b.seuil);
@@ -143,7 +144,11 @@ export class DialogComponent implements OnInit, OnDestroy {
     }
 
     calcAngelsToClaim() {
-        return Math.round(150 * Math.sqrt(this.data.data.score / Math.pow(10, 15)) - this.data.data.totalangels);
+        let anges = Math.round(150 * Math.sqrt(this.data.data.score / Math.pow(10, 15)) - this.data.data.totalangels);
+        if (anges == -0 || anges < 0) {
+            anges = 0;
+        }
+        return anges;
     }
 
 

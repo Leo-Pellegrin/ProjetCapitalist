@@ -10,23 +10,19 @@
         <div class="price-progress-wrapper">
             <p class="product-price">{{ product.revenu * (1 + _activeAngels * _bonusAngels / 100) }}</p>
             <div class="progressbardiv">
-                <app-my-progress-bar
-                    [run]="run"
-                    [auto]="product.managerUnlocked"
-                    [orientation]="Orientation.horizontal"
-                    [vitesse]="product.vitesse"
-                    [initialValue]="initialValue"
-                >
+                <app-my-progress-bar [run]="run" [auto]="product.managerUnlocked" [orientation]="Orientation.horizontal"
+                    [vitesse]="product.vitesse" [initialValue]="initialValue">
                 </app-my-progress-bar>
             </div>
-          
+
             <div>
-                <p class="timeleft">  {{product.timeleft | msToTime}} </p>
+                <p class="timeleft"> {{product.timeleft | msToTime}} </p>
             </div>
         </div>
         <button class="buy-button" type="button" (click)="buyProduct()" [disabled]="disabledButtonBuy">
             <span class="buy-text">Buy</span>
-            <span class="product-price" [innerHTML]="productCost | bigvalue"><span class="qmulti-product">{{ qmultiButton }}</span></span>
+            <span class="product-price" [innerHTML]="productCost | bigvalue"></span>
+            <span class="qmulti-product">{{ qmultiButton }}</span>
         </button>
     </div>
 </div>

@@ -49,7 +49,7 @@ function updateScore(context) {
     let w = context.world
     context.world.products.forEach(p => {
         let time = Date.now() - Number(w.lastupdate)
-        let qtProduit = CalcNbProduct(p, time)      
+        let qtProduit = CalcNbProduct(p, time)
         total += qtProduit * p.quantite * p.revenu * (1 + context.world.activeangels * context.world.angelbonus / 100)
 
     })
@@ -165,7 +165,7 @@ module.exports = {
             if (manager && product) {
                 context.world.managers.find(p => p.name === args.name).unlocked = true;
                 context.world.products[product.id].managerUnlocked = true;
-                context.world.money -= manager.cout;    
+                context.world.money -= manager.cout;
                 saveWorld(context);
             }
         },
@@ -203,22 +203,18 @@ module.exports = {
 
             let angelstoAdd = Math.round(150 * Math.sqrt(score / Math.pow(10, 15)) - totalangels)
 
-            newWorld = require("./world")
+            const world = require("./world")
+            context.world = Object.assign({}, world)
 
-            newWorld.score = score
-            newWorld.totalangels = totalangels + angelstoAdd
-            newWorld.activeangels = activeangels + angelstoAdd
+            context.world.score = score
+            context.world.totalangels = totalangels + angelstoAdd
+            context.world.activeangels = activeangels + angelstoAdd
 
-            writeFile("../userworlds/" + context.user + "-world.json", JSON.stringify(newWorld), err => {
-                if (err) {
-                    console.error(err)
-                    throw new Error(`Erreur d'écriture du monde coté serveur`)
-                }
-            })
+            saveWorld(context)
 
-            return newWorld;
+            return context.world;
         },
-        acheterAngelUpgrade(parent, args, context) {        
+        acheterAngelUpgrade(parent, args, context) {
             updateScore(context)
             let upgrade;
             try {
