@@ -145,9 +145,6 @@ export class DialogComponent implements OnInit, OnDestroy {
 
     calcAngelsToClaim() {
         let anges = Math.round(150 * Math.sqrt(this.data.data.score / Math.pow(10, 15)) - this.data.data.totalangels);
-        if (anges == -0 || anges < 0) {
-            anges = 0;
-        }
         return anges;
     }
 

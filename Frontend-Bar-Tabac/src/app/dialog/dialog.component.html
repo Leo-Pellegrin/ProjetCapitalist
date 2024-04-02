@@ -16,7 +16,7 @@
             <div>
                 <!-- (click)="hireManager(manager)" -->
                 <div class="hirebutton" (click)="buyManager(manager)"
-                    [ngClass]="{'selectable' : (data.data.money >= manager.seuil)}"> Hire !
+                    [ngClass]="{'selectable' : (data.data.money >= manager.seuil)}"> Engager !
                 </div>
             </div>
         </div>
@@ -51,7 +51,7 @@
                     <div>
 
                         <div class="hirebutton" (click)="buyUpgrade(upgrade)"
-                            [ngClass]="{'selectable' : (data.data.money >= upgrade.seuil)}">Hire !</div>
+                            [ngClass]="{'selectable' : (data.data.money >= upgrade.seuil)}">Acheter !</div>
                     </div>
                 </div>
                 }
@@ -150,7 +150,7 @@
                     <div>
 
                         <div class="hirebutton" (click)="buyAngelUpgrade(angelupgrade)"
-                            [ngClass]="{'selectable' : (data.data.activeangels >= angelupgrade.seuil)}">Buy !</div>
+                            [ngClass]="{'selectable' : (data.data.activeangels >= angelupgrade.seuil)}">Acheter !</div>
                     </div>
                 </div>
                 }
