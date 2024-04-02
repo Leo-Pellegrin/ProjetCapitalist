@@ -6,12 +6,13 @@ import { MyProgressBarComponent, Orientation } from '../progressbar/progressbar.
 import { GET_SERV } from '../../request';
 import { WebserviceService } from '../webservice.service';
 import { MsToTimePipe } from '../ms-to-time.pipe';
+import { BigvaluePipe } from '../bigvalue.pipe';
 
 
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [MatProgressBarModule, CommonModule, MsToTimePipe, MyProgressBarComponent],
+  imports: [MatProgressBarModule, CommonModule, MsToTimePipe, MyProgressBarComponent, BigvaluePipe],
   templateUrl: './product.component.html',
   styleUrl: './product.component.css'
 })
@@ -33,7 +34,7 @@ export class ProductComponent implements AfterViewInit {
   initialValue: number = 0;
   _activeAngels: number = 0;
   _bonusAngels: number = 0;
-  
+
   protected readonly Orientation = Orientation;
 
   constructor(
@@ -78,17 +79,17 @@ export class ProductComponent implements AfterViewInit {
       this.productCost = Math.round(this.product.cout * 100) / 100
 
       this.auto = this.product.managerUnlocked;
-      
-      if (this.product && this.product.timeleft > 0) {     
-        console.log("timeleft: " + this.product.timeleft)   
+
+      if (this.product && this.product.timeleft > 0) {
+        console.log("timeleft: " + this.product.timeleft)
         this.initialValue = this.product.vitesse - this.product.timeleft;
         this.run = true;
       }
-      else{       
+      else {
         this.initialValue = 0;
         this.run = false;
       }
-      
+
       this.buyDisabled();
     }
   }
@@ -108,19 +109,19 @@ export class ProductComponent implements AfterViewInit {
   }
 
   @Input()
-  set activeAngels(value: number){
+  set activeAngels(value: number) {
     this._activeAngels = value;
   }
 
   @Input()
-  set bonusAngels(value: number){
+  set bonusAngels(value: number) {
     this._bonusAngels = value;
   }
 
   // Quantité maximale que l'on peut acheter avec l'argent actuel
   calcMaxCanBuy() {
-    let numberOfItems = Math.log(1 - (this._worldmoney / this.product.cout) * (1 - this.product.croissance)) / Math.log(this.product.croissance);
-    if (numberOfItems > 0) this.maxCanBuy = Math.round(numberOfItems);
+    let numberOfItems = Math.floor(Math.log(1 + (this._worldmoney * (this.product.croissance - 1) / this.product.cout)) / Math.log(this.product.croissance));
+    this.maxCanBuy = Math.round(numberOfItems);
   }
 
   calcUpgrade(Upgrade: Palier) {
@@ -138,7 +139,7 @@ export class ProductComponent implements AfterViewInit {
 
   // Lancement d'un produit
   onClick() {
-    if (this.product.quantite > 0 && !this.run ) {
+    if (this.product.quantite > 0 && !this.run) {
       this.initialValue = 0;
       this.run = true;
       this.product.timeleft = this.product.vitesse;
@@ -172,8 +173,9 @@ export class ProductComponent implements AfterViewInit {
       switch (this._qtmulti) {
         case "x1":
           this.qmultiButton = "x1";
-          this.productCost = Math.round(this.product.cout * 100) / 100;
-          if (this._worldmoney >= this.product.cout) {
+          this.productCost = this.product.cout * (1 - Math.pow(this.product.croissance, 1)) / (1 - this.product.croissance);
+          this.productCost = Math.round(this.productCost * 100) / 100;
+          if (this._worldmoney >= this.productCost) {
             this.disabledButtonBuy = false;
           }
           else {
@@ -182,8 +184,9 @@ export class ProductComponent implements AfterViewInit {
           break;
         case "x10":
           this.qmultiButton = "x10";
-          this.productCost = Math.round((this.product.cout * 10) * 100) / 100;
-          if (this._worldmoney >= this.product.cout * 10) {
+          this.productCost = this.product.cout * (1 - Math.pow(this.product.croissance, 10)) / (1 - this.product.croissance);
+          this.productCost = Math.round(this.productCost * 100) / 100;
+          if (this._worldmoney >= this.productCost) {
             this.disabledButtonBuy = false;
           }
           else {
@@ -192,8 +195,9 @@ export class ProductComponent implements AfterViewInit {
           break;
         case "x100":
           this.qmultiButton = "x100";
-          this.productCost = Math.round((this.product.cout * 100) * 100) / 100;
-          if (this._worldmoney >= this.product.cout * 100) {
+          this.productCost = this.product.cout * (1 - Math.pow(this.product.croissance, 100)) / (1 - this.product.croissance);
+          this.productCost = Math.round(this.productCost * 100) / 100;
+          if (this._worldmoney >= this.productCost) {
             this.disabledButtonBuy = false;
           }
           else {
@@ -204,7 +208,7 @@ export class ProductComponent implements AfterViewInit {
           if (this.maxCanBuy > 0) {
             this.qmultiButton = "x" + this.maxCanBuy.toString();
 
-            let priceMaxcanBuy = this.maxCanBuy * this.product.cout * (1 + this.product.croissance) ^ (this.maxCanBuy - 1)
+            let priceMaxcanBuy = this.product.cout * (1 - Math.pow(this.product.croissance, this.maxCanBuy)) / (1 - this.product.croissance);
             this.productCost = Math.round(priceMaxcanBuy * 100) / 100;
 
             if (this._worldmoney > (priceMaxcanBuy)) {

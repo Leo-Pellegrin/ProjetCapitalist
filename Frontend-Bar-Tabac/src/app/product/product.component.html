@@ -26,10 +26,8 @@
         </div>
         <button class="buy-button" type="button" (click)="buyProduct()" [disabled]="disabledButtonBuy">
             <span class="buy-text">Buy</span>
-            <span class="product-price">{{ productCost }} <span class="qmulti-product">{{ qmultiButton }}</span></span>
+            <span class="product-price" [innerHTML]="productCost | bigvalue"><span class="qmulti-product">{{ qmultiButton }}</span></span>
         </button>
-
-       
     </div>
 </div>
 }

@@ -65,8 +65,6 @@ export class AppComponent {
         this.calcbadgeAngelUpgrades();
       }
     );
-
-
   }
 
   openDialogManager(): void {
