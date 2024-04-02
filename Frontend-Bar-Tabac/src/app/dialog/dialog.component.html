@@ -8,7 +8,7 @@
                         <div>
                             <div class="logo"><img [attr.src]="data.server + manager.logo" /> </div>
                         </div>
-                        <div>
+                        <div class="text">
                             <div class="name"> {{ manager.name}} </div>
                             <div class="cible"> {{ data.data.products[manager.idcible].name }} </div>
                             <div class="cost"> {{"Cout : " + manager.seuil}} </div>
@@ -30,7 +30,7 @@
               <h1 class="title">Want to maximize profits? Get your investments to this quotas !</h1>
             </div>
             <div class ="two-column-list">
-                @for (upgrade of data.data.upgrades.slice(0, 6); track upgrade.name) {
+                @for (upgrade of listClosestUpgrade.slice(0, 6); track upgrade.name) {
                     <div>
                         @if(!upgrade.unlocked){
                             <div class="layout">
@@ -70,14 +70,24 @@
                       <div>
                         <div class="logo"><img class="round" [attr.src]="data.server + unlock.logo"/> </div>
                       </div>
-                      <div>
-                        <div class="name"> {{ unlock.name}} </div>
-                        <div class="cible"> {{ data.data.products[unlock.idcible].name }} </div>
-                        <div class="cost"> {{ unlock.seuil}} </div>
-                        <div class="bonus">
-                            {{ unlock.typeratio == 'gain' ?  (data.data.products[unlock.idcible].name + " Profits x" + unlock.ratio) : (data.data.products[unlock.idcible].name + " Production Speed x" + unlock.ratio ) }}
-                          </div>
-                      </div>
+                      <div class="text">
+                        @if(unlock.idcible != -1){
+                            <div class="name"> {{ unlock.name}} </div>
+                            <div class="cible"> {{ data.data.products[unlock.idcible].name }} </div>
+                            <div class="cost"> {{ "Atteint le niveau " + unlock.seuil + " pour débloquer !"}} </div>
+                            <div class="bonus">
+                                {{ unlock.typeratio == 'gain' ?  (data.data.products[unlock.idcible].name + " Profits x" + unlock.ratio) : (data.data.products[unlock.idcible].name + " Production Speed x" + unlock.ratio ) }}
+                            </div>
+                        }
+                        @else{
+                            <div class="name"> {{ unlock.name}} </div>
+                            <div class="cible"> All Products </div>
+                            <div class="cost"> {{ unlock.seuil}} </div>
+                            <div class="bonus">
+                                {{ unlock.typeratio == 'gain' ?   "All Profits x" + unlock.ratio :  "All Production Speed x" + unlock.ratio  }}
+                            </div>
+                        }
+                        </div>
                     </div>
                   }
                 </div>
@@ -88,15 +98,18 @@
     @else if (data.type == "investors"){
         <div class="modal">
             <div>
-                <h1>Angel Investors</h1>
+                <h1 class="title">Angel Investors</h1>
             </div>
-            <div class="two-column-list">
-                <div>           
+            <div class="investors">
+                <div>
+                   <img class="img-ange" src="http://localhost:4000/icones/angel.jpeg">
+                                    
+                </div>
+                <div class="colonne2">           
                     <div class="totalangels">  Total anges : {{data.data.activeangels}}  </div>
                     <div class="bonusangels"> Pourcentage de bonus par anges : {{data.data.angelbonus}} % </div>
-                </div>   
-                <div>
-                    <button class="hirebutton" (click)="resetWorld()"> {{angelsToClaim}} To Claim with Restart</button>
+                
+                    <button class="restartbutton" (click)="resetWorld()"> {{angelsToClaim}} To Claim with Restart</button>
                 </div>  
             </div> 
 
@@ -118,11 +131,11 @@
                                 </div>
                                 <div>
                                     <div class="name"> {{ angelupgrade.name}} </div>
-                                    <div class="cible"> {{ data.data.products[angelupgrade.idcible].name }} </div>
-                                    <div class="cost"> {{ angelupgrade.seuil}} </div>
+                                    <div class="cible"> {{ angelupgrade.idcible == -1 ? ("All Products") : data.data.products[angelupgrade.idcible].name }} </div>
+                                    <div class="cost"> {{ angelupgrade.seuil + " anges"}} </div>
                                     <div class="bonus">
-                                        {{ angelupgrade.typeratio == 'gain' ?  ("Augmentation de tous les profits x" + angelupgrade.ratio) : (" Augmentation de l'éfficacité des anges + " + angelupgrade.ratio + "%") }}
-                                      </div>
+                                                {{ angelupgrade.typeratio == 'gain' ?  ( angelupgrade.idcible == -1 ? ("All profits x" + angelupgrade.ratio) : (data.data.products[angelupgrade.idcible].name) + " profits x" + angelupgrade.ratio)  : (" Increase in angel efficiency + " + angelupgrade.ratio + "%") }}
+                                            </div>
                                 </div>
                                 <div>
                                     
@@ -138,5 +151,5 @@
     }
 </div>
 <mat-dialog-actions>
-    <button mat-button mat-dialog-close>Fermer</button>
+    <button mat-button mat-dialog-close class="bouton-fermer">Fermer</button>
 </mat-dialog-actions>

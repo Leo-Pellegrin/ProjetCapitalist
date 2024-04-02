@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, Inject, Output } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Inject, OnDestroy, OnInit, Output } from '@angular/core';
 import {
     MAT_DIALOG_DATA,
     MatDialogRef,
@@ -33,11 +33,14 @@ export interface DialogData {
         CommonModule
     ],
 })
-export class DialogComponent implements AfterViewInit {
+export class DialogComponent implements OnInit, OnDestroy {
     listunlocks: Palier[] = [];
     listClosestUnlock: Palier[] = [];
+    listClosestUpgrade: Palier[] = [];  
+    
     angelsToClaim = 0;
 
+   
     constructor(
         public dialogRef: MatDialogRef<DialogComponent>,
         @Inject(MAT_DIALOG_DATA) public data: DialogData,
@@ -49,9 +52,16 @@ export class DialogComponent implements AfterViewInit {
         this.dialogRef.close();
     }
 
-    ngAfterViewInit() {
+    ngOnInit() {
         this.getUnlocks();
         this.getClosestUnlockForProducts();
+        this.getSortedUpgrades();
+    }
+    
+    ngOnDestroy(): void {
+        this.listunlocks = [];
+        this.listClosestUnlock = [];
+        this.listClosestUpgrade = [];
     }
 
     getUnlocks() {
@@ -71,9 +81,6 @@ export class DialogComponent implements AfterViewInit {
     getClosestUnlockForProducts() {
         const closestUnlocks: { [productId: string]: Palier | null } = {};
 
-
-
-
         this.data.data.products.forEach((product) => {
             let closestUnlock: Palier | null = null;
             let closestDistance = Infinity; // Initialisation à une valeur très grande
@@ -92,24 +99,32 @@ export class DialogComponent implements AfterViewInit {
         });
 
         let seuilmin = Infinity;
+        let closestAllUnlocks: Palier | null = null;
         this.data.data.allunlocks.forEach((unlock) => {
-            let closestAllUnlocks: Palier | null = null;
             if (!unlock.unlocked) {
                 console.log()
                 if (unlock.seuil < seuilmin) {
                     seuilmin = unlock.seuil;
                     closestAllUnlocks = unlock;
+                    console.log("closestAllUnlocks", closestAllUnlocks)
                 }
             }
-
-            if (closestAllUnlocks !== null) {
-                this.listClosestUnlock.push(closestAllUnlocks);
-
+        }); 
+        if(closestAllUnlocks !== null){
+            this.listClosestUnlock.push(closestAllUnlocks);
+    
+        }
+    }
+   
+    getSortedUpgrades(){
+        this.data.data.upgrades.forEach((upgrade) => {
+            if(!upgrade.unlocked){
+                this.listClosestUpgrade.push(upgrade);                
             }
         });
-        console.log(this.listClosestUnlock);
+        this.listClosestUpgrade.sort((a, b) => a.seuil - b.seuil);
+        console.log(this.listClosestUpgrade);
     }
-
 
     buyManager(palier: Palier) {
         this.onBuyManager.emit(palier);
